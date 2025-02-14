@@ -23,30 +23,39 @@ Widget textFormField(
   TextInputType? keyboardType,
   Iterable<String>? autofillHints,
   void Function(String)? onChanged,
+  bool? obscureText,
+  AutovalidateMode? autovalidateMode,
 }) {
   return TextFormField(
-    controller: controller,
-    decoration: InputDecoration(
-      labelText: labelText,
-      suffixIcon: suffixIcon,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.grey,
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.grey,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        borderRadius: BorderRadius.circular(10.0),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
       ),
-    ),
-    keyboardType: keyboardType,
-    autofillHints: autofillHints,
-    validator: validator,
-    onChanged: onChanged,
-  );
+      keyboardType: keyboardType,
+      autofillHints: autofillHints,
+      validator: validator,
+      onChanged: onChanged,
+      obscureText: obscureText ?? false,
+      autovalidateMode: autovalidateMode);
 }
 
 
