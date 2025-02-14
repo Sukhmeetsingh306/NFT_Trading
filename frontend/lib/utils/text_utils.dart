@@ -14,3 +14,29 @@ Text googleText(String text,
     ),
   );
 }
+
+Widget textFormField(
+  TextEditingController controller,
+  String labelText,
+  FormFieldValidator<String> validator,
+) {
+  return TextFormField(
+    controller: controller,
+    decoration: InputDecoration(
+      labelText: labelText,
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    ),
+    validator: validator,
+  );
+}
