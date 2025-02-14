@@ -40,3 +40,41 @@ Widget textFormField(
     validator: validator,
   );
 }
+
+
+
+/*
+code that will display the email 
+Row(
+                      children: [
+                        Text(
+                          '@', // Fixed '@' symbol
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(width: 5),
+                        DropdownButton<String>(
+                          value: selectedDomain,
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                selectedDomain = newValue;
+                              });
+                            }
+                          },
+                          items: emailDomains
+                              .map<DropdownMenuItem<String>>((String domain) {
+                            return DropdownMenuItem<String>(
+                              value: domain,
+                              child: Text(domain),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Your email: ${_emailController.text.isNotEmpty ? _emailController.text : 'username'}@$selectedDomain',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+ */
