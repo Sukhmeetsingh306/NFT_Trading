@@ -12,6 +12,12 @@ Widget sizedBoxH10() {
   );
 }
 
+Widget sizedBoxH15() {
+  return SizedBox(
+    height: 15,
+  );
+}
+
 Widget sizedBoxH20() {
   return SizedBox(
     height: 20,

@@ -80,48 +80,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return null;
                       },
                     ),
-                    TextFormField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        suffixIcon: DropdownButtonHideUnderline(
-                          child: Padding(
-                            padding: EdgeInsets.only(top: 11.0),
-                            child: DropdownButton<String>(
-                              value: selectedDomain,
-                              alignment: Alignment.centerRight,
-                              onChanged: (String? newValue) {
-                                if (newValue != null) {
-                                  setState(() {
-                                    selectedDomain = newValue;
-                                    _updateEmail();
-                                  });
-                                }
-                              },
-                              items: emailDomains.map<DropdownMenuItem<String>>(
-                                  (String domain) {
-                                return DropdownMenuItem<String>(
-                                  value: domain,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        "@$domain",
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ), // Smaller dropdown icon
-                                    ],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                      autofillHints: [AutofillHints.email],
-                      validator: (value) {
+                    sizedBoxH15(),
+                    textFormField(
+                      _emailController,
+                      'Email',
+                      (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email';
                         } else if (!RegExp(r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
@@ -130,6 +93,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         }
                         return null;
                       },
+                      suffixIcon: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: selectedDomain,
+                          alignment: Alignment.centerRight,
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                selectedDomain = newValue;
+                                _updateEmail();
+                              });
+                            }
+                          },
+                          items: emailDomains
+                              .map<DropdownMenuItem<String>>((String domain) {
+                            return DropdownMenuItem<String>(
+                              value: domain,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "@$domain",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ), // Smaller dropdown icon
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      autofillHints: [AutofillHints.email],
                       onChanged: (value) {
                         _updateEmail();
                       },

@@ -18,12 +18,17 @@ Text googleText(String text,
 Widget textFormField(
   TextEditingController controller,
   String labelText,
-  FormFieldValidator<String> validator,
-) {
+  FormFieldValidator<String> validator, {
+  Widget? suffixIcon,
+  TextInputType? keyboardType,
+  Iterable<String>? autofillHints,
+  void Function(String)? onChanged,
+}) {
   return TextFormField(
     controller: controller,
     decoration: InputDecoration(
       labelText: labelText,
+      suffixIcon: suffixIcon,
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.grey,
@@ -37,7 +42,10 @@ Widget textFormField(
         borderRadius: BorderRadius.circular(10.0),
       ),
     ),
+    keyboardType: keyboardType,
+    autofillHints: autofillHints,
     validator: validator,
+    onChanged: onChanged,
   );
 }
 
