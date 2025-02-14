@@ -54,19 +54,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     TextFormField(
                       controller: _nameController,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       decoration: InputDecoration(
+                        labelText: 'Username',
                         enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.green, width: 2.0),
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                            width: 1.0,
+                          ),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Colors.blue, width: 2.0),
+                          borderSide: BorderSide(
+                            width: 1.0,
+                            color: Colors.grey,
+                          ),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        hintText: 'Enter your name',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
