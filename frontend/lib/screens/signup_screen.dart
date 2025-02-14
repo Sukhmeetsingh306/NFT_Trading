@@ -21,6 +21,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscureText = true;
   bool _confirmObscureText = true;
 
+  final List<String> emailDomains = [
+    'gmail.com',
+    'yahoo.com',
+    'icloud.com',
+    'outlook.com',
+  ];
+  String selectedDomain = 'gmail.com'; // Default domain
+
+  void _updateEmail() {
+    String email =
+        _emailController.text.split('@')[0]; // Keep only the username part
+    _emailController.text = '$email@$selectedDomain';
+    _emailController.selection = TextSelection.fromPosition(
+      TextPosition(offset: email.length), // Keep cursor before the '@'
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,8 +82,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     TextFormField(
                       controller: _emailController,
-                      // autovalidateMode: AutovalidateMode.onUserInteraction,
-                      decoration: InputDecoration(labelText: 'Email'),
+                      decoration: InputDecoration(
+                        labelText: 'Email',
+                        suffixIcon: DropdownButtonHideUnderline(
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 11.0),
+                            child: DropdownButton<String>(
+                              value: selectedDomain,
+                              alignment: Alignment.centerRight,
+                              onChanged: (String? newValue) {
+                                if (newValue != null) {
+                                  setState(() {
+                                    selectedDomain = newValue;
+                                    _updateEmail();
+                                  });
+                                }
+                              },
+                              items: emailDomains.map<DropdownMenuItem<String>>(
+                                  (String domain) {
+                                return DropdownMenuItem<String>(
+                                  value: domain,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        "@$domain",
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      ), // Smaller dropdown icon
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ),
+                      ),
                       keyboardType: TextInputType.emailAddress,
                       autofillHints: [AutofillHints.email],
                       validator: (value) {
@@ -79,14 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         return null;
                       },
                       onChanged: (value) {
-                        if (!value.contains('@')) {
-                          setState(() {
-                            _emailController.text = '$value@gmail.com';
-                            _emailController.selection =
-                                TextSelection.fromPosition(TextPosition(
-                                    offset: _emailController.text.length));
-                          });
-                        }
+                        _updateEmail();
                       },
                     ),
                     TextFormField(
