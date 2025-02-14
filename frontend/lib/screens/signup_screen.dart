@@ -52,26 +52,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    TextFormField(
-                      controller: _nameController,
-                      decoration: InputDecoration(
-                        labelText: 'Username',
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.grey,
-                            width: 1.0,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1.0,
-                            color: Colors.grey,
-                          ),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      validator: (value) {
+                    sizedBoxH10(),
+                    textFormField(
+                      _nameController,
+                      'Username',
+                      (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please enter your name';
                         }
