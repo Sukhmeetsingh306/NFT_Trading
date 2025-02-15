@@ -11,6 +11,7 @@ class AppTextButton extends StatelessWidget {
   final double? buttonHeight;
   final String buttonText;
   final VoidCallback onPressed;
+  final double? fontSize;
 
   const AppTextButton(
       {super.key,
@@ -20,6 +21,7 @@ class AppTextButton extends StatelessWidget {
       this.verticalPadding,
       this.buttonWidth,
       this.buttonHeight,
+      this.fontSize,
       required this.buttonText,
       required this.onPressed});
 
@@ -50,7 +52,7 @@ class AppTextButton extends StatelessWidget {
       ),
       child: googleText(
         buttonText,
-        fontSize: 16,
+        fontSize: fontSize ?? 16,
         fontWeight: FontWeight.w600,
         color: Colors.white,
       ),

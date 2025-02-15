@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Text googleText(String text,
@@ -25,37 +26,40 @@ Widget textFormField(
   void Function(String)? onChanged,
   bool? obscureText,
   AutovalidateMode? autovalidateMode,
+  List<TextInputFormatter>? inputFormatters,
 }) {
   return TextFormField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: labelText,
-        suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.circular(10.0),
+    controller: controller,
+    decoration: InputDecoration(
+      labelText: labelText,
+      suffixIcon: suffixIcon,
+      border: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
+        borderRadius: BorderRadius.circular(10.0),
       ),
-      keyboardType: keyboardType,
-      autofillHints: autofillHints,
-      validator: validator,
-      onChanged: onChanged,
-      obscureText: obscureText ?? false,
-      autovalidateMode: autovalidateMode);
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.grey,
+        ),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+    ),
+    keyboardType: keyboardType,
+    autofillHints: autofillHints,
+    validator: validator,
+    onChanged: onChanged,
+    obscureText: obscureText ?? false,
+    autovalidateMode: autovalidateMode,
+    inputFormatters: inputFormatters,
+  );
 }
 
 TextSpan textSpan(
