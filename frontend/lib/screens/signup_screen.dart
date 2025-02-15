@@ -25,11 +25,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _referenceController = TextEditingController();
   final TextEditingController _otpPhoneController = TextEditingController();
+  final TextEditingController _otpEmailController = TextEditingController();
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
   bool hasMinLength = false;
-  bool otpSent = false; // Flag to show hint
+  bool otpSent = false;
+  bool otpEmailSent = false;
 
   final passwordFocusNode = FocusNode();
   final passwordConfirmationFocusNode = FocusNode();
@@ -63,6 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _phoneController.dispose();
     _referenceController.dispose();
     _otpPhoneController.dispose();
+    _otpEmailController.dispose();
   }
 
   void _sendOTP() {
@@ -75,6 +78,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     setState(() {
       otpSent = true;
+    });
+  }
+
+  void _sendEmailOTP() {
+    if (_emailController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter a valid Email')),
+      );
+      return;
+    }
+
+    setState(() {
+      otpEmailSent = true;
     });
   }
 
@@ -172,6 +188,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           _updateEmail();
                         },
                       ),
+                      sizedBoxH15(),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: textFormField(
+                              _otpEmailController,
+                              'Email OTP',
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
+                              (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter a valid OTP';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          AppTextButton(
+                            onPressed: () {
+                              _sendEmailOTP();
+                            },
+                            buttonText: 'OTP',
+                            buttonWidth: 75,
+                            buttonHeight: 45,
+                            horizontalPadding: 0,
+                            verticalPadding: 0,
+                          ),
+                        ],
+                      ),
+                      if (otpEmailSent)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: googleText(
+                            'OTP has been sent to your Email',
+                            fontSize: 10,
+                          ),
+                        ),
                       sizedBoxH15(),
                       IntlPhoneField(
                         controller: _phoneController,
