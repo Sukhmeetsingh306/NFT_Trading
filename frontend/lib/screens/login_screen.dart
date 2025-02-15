@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../utils/buttons/signup_button.dart';
+import '../utils/navigation_utils.dart';
 import '../utils/space_utils.dart';
 import '../utils/text_utils.dart';
 import '../utils/validations/password_validations.dart';
+import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -141,7 +143,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 sizedBoxH8(),
                 Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      materialRouteNavigator(
+                        context,
+                        SignUpScreen(),
+                      );
+                    },
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
