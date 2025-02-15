@@ -3,6 +3,8 @@ import 'package:frontend/screens/login_screen.dart';
 import 'package:frontend/utils/space_utils.dart';
 
 import '../core/termsAndConditions_core.dart';
+import '../utils/buttons/signup_button.dart';
+import '../utils/navigation_utils.dart';
 import '../utils/text_utils.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
@@ -40,126 +42,156 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 30,
-              right: 30,
-              bottom: 15,
-              top: 5,
-            ),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 30,
+            right: 30,
+            bottom: 10,
+            top: 5,
+          ),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
             child: Column(
-              mainAxisSize:
-                  MainAxisSize.min, // Ensure it takes only required space
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      googleText(
-                        'Reset',
-                        fontWeight: FontWeight.w700,
-                        fontSize: 24,
-                      ),
-                      sizedBoxH10(),
-                      googleText(
-                        "Enter email to reset password",
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                      Form(
-                        key: _formKey,
-                        child: Column(
-                          children: [
-                            sizedBoxH15(),
-                            textFormField(
-                              _emailController,
-                              'Email',
-                              (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your email';
-                                } else if (!RegExp(
-                                        r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
-                                    .hasMatch(value)) {
-                                  return 'Please enter a valid email';
-                                }
-                                return null;
-                              },
-                              suffixIcon: DropdownButtonHideUnderline(
-                                child: DropdownButton<String>(
-                                  value: selectedDomain,
-                                  alignment: Alignment.centerRight,
-                                  onChanged: (String? newValue) {
-                                    if (newValue != null) {
-                                      setState(() {
-                                        selectedDomain = newValue;
-                                        _updateEmail();
-                                      });
-                                    }
-                                  },
-                                  items: emailDomains
-                                      .map<DropdownMenuItem<String>>(
-                                          (String domain) {
-                                    return DropdownMenuItem<String>(
-                                      value: domain,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Text(
-                                            "@$domain",
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ), // Smaller dropdown icon
-                                        ],
+                Expanded(
+                  // Push content to the top
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              googleText(
+                                'Reset',
+                                fontWeight: FontWeight.w700,
+                                fontSize: 24,
+                              ),
+                              sizedBoxH10(),
+                              googleText(
+                                "Enter email to reset password",
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
+                              ),
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    sizedBoxH15(),
+                                    textFormField(
+                                      _emailController,
+                                      'Email',
+                                      (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your email';
+                                        } else if (!RegExp(
+                                                r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+                                            .hasMatch(value)) {
+                                          return 'Please enter a valid email';
+                                        }
+                                        return null;
+                                      },
+                                      suffixIcon: DropdownButtonHideUnderline(
+                                        child: DropdownButton<String>(
+                                          value: selectedDomain,
+                                          alignment: Alignment.centerRight,
+                                          onChanged: (String? newValue) {
+                                            if (newValue != null) {
+                                              setState(() {
+                                                selectedDomain = newValue;
+                                                _updateEmail();
+                                              });
+                                            }
+                                          },
+                                          items: emailDomains
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String domain) {
+                                            return DropdownMenuItem<String>(
+                                              value: domain,
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    "@$domain",
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }).toList(),
+                                        ),
                                       ),
-                                    );
-                                  }).toList(),
+                                      keyboardType: TextInputType.emailAddress,
+                                      autofillHints: [AutofillHints.email],
+                                      onChanged: (value) {
+                                        _updateEmail();
+                                      },
+                                    ),
+                                    sizedBoxH15(),
+                                  ],
                                 ),
                               ),
-                              keyboardType: TextInputType.emailAddress,
-                              autofillHints: [AutofillHints.email],
-                              onChanged: (value) {
-                                _updateEmail();
-                              },
-                            ),
-                            sizedBoxH15(),
-                          ],
+                              sizedBoxH15(),
+                              AppTextButton(
+                                buttonText: "Reset",
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    materialRouteNavigatorRep(
+                                      context,
+                                      LoginScreen(),
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-                sizedBoxH20(),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const TermsAndConditionsText(),
-                      sizedBoxH15(),
-                      GestureDetector(
+                // Bottom Section
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const TermsAndConditionsText(),
+                    sizedBoxH10(),
+                    Center(
+                      child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                          materialRouteNavigatorRep(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
-                            ),
+                            LoginScreen(),
                           );
                         },
-                        child: googleText(
-                          "Back to Login",
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.blue,
+                        child: RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            children: [
+                              textSpan(
+                                'Already have an account?',
+                                fontSize: 14,
+                              ),
+                              textSpan(
+                                ' Login',
+                                color: Colors.blue,
+                                fontSize: 14,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Divider(),
+                  ],
                 ),
               ],
             ),
