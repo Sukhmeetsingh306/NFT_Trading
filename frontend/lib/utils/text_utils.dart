@@ -58,6 +58,16 @@ Widget textFormField(
       autovalidateMode: autovalidateMode);
 }
 
+TextSpan textSpan(String text) {
+  return TextSpan(
+    text: text,
+    style: TextStyle(
+      fontSize: 11,
+      fontWeight: FontWeight.w400,
+      color: const Color(0xFF9E9E9E),
+    ),
+  );
+}
 
 
 /*

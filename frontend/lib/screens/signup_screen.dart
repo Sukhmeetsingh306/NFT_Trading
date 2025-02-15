@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/space_utils.dart';
 
+import '../core/termsAndConditions_core.dart';
+import '../utils/buttons/signup_button.dart';
 import '../utils/text_utils.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -20,6 +22,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
+
+  final passwordFocusNode = FocusNode();
+  final passwordConfirmationFocusNode = FocusNode();
 
   final List<String> emailDomains = [
     'gmail.com',
@@ -198,6 +203,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ],
                 ),
+              ),
+              const TermsAndConditionsText(),
+              sizedBoxH15(),
+              AppTextButton(
+                buttonText: "Create Account",
+                onPressed: () async {},
               ),
             ],
           ),
