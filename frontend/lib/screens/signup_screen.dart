@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/utils/navigation_utils.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/validations/password_validations.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
@@ -7,6 +8,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import '../core/termsAndConditions_core.dart';
 import '../utils/buttons/signup_button.dart';
 import '../utils/text_utils.dart';
+import 'login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -393,12 +395,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 sizedBoxH15(),
                 AppTextButton(
                   buttonText: "Create Account",
-                  onPressed: () async {},
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      // If all fields are valid, proceed with account creation
+                      materialRouteNavigatorRep(
+                        context,
+                        LoginScreen(),
+                      );
+                    }
+                  },
                 ),
                 sizedBoxH8(),
                 Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      materialRouteNavigatorRep(
+                        context,
+                        LoginScreen(),
+                      );
+                    },
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
