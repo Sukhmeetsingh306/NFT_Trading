@@ -196,6 +196,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         if (!regex.hasMatch(value)) {
                           return 'Password must contain at least one uppercase letter, one number, and one special character';
                         }
+                        if (value != _passwordController.text) {
+                          return 'Passwords do not match';
+                        }
                         return null;
                       },
                       suffixIcon: IconButton(
