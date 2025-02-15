@@ -21,6 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
   bool hasMinLength = false;
 
   @override
+  void dispose() {
+    super.dispose();
+    _nameController.dispose();
+    _passwordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
