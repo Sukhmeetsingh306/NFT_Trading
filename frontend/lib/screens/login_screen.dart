@@ -138,7 +138,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 sizedBoxH15(),
                 AppTextButton(
                   buttonText: "Login",
-                  onPressed: () async {},
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      materialRouteNavigatorRep(
+                        context,
+                        LoginScreen(),
+                      );
+                    }
+                  },
                 ),
                 sizedBoxH8(),
                 Center(
