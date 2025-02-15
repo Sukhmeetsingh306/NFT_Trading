@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/forgetPassword_screen.dart';
 
 import '../utils/buttons/signup_button.dart';
 import '../utils/navigation_utils.dart';
@@ -118,7 +119,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Align(
                     alignment: Alignment.topRight,
                     child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        materialRouteNavigator(
+                          context,
+                          ForgetPasswordScreen(),
+                        );
+                      },
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
