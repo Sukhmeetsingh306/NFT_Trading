@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/validations/password_validations.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../core/termsAndConditions_core.dart';
 import '../utils/buttons/signup_button.dart';
@@ -20,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
@@ -52,6 +55,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+    _phoneController.dispose();
   }
 
   @override
@@ -144,6 +148,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       autofillHints: [AutofillHints.email],
                       onChanged: (value) {
                         _updateEmail();
+                      },
+                    ),
+                    sizedBoxH15(),
+                    IntlPhoneField(
+                      controller: _phoneController,
+                      decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(),
+                        ),
+                      ),
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      initialCountryCode: 'US', // Set default country
+                      onChanged: (phone) {
+                        //print(phone.completeNumber);
+                      },
+                      validator: (phone) {
+                        if (phone == null || phone.number.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        return null;
                       },
                     ),
                     sizedBoxH15(),
