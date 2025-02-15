@@ -65,13 +65,14 @@ Widget textFormField(
 TextSpan textSpan(
   String text, {
   double? fontSize,
+  Color? color,
 }) {
   return TextSpan(
     text: text,
     style: TextStyle(
       fontSize: fontSize ?? 11,
       fontWeight: FontWeight.w400,
-      color: const Color(0xFF9E9E9E),
+      color: color ?? const Color(0xFF9E9E9E),
     ),
   );
 }
