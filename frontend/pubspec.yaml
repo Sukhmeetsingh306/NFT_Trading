@@ -38,6 +38,7 @@ dependencies:
   flutter_svg: ^2.0.17
   awesome_dialog: ^3.2.1
   intl_phone_field: ^3.2.0
+  lucide_icons: ^0.257.0
 
 
 dev_dependencies:
