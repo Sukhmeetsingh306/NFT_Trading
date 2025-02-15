@@ -1,20 +1,53 @@
 import 'package:flutter/material.dart';
 
-extension Navigation on BuildContext {
-  pop() => Navigator.of(this).pop();
+Future<void> pageRouteNavigator(BuildContext context, Widget classname) {
+  return Navigator.of(context).push(
+    PageRouteBuilder(
+      pageBuilder: (context, index, _) => classname,
+      //Try(),
+      opaque: false,
+    ),
+  );
+}
 
-  pushNamed(String routeName, {Object? arguments}) {
-    return Navigator.of(this).pushNamed(routeName, arguments: arguments);
-  }
+Future<void> pageRouteNavigatorRep(BuildContext context, Widget classname) {
+  return Navigator.of(context).pushReplacement(
+    PageRouteBuilder(
+      pageBuilder: (context, index, _) => classname,
+      //Try(),
+      opaque: false,
+    ),
+  );
+}
 
-  pushNamedAndRemoveUntil(String routeName,
-      {Object? arguments, required RoutePredicate predicate}) {
-    return Navigator.of(this)
-        .pushNamedAndRemoveUntil(routeName, predicate, arguments: arguments);
-  }
+Future<void> materialRouteNavigator(BuildContext context, Widget classname) {
+  return Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => classname,
+    ),
+  );
+}
 
-  pushReplacementNamed(String routeName, {Object? arguments}) {
-    return Navigator.of(this)
-        .pushReplacementNamed(routeName, arguments: arguments);
-  }
+Future<void> materialRouteNavigatorRep(BuildContext context, Widget classname) {
+  return Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (context) => classname,
+    ),
+  );
+}
+
+Future<void> pushAndRemoveUntil(BuildContext context, Widget classname) {
+  return Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+      builder: (context) => classname,
+    ),
+    (Route<dynamic> route) => false, // Remove all previous routes
+  );
+}
+
+void pop(BuildContext context) {
+  return Navigator.of(context).pop();
 }
