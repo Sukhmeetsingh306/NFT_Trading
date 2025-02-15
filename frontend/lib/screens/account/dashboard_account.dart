@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/buttons/dashboard_buttons.dart';
+import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -124,6 +125,60 @@ class DashboardAccount extends StatelessWidget {
                     const SizedBox(width: 15),
                     dashBoardOutlineButton('20 Points  >'),
                   ],
+                ),
+              ),
+              sizedBoxH10(),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    padding: const EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 10,
+                          spreadRadius: 2,
+                          offset: Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        googleText(
+                          'Wallet Balance',
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        sizedBoxH8(),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          child: Divider(),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            googleText(
+                              'Daily Income',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            googleText(
+                              'Total Income',
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ],
