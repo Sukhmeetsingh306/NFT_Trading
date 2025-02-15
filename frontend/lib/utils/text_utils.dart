@@ -58,11 +58,14 @@ Widget textFormField(
       autovalidateMode: autovalidateMode);
 }
 
-TextSpan textSpan(String text) {
+TextSpan textSpan(
+  String text, {
+  double? fontSize,
+}) {
   return TextSpan(
     text: text,
     style: TextStyle(
-      fontSize: 11,
+      fontSize: fontSize ?? 11,
       fontWeight: FontWeight.w400,
       color: const Color(0xFF9E9E9E),
     ),
