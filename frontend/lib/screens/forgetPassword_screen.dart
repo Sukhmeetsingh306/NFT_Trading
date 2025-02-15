@@ -182,7 +182,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               ),
                               textSpan(
                                 ' Login',
-                                color: Colors.blue,
+                                color: const Color.fromRGBO(36, 124, 255, 1),
                                 fontSize: 14,
                               ),
                             ],
