@@ -22,6 +22,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
+  bool hasMinLength = false;
 
   final passwordFocusNode = FocusNode();
   final passwordConfirmationFocusNode = FocusNode();
@@ -209,6 +210,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
               AppTextButton(
                 buttonText: "Create Account",
                 onPressed: () async {},
+              ),
+              sizedBoxH8(),
+              Center(
+                child: GestureDetector(
+                  onTap: () {},
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        textSpan(
+                          'Already have an account?',
+                          fontSize: 14,
+                        ),
+                        textSpan(
+                          ' Login',
+                          fontSize: 14,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
