@@ -7,7 +7,18 @@ class PasswordValidations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return buildValidationRow('At least 8 characters', hasMinLength);
+    return Padding(
+      padding: EdgeInsets.only(left: 8),
+      child: Column(
+        children: [
+          buildValidationRow('At least 1 lowercase letter', hasMinLength),
+          buildValidationRow('At least 1 uppercase letter', hasMinLength),
+          buildValidationRow('At least 1 special character', hasMinLength),
+          buildValidationRow('At least 1 number', hasMinLength),
+          buildValidationRow('At least 8 characters', hasMinLength),
+        ],
+      ),
+    );
   }
 
   Widget buildValidationRow(String text, bool hasValidated) {
