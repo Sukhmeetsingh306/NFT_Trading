@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/utils/buttons/dashboard_buttons.dart';
 import 'package:frontend/utils/text_utils.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
@@ -57,19 +58,74 @@ class DashboardAccount extends StatelessWidget {
           ],
         ),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft, // Colors applied in columns
-            end: Alignment.centerRight,
-            colors: [
-              Color(0xFFE8F3FB),
-              Color(0xFFE3F4F6), // Dark Blue (Left Column)
-              Color(0xFFDDF8F1), // Deep Navy
-              Color(0xFFD6FAEA),
-              Color(0xFFDEF6E7), // Electric Blue
-              Color(0xFFF1EADE),
-              Color(0xFFFDE3D6), // Hot Pink (Right Column)
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Color(0xFFE8F3FB),
+                Color(0xFFE3F4F6),
+                Color(0xFFDDF8F1),
+                Color(0xFFD6FAEA),
+                Color(0xFFDEF6E7),
+                Color(0xFFF1EADE),
+                Color(0xFFFDE3D6),
+              ],
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0, top: 18),
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 40,
+                      // backgroundImage: AssetImage(
+                      //     'assets/profile.jpg'),
+                    ),
+                    const SizedBox(width: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text("Username",
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        SizedBox(height: 5),
+                        Text(
+                          "UID: 123456",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black87,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.calendar_today,
+                          size: 20, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 35),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    dashBoardOutlineButton('Level 1  >'),
+                    const SizedBox(width: 15),
+                    dashBoardOutlineButton('20 Points  >'),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
