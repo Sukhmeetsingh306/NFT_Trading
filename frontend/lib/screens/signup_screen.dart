@@ -424,6 +424,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           textSpan(
                             ' Login',
                             fontSize: 14,
+                            color: const Color.fromRGBO(36, 124, 255, 1),
                           ),
                         ],
                       ),
