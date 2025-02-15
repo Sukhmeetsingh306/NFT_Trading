@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/space_utils.dart';
+import 'package:frontend/utils/validations/password_validations.dart';
 
 import '../core/termsAndConditions_core.dart';
 import '../utils/buttons/signup_button.dart';
@@ -42,6 +43,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.selection = TextSelection.fromPosition(
       TextPosition(offset: email.length), // Keep cursor before the '@'
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
   }
 
   @override
@@ -205,6 +215,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
+              sizedBoxH8(),
+              PasswordValidations(hasMinLength: hasMinLength),
+              sizedBoxH8(),
               const TermsAndConditionsText(),
               sizedBoxH15(),
               AppTextButton(
