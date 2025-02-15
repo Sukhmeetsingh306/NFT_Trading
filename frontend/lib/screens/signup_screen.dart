@@ -24,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _referenceController = TextEditingController();
-  final TextEditingController _otpController = TextEditingController();
+  final TextEditingController _otpPhoneController = TextEditingController();
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
@@ -62,6 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _confirmPasswordController.dispose();
     _phoneController.dispose();
     _referenceController.dispose();
+    _otpPhoneController.dispose();
   }
 
   void _sendOTP() {
@@ -200,7 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         children: [
                           Expanded(
                             child: textFormField(
-                              _otpController,
+                              _otpPhoneController,
                               'Phone Number OTP',
                               keyboardType: TextInputType.number,
                               inputFormatters: [
