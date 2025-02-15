@@ -397,7 +397,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   buttonText: "Create Account",
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      // If all fields are valid, proceed with account creation
                       materialRouteNavigatorRep(
                         context,
                         LoginScreen(),
