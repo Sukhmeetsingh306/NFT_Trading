@@ -70,19 +70,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _otpEmailController.dispose();
   }
 
-  void _sendOTP() {
-    if (_phoneController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter a valid phone number')),
-      );
-      return;
-    }
-
-    setState(() {
-      otpSent = true;
-    });
-  }
-
   void _sendEmailOTP() {
     if (_emailController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -255,45 +242,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           return null;
                         },
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: textFormField(
-                              _otpPhoneController,
-                              'Phone Number OTP',
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a valid OTP';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          AppTextButton(
-                            onPressed: () {
-                              _sendOTP();
-                            },
-                            buttonText: 'OTP',
-                            buttonWidth: 75,
-                            buttonHeight: 45,
-                            horizontalPadding: 0,
-                            verticalPadding: 0,
-                          ),
-                        ],
-                      ),
-                      if (otpSent)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: googleText(
-                            'OTP has been sent to your phone',
-                            fontSize: 10,
-                          ),
-                        ),
                       sizedBoxH15(),
                       textFormField(
                         _passwordController,
