@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/buttons/dashboard_buttons.dart';
+import 'package:frontend/utils/code/balance_code.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -73,7 +74,8 @@ class DashboardAccount extends StatelessWidget {
                     const CircleAvatar(
                       radius: 40,
                       // backgroundImage: AssetImage(
-                      //     'assets/profile.jpg'),
+                      //   'assets/images/t.png',
+                      // ),
                     ),
                     const SizedBox(width: 20),
                     Column(
@@ -143,6 +145,10 @@ class DashboardAccount extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                         sizedBoxH8(),
+                        income(
+                          '100.00',
+                          fontWeight: FontWeight.bold,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(left: 15.0),
                           child: Divider(),
