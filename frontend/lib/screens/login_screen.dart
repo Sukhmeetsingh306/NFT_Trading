@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/forgetPassword_screen.dart';
 
+import '../models/controllers/login_controller.dart';
 import '../utils/buttons/signup_button.dart';
 import '../utils/navigation_utils.dart';
 import '../utils/space_utils.dart';
 import '../utils/text_utils.dart';
 import '../utils/validations/password_validations.dart';
+import 'account/dashboard_account.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,8 +19,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final LoginController _loginController = LoginController();
 
   bool _obscureText = true;
   bool hasMinLength = false;
@@ -26,8 +29,25 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     super.dispose();
-    _nameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  final List<String> emailDomains = [
+    'gmail.com',
+    'yahoo.com',
+    'icloud.com',
+    'outlook.com',
+  ];
+  String selectedDomain = 'gmail.com';
+
+  void _updateEmail() {
+    String email =
+        _emailController.text.split('@')[0]; // Keep only the username part
+    _emailController.text = '$email@$selectedDomain';
+    _emailController.selection = TextSelection.fromPosition(
+      TextPosition(offset: email.length), // Keep cursor before the '@'
+    );
   }
 
   @override
@@ -76,13 +96,54 @@ class _LoginScreenState extends State<LoginScreen> {
                             Divider(),
                             sizedBoxH15(),
                             textFormField(
-                              _nameController,
-                              'Username',
+                              _emailController,
+                              'Email',
                               (value) {
                                 if (value == null || value.isEmpty) {
-                                  return 'Please enter your name';
+                                  return 'Please enter your email';
+                                } else if (!RegExp(
+                                        r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+                                    .hasMatch(value)) {
+                                  return 'Please enter a valid email';
                                 }
                                 return null;
+                              },
+                              suffixIcon: DropdownButtonHideUnderline(
+                                child: DropdownButton<String>(
+                                  value: selectedDomain,
+                                  alignment: Alignment.centerRight,
+                                  onChanged: (String? newValue) {
+                                    if (newValue != null) {
+                                      setState(() {
+                                        selectedDomain = newValue;
+                                        _updateEmail();
+                                      });
+                                    }
+                                  },
+                                  items: emailDomains
+                                      .map<DropdownMenuItem<String>>(
+                                          (String domain) {
+                                    return DropdownMenuItem<String>(
+                                      value: domain,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            "@$domain",
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ), // Smaller dropdown icon
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                              autofillHints: [AutofillHints.email],
+                              onChanged: (value) {
+                                _updateEmail();
                               },
                             ),
                             sizedBoxH15(),
@@ -152,10 +213,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         buttonText: "Login",
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            materialRouteNavigatorRep(
-                              context,
-                              LoginScreen(),
+                            bool isAuthenticated =
+                                await _loginController.loginUser(
+                              context: context,
+                              email: _emailController.text,
+                              password: _passwordController.text,
                             );
+
+                            if (isAuthenticated) {
+                              // Navigate only if authentication is successful
+                              materialRouteNavigatorRep(
+                                context,
+                                DashboardAccount(),
+                              );
+                            }
                           }
                         },
                       ),
