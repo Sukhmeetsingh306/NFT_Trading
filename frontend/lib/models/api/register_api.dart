@@ -4,15 +4,17 @@ class RegisteringUser {
   final String id;
   final String name;
   final String email;
-  final String walletAddress;
-  final double usdtBalance; // Storing as double for numeric operations
+  final String password;
+  // final String walletAddress;
+  // final double usdtBalance;
 
   RegisteringUser({
     required this.id,
     required this.name,
     required this.email,
-    required this.walletAddress,
-    required this.usdtBalance,
+    required this.password,
+    // required this.walletAddress,
+    // required this.usdtBalance,
   });
 
   // Convert instance to JSON
@@ -21,8 +23,9 @@ class RegisteringUser {
       'id': id,
       'name': name,
       'email': email,
-      'walletAddress': walletAddress,
-      'usdtBalance': usdtBalance.toString(), // Convert back to string for JSON
+      'password': password,
+      // 'walletAddress': walletAddress,
+      // 'usdtBalance': usdtBalance.toString(), // Convert back to string for JSON
     };
   }
 
@@ -32,9 +35,10 @@ class RegisteringUser {
       id: json['_id'] as String,
       name: json['name'] as String,
       email: json['email'] as String,
-      walletAddress: json['walletAddress'] as String,
-      usdtBalance:
-          double.tryParse(json['usdtBalance']['\$numberDecimal']) ?? 0.0,
+      password: json['password'] as String,
+      // walletAddress: json['walletAddress'] as String,
+      // usdtBalance:
+      //     double.tryParse(json['usdtBalance']['\$numberDecimal']) ?? 0.0,
     );
   }
 
