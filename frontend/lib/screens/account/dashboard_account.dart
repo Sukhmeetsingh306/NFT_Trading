@@ -169,6 +169,7 @@ class DashboardAccount extends StatelessWidget {
                             ),
                           ],
                         ),
+                        //earning('Comprehensive', dailyIncome, totalIncome)
                       ],
                     ),
                   ),
