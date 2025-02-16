@@ -4,7 +4,6 @@
 *.pyc
 *.swp
 .DS_Store
-.atom/
 .build/
 .buildlog/
 .history
@@ -43,3 +42,71 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Flutter/Dart related
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+.cider/
+.idea/
+.melody/
+
+# Web
+web/.dart_tool/
+web/.packages
+web/build/
+
+# iOS
+ios/Flutter/.last_build_id
+ios/.symlinks/
+ios/Pods/
+ios/Podfile.lock
+ios/DerivedData/
+
+# macOS
+macos/Flutter/ephemeral/
+macos/Pods/
+macos/Podfile.lock
+macos/DerivedData/
+
+# Android
+android/.gradle/
+android/.idea/
+android/app/debug.keystore
+android/local.properties
+android/app/build/
+android/build/
+
+# VS Code settings
+.vscode/
+
+# Generated files
+*.iml
+*.log
+*.lock
+*.pyc
+*.swp
+*.DS_Store
+*.class
+
+# Obfuscation
+app.*.json
+flutter_export_environment.sh
+
+# IntelliJ/Android Studio
+.idea/
+*.ipr
+*.iws
+*.iml
+*.hprof
+
+# Node Related
+**/node_modules/
+.env
+
+# Ignore the globals_variable.dart file
+lib/globals.dart
