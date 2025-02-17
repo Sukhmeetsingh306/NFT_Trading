@@ -119,71 +119,66 @@ class DashboardAccount extends StatelessWidget {
                 ),
               ),
               sizedBoxH10(),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Container(
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                          offset: Offset(0, 5),
-                        ),
-                      ],
+              containerWhite(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    googleText(
+                      'Wallet Balance',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        googleText(
-                          'Wallet Balance',
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        sizedBoxH8(),
-                        income(
-                          '100.00',
-                          fontWeight: FontWeight.bold,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          child: Divider(),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(width: width * 0.38),
-                              googleText(
-                                'Daily Income',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              SizedBox(width: width * 0.03),
-                              googleText(
-                                'Total Income',
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ],
+                    sizedBoxH8(),
+                    income(
+                      '100.00',
+                      fontWeight: FontWeight.bold,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: Divider(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          SizedBox(width: width * 0.38),
+                          googleText(
+                            'Daily Income',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
-                        ),
-                        earning(context, 'Comprehensive', '100', '100'),
-                        earning(context, 'Reserve', '0', '90000'),
-                        earning(context, 'Team', '50000', '0'),
-                        earning(context, 'Activity', '0', '0'),
-                        earning(context, 'Stake', '0', '0'),
-                      ],
+                          SizedBox(width: width * 0.03),
+                          googleText(
+                            'Total Income',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    earning(context, 'Comprehensive', '100', '100'),
+                    earning(context, 'Reserve', '0', '90000'),
+                    earning(context, 'Team', '50000', '0'),
+                    earning(context, 'Activity', '0', '0'),
+                    earning(context, 'Stake', '0', '0'),
+                  ],
+                ),
+              ),
+              sizedBoxH8(),
+              containerWhite(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    googleText(
+                      'Wallet Balance',
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ],
                 ),
               ),
             ],
