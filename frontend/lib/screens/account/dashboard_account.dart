@@ -178,6 +178,24 @@ class DashboardAccount extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15.0),
+                      child: Divider(),
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            teamColumn('0', 'Community\n rewards'),
+                            teamColumn('0', 'Valid\n Members'),
+                            teamColumn('0', 'A enthusiast\n  '),
+                            teamColumn('0', 'B+C\n enthusiasts'),
+                          ],
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -187,4 +205,16 @@ class DashboardAccount extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget teamColumn(String amount, String name) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      teamText(amount, fontWeight: FontWeight.bold),
+      SizedBox(width: 8),
+      teamText(name),
+    ],
+  );
 }

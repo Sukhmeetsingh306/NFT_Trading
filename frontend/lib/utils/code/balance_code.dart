@@ -64,7 +64,7 @@ Widget earning(
               googleText(
                 dailyIncome,
                 fontSize: fontSize ?? 14,
-                fontWeight: fontWeight ?? FontWeight.normal,
+                fontWeight: FontWeight.bold,
               ),
             ],
           ),
@@ -86,12 +86,25 @@ Widget earning(
               googleText(
                 totalIncome,
                 fontSize: fontSize ?? 14,
-                fontWeight: fontWeight ?? FontWeight.normal,
+                fontWeight: FontWeight.bold,
               ),
             ],
           ),
         ),
       ],
     ),
+  );
+}
+
+Text teamText(
+  String text, {
+  double? fontSize,
+  FontWeight? fontWeight,
+}) {
+  return googleText(
+    text,
+    fontSize: fontSize ?? 14,
+    fontWeight: fontWeight ?? FontWeight.normal,
+    textAlign: TextAlign.center,
   );
 }
