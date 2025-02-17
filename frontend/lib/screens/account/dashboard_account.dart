@@ -248,19 +248,19 @@ class DashboardAccount extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               teamColumnImage(
-                                'assets/icons/community.png',
+                                'assets/icons/NFT.png',
                                 'NFTs               ',
                               ),
                               teamColumnImage(
-                                'assets/icons/trophy.png',
+                                'assets/icons/details.png',
                                 'Details               ',
                               ),
                               teamColumnImage(
-                                'assets/icons/orders.png',
+                                'assets/icons/deposits.png',
                                 'Deposit         ',
                               ),
                               teamColumnImage(
-                                'assets/icons/share.png',
+                                'assets/icons/withdrawal.png',
                                 'Withdraw',
                               ),
                             ],
@@ -282,6 +282,7 @@ class DashboardAccount extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                       Divider(),
+                      sizedBoxH8(),
                       Column(
                         children: [
                           Row(
@@ -289,19 +290,19 @@ class DashboardAccount extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               teamColumnImage(
-                                'assets/icons/community.png',
+                                'assets/icons/tutorial.png',
                                 'Tutorials',
                               ),
                               teamColumnImage(
-                                'assets/icons/trophy.png',
+                                'assets/icons/setting.png',
                                 'Settings',
                               ),
                               teamColumnImage(
-                                'assets/icons/orders.png',
+                                'assets/icons/mint.png',
                                 'Mint',
                               ),
                               teamColumnImage(
-                                'assets/icons/share.png',
+                                'assets/icons/collection.png',
                                 'Collections',
                               ),
                             ],
@@ -310,6 +311,9 @@ class DashboardAccount extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                SizedBox(
+                  height: 10,
                 ),
               ],
             ),
