@@ -194,6 +194,7 @@ class DashboardAccount extends StatelessWidget {
                             teamColumn('0', 'B+C\n enthusiasts'),
                           ],
                         ),
+                        sizedBoxH8()
                       ],
                     )
                   ],
