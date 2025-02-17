@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/login_screen.dart';
 
-import 'screens/account/dashboard_account.dart';
+import 'screens/account/reserve_account.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white30),
         useMaterial3: true,
       ),
-      home: DashboardAccount(),
+      home: ReserveAccount(),
     );
   }
 }
