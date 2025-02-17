@@ -221,7 +221,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
 
                             if (isAuthenticated) {
-                              // Navigate only if authentication is successful
                               materialRouteNavigatorRep(
                                 context,
                                 DashboardAccount(),
