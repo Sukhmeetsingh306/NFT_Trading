@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/buttons/dashboard_buttons.dart';
+import 'package:frontend/utils/code/appbar_code.dart';
 import 'package:frontend/utils/code/balance_code.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../core/background_core.dart';
 
@@ -15,55 +15,8 @@ class DashboardAccount extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(left: 4.0),
-          child: googleText('DashBoard', fontSize: 20),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(LucideIcons.bell),
-            onPressed: () {
-              // Add notification action
-            },
-          ),
-          Builder(
-            builder: (context) => Padding(
-              padding: const EdgeInsets.only(right: 4.0),
-              child: IconButton(
-                icon: const Icon(Icons.menu),
-                onPressed: () {
-                  Scaffold.of(context).openEndDrawer();
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-      endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const [
-            DrawerHeader(
-              decoration: BoxDecoration(color: Colors.black),
-              child: Text("Menu",
-                  style: TextStyle(color: Colors.white, fontSize: 24)),
-            ),
-            ListTile(
-              leading: Icon(Icons.home),
-              title: Text("Home"),
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text("Profile"),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Settings"),
-            ),
-          ],
-        ),
-      ),
+      appBar: appBarCode(),
+      endDrawer: endDrawer(),
       body: Background(
         child: SafeArea(
           child: SingleChildScrollView(
