@@ -3,9 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Text googleText(String text,
-    {double? fontSize, FontWeight? fontWeight, Color? color}) {
+    {double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+    TextAlign? textAlign}) {
   return Text(
     text,
+    textAlign: textAlign, // Move textAlign here
     style: GoogleFonts.getFont(
       'Lato',
       color: color ?? Colors.black,
