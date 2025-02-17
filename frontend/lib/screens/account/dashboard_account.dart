@@ -12,6 +12,8 @@ class DashboardAccount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Padding(
@@ -153,23 +155,28 @@ class DashboardAccount extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 15.0),
                           child: Divider(),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            googleText(
-                              'Daily Income',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            googleText(
-                              'Total Income',
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(width: width * 0.38),
+                              googleText(
+                                'Daily Income',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              SizedBox(width: width * 0.03),
+                              googleText(
+                                'Total Income',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ],
+                          ),
                         ),
-                        //earning('Comprehensive', dailyIncome, totalIncome)
+                        earning(context, 'Comprehensive', '0', '0'),
                       ],
                     ),
                   ),
