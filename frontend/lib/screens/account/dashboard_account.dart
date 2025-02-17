@@ -194,9 +194,31 @@ class DashboardAccount extends StatelessWidget {
                             teamColumn('0', 'B+C\n enthusiasts'),
                           ],
                         ),
-                        sizedBoxH8()
+                        sizedBoxH15(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            teamColumnImage(
+                              'assets/icons/community.png',
+                              'Community\nenthusiasts',
+                            ),
+                            teamColumnImage(
+                              'assets/icons/trophy.png',
+                              'Community\ncontributions',
+                            ),
+                            teamColumnImage(
+                              'assets/icons/orders.png',
+                              'Community\norders',
+                            ),
+                            teamColumnImage(
+                              'assets/icons/share.png',
+                              'Referral\n ',
+                            ),
+                          ],
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -215,6 +237,21 @@ Widget teamColumn(String amount, String name) {
     children: [
       teamText(amount, fontWeight: FontWeight.bold),
       SizedBox(width: 8),
+      teamText(name),
+    ],
+  );
+}
+
+Widget teamColumnImage(String image, String name) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      ImageIcon(
+        AssetImage(image),
+        size: 26,
+      ),
+      const SizedBox(height: 8),
       teamText(name),
     ],
   );
