@@ -39,45 +39,57 @@ Widget earning(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        googleText(
-          text,
-          fontSize: fontSize ?? 14,
-          fontWeight: fontWeight ?? FontWeight.normal,
+        SizedBox(
+          width: width * 0.3,
+          child: googleText(
+            text,
+            fontSize: fontSize ?? 14,
+            fontWeight: fontWeight ?? FontWeight.normal,
+          ),
         ),
-        Row(
-          children: [
-            SizedBox(width: width * 0.1),
-            Image.asset(
-              'assets/images/t.png',
-              width: 14,
-              height: 14,
-            ),
-            const SizedBox(width: 4),
-            googleText(
-              dailyIncome,
-              fontSize: fontSize ?? 14,
-              fontWeight: fontWeight ?? FontWeight.normal,
-            ),
-          ],
+        SizedBox(
+          width: width * 0.2,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: width * 0.05,
+              ),
+              Image.asset(
+                'assets/images/t.png',
+                width: 14,
+                height: 14,
+              ),
+              const SizedBox(width: 4),
+              googleText(
+                dailyIncome,
+                fontSize: fontSize ?? 14,
+                fontWeight: fontWeight ?? FontWeight.normal,
+              ),
+            ],
+          ),
         ),
-        Row(
-          children: [
-            SizedBox(width: width * 0.02),
-            Image.asset(
-              'assets/images/t.png',
-              width: 14,
-              height: 14,
-            ),
-            const SizedBox(width: 4),
-            googleText(
-              totalIncome,
-              fontSize: fontSize ?? 14,
-              fontWeight: fontWeight ?? FontWeight.normal,
-            ),
-            SizedBox(
-              width: width * 0.06,
-            ),
-          ],
+        SizedBox(
+          width: width * 0.2,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                width: width * 0.05,
+              ),
+              Image.asset(
+                'assets/images/t.png',
+                width: 14,
+                height: 14,
+              ),
+              const SizedBox(width: 4),
+              googleText(
+                totalIncome,
+                fontSize: fontSize ?? 14,
+                fontWeight: fontWeight ?? FontWeight.normal,
+              ),
+            ],
+          ),
         ),
       ],
     ),
