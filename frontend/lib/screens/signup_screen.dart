@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:frontend/utils/navigation_utils.dart';
@@ -6,6 +8,7 @@ import 'package:frontend/utils/validations/password_validations.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../core/termsAndConditions_core.dart';
+import '../models/controllers/register_controllers.dart';
 import '../utils/buttons/signup_button.dart';
 import '../utils/text_utils.dart';
 import 'login_screen.dart';
@@ -18,7 +21,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -26,8 +29,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _referenceController = TextEditingController();
-  final TextEditingController _otpPhoneController = TextEditingController();
   final TextEditingController _otpEmailController = TextEditingController();
+  final RegisterController _registerController = RegisterController();
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
@@ -66,21 +69,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _confirmPasswordController.dispose();
     _phoneController.dispose();
     _referenceController.dispose();
-    _otpPhoneController.dispose();
     _otpEmailController.dispose();
-  }
-
-  void _sendOTP() {
-    if (_phoneController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter a valid phone number')),
-      );
-      return;
-    }
-
-    setState(() {
-      otpSent = true;
-    });
   }
 
   void _sendEmailOTP() {
@@ -93,6 +82,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     setState(() {
       otpEmailSent = true;
+    });
+  }
+
+  void reloadWidget() {
+    setState(() {
+      _formKey = GlobalKey<FormState>();
     });
   }
 
@@ -255,45 +250,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           return null;
                         },
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: textFormField(
-                              _otpPhoneController,
-                              'Phone Number OTP',
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly
-                              ],
-                              (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a valid OTP';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          SizedBox(width: 10),
-                          AppTextButton(
-                            onPressed: () {
-                              _sendOTP();
-                            },
-                            buttonText: 'OTP',
-                            buttonWidth: 75,
-                            buttonHeight: 45,
-                            horizontalPadding: 0,
-                            verticalPadding: 0,
-                          ),
-                        ],
-                      ),
-                      if (otpSent)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4.0),
-                          child: googleText(
-                            'OTP has been sent to your phone',
-                            fontSize: 10,
-                          ),
-                        ),
                       sizedBoxH15(),
                       textFormField(
                         _passwordController,
@@ -393,15 +349,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 const TermsAndConditionsText(),
                 sizedBoxH15(),
+
                 AppTextButton(
                   buttonText: "Create Account",
                   onPressed: () async {
+                    print("BUtton pressed");
                     if (_formKey.currentState!.validate()) {
+                      await _registerController.registerUser(
+                        context: context,
+                        name: _nameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      );
+                      print("Button worked");
+                      setState(() {
+                        _formKey.currentState!.reset();
+                      });
+
+                      reloadWidget();
+
                       materialRouteNavigatorRep(
                         context,
                         LoginScreen(),
                       );
                     }
+                    print("Button exited");
                   },
                 ),
                 sizedBoxH8(),
