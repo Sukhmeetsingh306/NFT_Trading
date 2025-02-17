@@ -27,3 +27,28 @@ class Background extends StatelessWidget {
     );
   }
 }
+
+Widget containerWhite(Widget child) {
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: SizedBox(
+      width: double.infinity,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+              spreadRadius: 2,
+              offset: Offset(0, 5),
+            ),
+          ],
+        ),
+        child: child,
+      ),
+    ),
+  );
+}
