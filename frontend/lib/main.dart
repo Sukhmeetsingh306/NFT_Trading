@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white30),
         useMaterial3: true,
       ),
-      home: LoginScreen(),
+      home: DashboardAccount(),
     );
   }
 }
