@@ -18,6 +18,8 @@ class DashboardAccount extends StatefulWidget {
 class _DashboardAccountState extends State<DashboardAccount> {
   String username = "User";
 
+  bool isHidden = false;
+
   @override
   void initState() {
     super.initState();
@@ -25,11 +27,11 @@ class _DashboardAccountState extends State<DashboardAccount> {
   }
 
   Future<void> _loadUsername() async {
-    final prefs = await SharedPreferences.getInstance();
+    final pref = await SharedPreferences.getInstance();
     setState(() {
-      username = prefs.getString('username') ?? "User"; // Ensure UI updates
+      username = pref.getString('username') ?? "User"; // Ensure UI updates
     });
-    print("Loaded Username: $username"); // 🔍 Debug SharedPreferences
+    //print("Loaded Username: $username"); // 🔍 Debug SharedPreferences
   }
 
   @override
@@ -51,30 +53,54 @@ class _DashboardAccountState extends State<DashboardAccount> {
                     children: [
                       const CircleAvatar(
                         radius: 40,
-                        // backgroundImage: AssetImage(
-                        //   'assets/images/t.png',
-                        // ),
+                        // backgroundImage: AssetImage('assets/images/t.png'),
                       ),
                       const SizedBox(width: 20),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          googleText(username),
-                          SizedBox(height: 5),
-                          Text(
-                            "UID: 123456",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black87,
-                            ),
+                          googleText(
+                            isHidden ? "******" : username, // Toggle visibility
+                          ),
+                          const SizedBox(height: 5),
+                          googleText(
+                            isHidden ? "UID: ******" : "UID: 123456",
+                            //isHidden ? "UID: ******" : "UID: ${uid}",
+                            fontSize: 14,
+                            fontWeight: FontWeight.normal,
                           ),
                         ],
                       ),
-                      Spacer(),
-                      IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.calendar_today,
-                            size: 20, color: Colors.black),
+                      const Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height * 0.03),
+                        child: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isHidden = !isHidden; // Toggle state
+                            });
+                          },
+                          icon: Icon(
+                            isHidden
+                                ? Icons.visibility_off
+                                : Icons.visibility, // Eye icon toggle
+                            size: 20,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).size.height * 0.03),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.calendar_today,
+                            size: 20,
+                            color: Colors.black,
+                          ),
+                        ),
                       ),
                     ],
                   ),
