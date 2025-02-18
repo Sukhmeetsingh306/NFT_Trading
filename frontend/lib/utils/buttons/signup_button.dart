@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../text_utils.dart';
 
 class AppTextButton extends StatelessWidget {
   final double? borderRadius;
-  final Color? backgroundColor;
+  final List<Color>? gradientColors; // Accepts gradient colors
   final double? horizontalPadding;
   final double? verticalPadding;
   final double? buttonWidth;
@@ -12,49 +11,61 @@ class AppTextButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressed;
   final double? fontSize;
+  final Color? color;
 
-  const AppTextButton(
-      {super.key,
-      this.borderRadius,
-      this.backgroundColor,
-      this.horizontalPadding,
-      this.verticalPadding,
-      this.buttonWidth,
-      this.buttonHeight,
-      this.fontSize,
-      required this.buttonText,
-      required this.onPressed});
+  const AppTextButton({
+    super.key,
+    this.borderRadius,
+    this.gradientColors,
+    this.horizontalPadding,
+    this.verticalPadding,
+    this.buttonWidth,
+    this.buttonHeight,
+    this.fontSize,
+    this.color,
+    required this.buttonText,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              borderRadius ?? 16,
+    return Container(
+      width: buttonWidth ?? double.maxFinite,
+      height: buttonHeight ?? 52,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(borderRadius ?? 16),
+        gradient: gradientColors != null
+            ? LinearGradient(
+                colors: gradientColors!,
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              )
+            : null,
+        color: gradientColors == null
+            ? const Color.fromRGBO(36, 124, 255, 1)
+            : null,
+      ),
+      child: TextButton(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(borderRadius ?? 16),
+            ),
+          ),
+          padding: MaterialStateProperty.all<EdgeInsets>(
+            EdgeInsets.symmetric(
+              horizontal: horizontalPadding ?? 12,
+              vertical: verticalPadding ?? 14,
             ),
           ),
         ),
-        backgroundColor: WidgetStatePropertyAll(
-          backgroundColor ?? const Color.fromRGBO(36, 124, 255, 1),
+        child: googleText(
+          buttonText,
+          fontSize: fontSize ?? 16,
+          fontWeight: FontWeight.w600,
+          color: color ?? Colors.white,
         ),
-        padding: WidgetStateProperty.all<EdgeInsets>(
-          EdgeInsets.symmetric(
-            horizontal: horizontalPadding ?? 12,
-            vertical: verticalPadding ?? 14,
-          ),
-        ),
-        fixedSize: WidgetStateProperty.all(
-          Size(buttonWidth ?? double.maxFinite, buttonHeight ?? 52),
-        ),
-      ),
-      child: googleText(
-        buttonText,
-        fontSize: fontSize ?? 16,
-        fontWeight: FontWeight.w600,
-        color: Colors.white,
       ),
     );
   }

@@ -221,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             );
 
                             if (isAuthenticated) {
-                              materialRouteNavigatorRep(
+                              pushAndRemoveUntil(
                                 context,
                                 DashboardAccount(),
                               );

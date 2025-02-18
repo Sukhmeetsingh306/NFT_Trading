@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/login_screen.dart';
 
-import 'screens/account/dashboard_account.dart';
+import 'screens/account/reserve_account.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
