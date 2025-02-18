@@ -14,7 +14,7 @@ class ReserveAccount extends StatefulWidget {
 }
 
 class _ReserveAccountState extends State<ReserveAccount> {
-  int _selectedTabIndex = 0; // Tracks the active tab index
+  int _selectedTabIndex = 1; // Tracks the active tab index
   String? _dropdownValue1;
   String? _dropdownValue2;
 
