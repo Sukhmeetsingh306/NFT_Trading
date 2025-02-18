@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/utils/buttons/signup_button.dart';
 import 'package:frontend/utils/code/appbar_code.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
@@ -144,6 +145,10 @@ class _ReserveAccountState extends State<ReserveAccount> {
       "LVL 3": ["500", "1000"],
     };
 
+    _dropdownValue1 ??= "LVL 1"; // Default first dropdown to "LVL 1"
+    _dropdownValue2 ??= levelOptions[_dropdownValue1]![
+        0]; // Default second dropdown based on first
+
     return Padding(
       padding: EdgeInsets.all(20),
       child: Column(
@@ -152,13 +157,13 @@ class _ReserveAccountState extends State<ReserveAccount> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _dropdownButton(
-                "LVL 1",
+                "Select Level",
                 ["LVL 1", "LVL 2", "LVL 3"],
                 (String? newValue) {
                   setState(() {
-                    _dropdownValue1 = newValue;
-                    _dropdownValue2 =
-                        null; // Reset second dropdown when first changes
+                    _dropdownValue1 = newValue!;
+                    _dropdownValue2 = levelOptions[newValue]![
+                        0]; // Set default based on selection
                   });
                 },
                 _dropdownValue1,
@@ -173,10 +178,29 @@ class _ReserveAccountState extends State<ReserveAccount> {
                 },
                 _dropdownValue2,
               ),
+              GestureDetector(
+                onTap: () {},
+                child: Image.asset(
+                  'assets/icons/info.png',
+                  width: 30,
+                  height: 30,
+                ),
+              ),
             ],
           ),
           SizedBox(height: 20),
-          ElevatedButton(
+          AppTextButton(
+            gradientColors: [
+              Color(0xFFE8F3FB),
+              Color(0xFFE3F4F6),
+              Color(0xFFDDF8F1),
+              Color(0xFFD6FAEA),
+              Color(0xFFDEF6E7),
+              Color(0xFFF1EADE),
+              Color(0xFFFDE3D6),
+            ],
+            color: const Color.fromARGB(255, 255, 255, 255),
+            buttonText: 'Confirm',
             onPressed: () {
               if (_dropdownValue1 != null && _dropdownValue2 != null) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -187,7 +211,6 @@ class _ReserveAccountState extends State<ReserveAccount> {
                 );
               }
             },
-            child: Text("Confirm"),
           ),
         ],
       ),
