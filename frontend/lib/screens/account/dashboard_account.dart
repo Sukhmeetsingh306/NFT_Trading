@@ -4,11 +4,33 @@ import 'package:frontend/utils/code/appbar_code.dart';
 import 'package:frontend/utils/code/balance_code.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/background_core.dart';
 
-class DashboardAccount extends StatelessWidget {
+class DashboardAccount extends StatefulWidget {
   const DashboardAccount({super.key});
+
+  @override
+  State<DashboardAccount> createState() => _DashboardAccountState();
+}
+
+class _DashboardAccountState extends State<DashboardAccount> {
+  String username = "User";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsername();
+  }
+
+  Future<void> _loadUsername() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('username') ?? "User"; // Ensure UI updates
+    });
+    print("Loaded Username: $username"); // 🔍 Debug SharedPreferences
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +58,8 @@ class DashboardAccount extends StatelessWidget {
                       const SizedBox(width: 20),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Text("Username",
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)),
+                        children: [
+                          googleText(username),
                           SizedBox(height: 5),
                           Text(
                             "UID: 123456",

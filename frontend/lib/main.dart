@@ -4,6 +4,7 @@ import 'package:frontend/screens/login_screen.dart';
 import 'screens/account/reserve_account.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white30),
         useMaterial3: true,
       ),
-      home: ReserveAccount(),
+      home: LoginScreen(),
     );
   }
 }
