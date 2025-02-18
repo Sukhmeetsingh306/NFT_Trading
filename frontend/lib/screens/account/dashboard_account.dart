@@ -7,6 +7,9 @@ import 'package:frontend/utils/text_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/background_core.dart';
+import '../../utils/code/detector_code.dart';
+import '../../utils/navigation_utils.dart';
+import 'reserve_account.dart';
 
 class DashboardAccount extends StatefulWidget {
   const DashboardAccount({super.key});
@@ -113,6 +116,19 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       dashBoardOutlineButton('Level 1  >'),
                       const SizedBox(width: 15),
                       dashBoardOutlineButton('20 Points  >'),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      gestureDetectorRich(
+                        Image.asset('assets/icons/nft_list.png',
+                            width: 24, height: 24),
+                        onTap: () {
+                          materialRouteNavigator(
+                            context,
+                            const ReserveAccount(),
+                          );
+                        },
+                      )
                     ],
                   ),
                 ),
