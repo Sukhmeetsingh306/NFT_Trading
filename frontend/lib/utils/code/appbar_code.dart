@@ -57,7 +57,7 @@ Widget endDrawer(BuildContext context) {
           "Profile",
           Icon(Icons.account_circle),
           onTap: () {
-            materialRouteNavigatorRep(
+            pushAndRemoveUntil(
               context,
               const DashboardAccount(),
             );
@@ -71,6 +71,7 @@ Widget endDrawer(BuildContext context) {
           "Earn",
           Image.asset('assets/icons/nft_list.png', width: 24, height: 24),
           onTap: () {
+            pop(context);
             materialRouteNavigator(
               context,
               const ReserveAccount(),

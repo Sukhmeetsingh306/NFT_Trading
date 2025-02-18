@@ -4,6 +4,8 @@ import 'package:frontend/utils/code/appbar_code.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
 
+import '../../core/background_core.dart';
+
 class ReserveAccount extends StatefulWidget {
   const ReserveAccount({super.key});
 
@@ -54,15 +56,10 @@ class _ReserveAccountState extends State<ReserveAccount> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(title,
-                    style:
-                        TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                googleText(title, fontSize: 12, fontWeight: FontWeight.w500),
                 SizedBox(height: 5),
-                Text(value,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: color)),
+                googleText(value,
+                    fontSize: 18, fontWeight: FontWeight.bold, color: color),
               ],
             ),
           ),
@@ -116,12 +113,10 @@ class _ReserveAccountState extends State<ReserveAccount> {
       },
       child: Column(
         children: [
-          Text(
+          googleText(
             label,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-            ),
+            fontSize: 16,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
           ),
           SizedBox(height: 5),
           if (isSelected)
@@ -190,16 +185,8 @@ class _ReserveAccountState extends State<ReserveAccount> {
           ),
           SizedBox(height: 20),
           AppTextButton(
-            gradientColors: [
-              Color(0xFFE8F3FB),
-              Color(0xFFE3F4F6),
-              Color(0xFFDDF8F1),
-              Color(0xFFD6FAEA),
-              Color(0xFFDEF6E7),
-              Color(0xFFF1EADE),
-              Color(0xFFFDE3D6),
-            ],
-            color: const Color.fromARGB(255, 255, 255, 255),
+            gradientColors: backgroundColor,
+            color: const Color.fromARGB(255, 0, 0, 0),
             buttonText: 'Confirm',
             onPressed: () {
               if (_dropdownValue1 != null && _dropdownValue2 != null) {
