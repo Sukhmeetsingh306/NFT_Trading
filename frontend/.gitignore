@@ -110,3 +110,4 @@ flutter_export_environment.sh
 
 # Ignore the globals_variable.dart file
 lib/globals.dart
+lib/withdraw.dart
