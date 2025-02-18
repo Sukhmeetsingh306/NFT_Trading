@@ -21,7 +21,7 @@ class _ReserveAccountState extends State<ReserveAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCode(),
+      appBar: appBarCode("Reserve"),
       endDrawer: endDrawer(context),
       backgroundColor: Colors.white,
       body: Column(

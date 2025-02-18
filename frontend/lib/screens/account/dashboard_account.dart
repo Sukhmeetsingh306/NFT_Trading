@@ -42,7 +42,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: appBarCode(),
+      appBar: appBarCode("DashBoard"),
       endDrawer: endDrawer(context),
       body: Background(
         child: SafeArea(
@@ -128,7 +128,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                             const ReserveAccount(),
                           );
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),
@@ -275,6 +275,12 @@ class _DashboardAccountState extends State<DashboardAccount> {
                               teamColumnImage(
                                 'assets/icons/withdrawal.png',
                                 'Withdraw',
+                                onTap: () {
+                                  materialRouteNavigator(
+                                    context,
+                                    const ReserveAccount(),
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -351,14 +357,17 @@ Widget teamColumn(String amount, String name) {
   );
 }
 
-Widget teamColumnImage(String image, String name) {
+Widget teamColumnImage(String image, String name, {GestureTapCallback? onTap}) {
   return SizedBox(
     width: 80, // Ensures equal width
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset(image, width: 24, height: 24),
+        gestureDetectorRich(
+          Image.asset(image, width: 24, height: 24),
+          onTap: onTap ?? () {},
+        ),
         const SizedBox(height: 8),
         teamText(name),
       ],

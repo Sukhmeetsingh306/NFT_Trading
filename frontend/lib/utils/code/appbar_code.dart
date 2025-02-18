@@ -7,11 +7,11 @@ import 'package:lucide_icons/lucide_icons.dart';
 import '../../screens/account/dashboard_account.dart';
 import '../text_utils.dart';
 
-PreferredSizeWidget appBarCode() {
+PreferredSizeWidget appBarCode(String screenName) {
   return AppBar(
     title: Padding(
       padding: const EdgeInsets.only(left: 4.0),
-      child: googleText('DashBoard', fontSize: 20),
+      child: googleText(screenName, fontSize: 20),
     ),
     actions: [
       IconButton(
