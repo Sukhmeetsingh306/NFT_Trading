@@ -40,7 +40,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
 
     return Scaffold(
       appBar: appBarCode(),
-      endDrawer: endDrawer(),
+      endDrawer: endDrawer(context),
       body: Background(
         child: SafeArea(
           child: SingleChildScrollView(

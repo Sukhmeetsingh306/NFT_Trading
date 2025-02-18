@@ -20,7 +20,7 @@ class _ReserveAccountState extends State<ReserveAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCode(),
-      endDrawer: endDrawer(),
+      endDrawer: endDrawer(context),
       backgroundColor: Colors.white,
       body: Column(
         children: [

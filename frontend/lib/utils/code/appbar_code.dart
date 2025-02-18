@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/background_core.dart';
+import 'package:frontend/screens/account/reserve_account.dart';
+import 'package:frontend/utils/navigation_utils.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
+import '../../screens/account/dashboard_account.dart';
 import '../text_utils.dart';
 
 PreferredSizeWidget appBarCode() {
@@ -31,29 +35,57 @@ PreferredSizeWidget appBarCode() {
   );
 }
 
-Widget endDrawer() {
+Widget endDrawer(BuildContext context) {
   return Drawer(
+    width: MediaQuery.of(context).size.width * .5,
     child: ListView(
       padding: EdgeInsets.zero,
-      children: const [
+      children: [
         DrawerHeader(
-          decoration: BoxDecoration(color: Colors.black),
-          child:
-              Text("Menu", style: TextStyle(color: Colors.white, fontSize: 24)),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: backgroundColor,
+            ),
+          ),
+          child: googleText("Menu", color: Colors.black, fontSize: 24),
         ),
-        ListTile(
-          leading: Icon(Icons.home),
-          title: Text("Home"),
+        listTile(
+          "Home",
+          Icon(Icons.home),
         ),
-        ListTile(
-          leading: Icon(Icons.account_circle),
-          title: Text("Profile"),
+        listTile(
+          "Profile",
+          Icon(Icons.account_circle),
+          onTap: () {
+            materialRouteNavigatorRep(
+              context,
+              const DashboardAccount(),
+            );
+          },
         ),
-        ListTile(
-          leading: Icon(Icons.settings),
-          title: Text("Settings"),
+        listTile(
+          "Settings",
+          Icon(Icons.settings),
+        ),
+        listTile(
+          "Earn",
+          Image.asset('assets/icons/nft_list.png', width: 24, height: 24),
+          onTap: () {
+            materialRouteNavigator(
+              context,
+              const ReserveAccount(),
+            );
+          },
         ),
       ],
     ),
+  );
+}
+
+ListTile listTile(String text, Widget leading, {GestureTapCallback? onTap}) {
+  return ListTile(
+    leading: leading,
+    title: googleText(text, fontSize: 16, fontWeight: FontWeight.normal),
+    onTap: onTap ?? () {},
   );
 }
