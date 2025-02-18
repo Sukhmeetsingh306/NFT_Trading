@@ -16,7 +16,7 @@ class ReserveAccount extends StatelessWidget {
         children: [
           _buildEarningsGrid(),
           sizedBoxH8(),
-          _buildTabs(),
+          _buildTabs(context),
           sizedBoxH20(),
           _buildNoDataSection(),
         ],
@@ -75,9 +75,12 @@ Widget _buildEarningsGrid() {
   );
 }
 
-Widget _buildTabs() {
+Widget _buildTabs(BuildContext context) {
   return Padding(
-    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+    padding: EdgeInsets.symmetric(
+      horizontal: MediaQuery.of(context).size.height * 0.06,
+      vertical: MediaQuery.of(context).size.width * 0.01,
+    ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
