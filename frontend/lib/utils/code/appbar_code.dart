@@ -9,6 +9,8 @@ import '../text_utils.dart';
 
 PreferredSizeWidget appBarCode(String screenName) {
   return AppBar(
+    backgroundColor: Colors.white60,
+    //e7f1f3
     title: Padding(
       padding: const EdgeInsets.only(left: 4.0),
       child: googleText(screenName, fontSize: 20),
