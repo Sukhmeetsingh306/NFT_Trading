@@ -1,9 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/buttons/dashboard_buttons.dart';
 import 'package:frontend/utils/code/appbar_code.dart';
 import 'package:frontend/utils/code/balance_code.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
+import 'package:random_avatar/random_avatar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/background_core.dart';
@@ -41,9 +44,22 @@ class _DashboardAccountState extends State<DashboardAccount> {
     //print("Loaded Username: $username"); // 🔍 Debug SharedPreferences
   }
 
+  // List<Color> generateRandomColors(int count) {
+  //   Random random = Random();
+  //   return List.generate(count, (index) {
+  //     return Color.fromRGBO(
+  //       random.nextInt(256), // R
+  //       random.nextInt(256), // G
+  //       random.nextInt(256), // B
+  //       1, // Opacity
+  //     );
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    //List<Color> gradientColors = generateRandomColors(3);
 
     return Scaffold(
       appBar: appBarCode("DashBoard"),
@@ -61,9 +77,31 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const CircleAvatar(
+                          // CircleAvatar(
+                          //   radius: 50,
+                          //   child: Container(
+                          //     decoration: BoxDecoration(
+                          //       shape: BoxShape.circle,
+                          //       gradient: LinearGradient(
+                          //         colors:
+                          //             gradientColors, // Random gradient colors
+                          //         begin: Alignment.topLeft,
+                          //         end: Alignment.bottomRight,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+
+                          CircleAvatar(
                             radius: 40,
-                            // backgroundImage: AssetImage('assets/images/t.png'),
+                            backgroundColor: Colors.grey[300],
+                            child: ClipOval(
+                              child: RandomAvatar(
+                                username, // Unique seed for consistent avatars
+                                width: 80,
+                                height: 80,
+                              ),
+                            ),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
