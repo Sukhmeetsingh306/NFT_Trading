@@ -4,8 +4,6 @@ import 'package:frontend/utils/code/appbar_code.dart';
 import 'package:frontend/utils/space_utils.dart';
 import 'package:frontend/utils/text_utils.dart';
 
-import '../../core/background_core.dart';
-
 class ReserveAccount extends StatefulWidget {
   const ReserveAccount({super.key});
 
@@ -185,8 +183,6 @@ class _ReserveAccountState extends State<ReserveAccount> {
           ),
           SizedBox(height: 20),
           AppTextButton(
-            gradientColors: backgroundColor,
-            color: const Color.fromARGB(255, 0, 0, 0),
             buttonText: 'Confirm',
             onPressed: () {
               if (_dropdownValue1 != null && _dropdownValue2 != null) {
