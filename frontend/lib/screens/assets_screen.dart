@@ -4,6 +4,7 @@ import 'package:frontend/utils/space_utils.dart';
 import '../core/background_core.dart';
 import '../utils/buttons/signup_button.dart';
 import '../utils/code/appbar_code.dart';
+import '../utils/code/floating_code.dart';
 import '../utils/navigation_utils.dart';
 import '../utils/text_utils.dart';
 import 'account/dashboard_account.dart';
@@ -23,103 +24,110 @@ class _AssetsScreenState extends State<AssetsScreen> {
     return Scaffold(
       appBar: appBarCode("Deposit"),
       endDrawer: endDrawer(context),
-      body: Background(
-        child: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  containerWhite(
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 5.0),
-                          child: googleText(
-                            'Assets (USDT)',
-                            fontSize: 14,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 12.0),
-                          child: googleText('12.57', fontSize: 25),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
+        children: [
+          Background(
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    children: [
+                      containerWhite(
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            columnWithdraw("12.56", "Total Earning"),
-                            columnWithdraw("100", "WithDraw"),
-                            columnWithdraw("12.57", "UnDrawn"),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 5.0),
+                              child: googleText(
+                                'Assets (USDT)',
+                                fontSize: 14,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: googleText('12.57', fontSize: 25),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                columnWithdraw("12.56", "Total Earning"),
+                                columnWithdraw("100", "WithDraw"),
+                                columnWithdraw("12.57", "UnDrawn"),
+                              ],
+                            ),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  containerWhite(
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                      ),
+                      containerWhite(
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                                child: Text("Node 1",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold))),
-                            Icon(Icons.help_outline, color: Colors.grey),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Text("Node 1",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold))),
+                                Icon(Icons.help_outline, color: Colors.grey),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            _depositAddressItem(
+                                "USDT Deposit Address (BEP-20)", bep, () {
+                              setState(() {
+                                bep = !bep;
+                              });
+                            }),
                           ],
                         ),
-                        const SizedBox(height: 10),
-                        _depositAddressItem(
-                            "USDT Deposit Address (BEP-20)", bep, () {
-                          setState(() {
-                            bep = !bep;
-                          });
-                        }),
-                      ],
-                    ),
-                  ),
-                  containerWhite(
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              // teamColumnImage(
-                              //   'assets/icons/deposits.png',
-                              //   'Deposit         ',
-                              // ),
-                              teamColumnImage(
-                                'assets/icons/withdrawal.png',
-                                'Withdraw',
-                                onTap: () {
-                                  materialRouteNavigator(
-                                    context,
-                                    const AssetsScreen(),
-                                  );
-                                },
+                      ),
+                      containerWhite(
+                        Column(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 12.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  // teamColumnImage(
+                                  //   'assets/icons/deposits.png',
+                                  //   'Deposit         ',
+                                  // ),
+                                  teamColumnImage(
+                                    'assets/icons/withdrawal.png',
+                                    'Withdraw',
+                                    onTap: () {
+                                      materialRouteNavigator(
+                                        context,
+                                        const AssetsScreen(),
+                                      );
+                                    },
+                                  ),
+                                  teamColumnImage(
+                                    'assets/icons/setting.png',
+                                    'Settings',
+                                  ),
+                                ],
                               ),
-                              teamColumnImage(
-                                'assets/icons/setting.png',
-                                'Settings',
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      sizedBoxH10(),
+                      AppTextButton(buttonText: 'Deposit', onPressed: () {}),
+                      sizedBoxH8(),
+                      containerWhite(_buildHistorySection()),
+                    ],
                   ),
-                  sizedBoxH10(),
-                  AppTextButton(buttonText: 'Deposit', onPressed: () {}),
-                  sizedBoxH8(),
-                  containerWhite(_buildHistorySection()),
-                ],
+                ),
               ),
             ),
           ),
-        ),
+          floatingRowCode(context),
+        ],
       ),
     );
   }
