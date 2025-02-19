@@ -27,10 +27,10 @@ class LoginController {
           final pref = await SharedPreferences.getInstance();
           await pref.setString(
               'username', responseData['user']['name'] ?? 'User');
-          await pref.setString(
-              'usdtBalance',
-              responseData['user']['usdtBalance']['\$numberDecimal'] ??
-                  '0.00'); // 🔥 Store usdtBalance
+          await pref.setString('usdtBalance',
+              responseData['user']['usdtBalance']['\$numberDecimal'] ?? '0.00');
+          await pref.setString('walletAddress',
+              responseData['user']['walletAddress'] ?? 'Wallet Address');
         }
         return true;
       } else {

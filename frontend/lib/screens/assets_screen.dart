@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/utils/space_utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../core/background_core.dart';
 import '../utils/buttons/signup_button.dart';
@@ -19,6 +20,29 @@ class AssetsScreen extends StatefulWidget {
 class _AssetsScreenState extends State<AssetsScreen> {
   bool bep = false;
   bool trc = false;
+  bool isVisible = false;
+
+  String walletAddress = "Fetching...";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadWalletAddress();
+  }
+
+  Future<void> _loadWalletAddress() async {
+    final pref = await SharedPreferences.getInstance();
+    String? savedAddress = pref.getString('walletAddress');
+
+    print("Retrieved Wallet Address: $savedAddress"); // Debugging
+
+    if (mounted) {
+      setState(() {
+        walletAddress = savedAddress ?? "No Wallet Address Found";
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,11 +98,17 @@ class _AssetsScreenState extends State<AssetsScreen> {
                             ),
                             const SizedBox(height: 10),
                             _depositAddressItem(
-                                "USDT Deposit Address (BEP-20)", bep, () {
-                              setState(() {
-                                bep = !bep;
-                              });
-                            }),
+                              "USDT Deposit Address (BEP-20)",
+                              isVisible
+                                  ? walletAddress
+                                  : "***************************",
+                              isVisible,
+                              () {
+                                setState(() {
+                                  isVisible = !isVisible;
+                                });
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -249,11 +279,15 @@ Column columnWithdraw(String amount, String text) {
   );
 }
 
-Widget _depositAddressItem(String title, bool isVisible, VoidCallback toggle) {
+Widget _depositAddressItem(
+    String title, String wallet, bool isVisible, VoidCallback toggle) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      googleText(title, fontWeight: FontWeight.bold, fontSize: 12),
+      Text(
+        title,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+      ),
       const SizedBox(height: 4),
       Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -264,10 +298,9 @@ Widget _depositAddressItem(String title, bool isVisible, VoidCallback toggle) {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            googleText(
-              isVisible ? "1AbcXyZ45678ghJkl" : "***************************",
-              fontSize: 12,
-              fontWeight: FontWeight.normal,
+            Text(
+              wallet,
+              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
             ),
             GestureDetector(
               onTap: toggle,
