@@ -46,7 +46,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCode("Deposit"),
+      appBar: appBarCode("Assets"),
       endDrawer: endDrawer(context),
       body: Stack(
         children: [

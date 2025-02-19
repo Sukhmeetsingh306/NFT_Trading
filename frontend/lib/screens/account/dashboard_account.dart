@@ -10,6 +10,7 @@ import '../../core/background_core.dart';
 import '../../utils/code/detector_code.dart';
 import '../../utils/code/floating_code.dart';
 import '../../utils/navigation_utils.dart';
+import '../assets_screen.dart';
 import 'reserve_account.dart';
 
 class DashboardAccount extends StatefulWidget {
@@ -289,7 +290,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                                     onTap: () {
                                       materialRouteNavigator(
                                         context,
-                                        const ReserveAccount(),
+                                        const AssetsScreen(),
                                       );
                                     },
                                   ),
