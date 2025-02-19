@@ -5,6 +5,7 @@ import 'package:frontend/utils/navigation_utils.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import '../../screens/account/dashboard_account.dart';
+import '../../screens/login_screen.dart';
 import '../text_utils.dart';
 
 PreferredSizeWidget appBarCode(String screenName) {
@@ -80,6 +81,12 @@ Widget endDrawer(BuildContext context) {
             );
           },
         ),
+        listTile("Logout", Icon(Icons.logout_rounded), onTap: () {
+          pushAndRemoveUntil(
+            context,
+            const LoginScreen(),
+          );
+        }),
       ],
     ),
   );
