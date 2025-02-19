@@ -22,7 +22,7 @@ class Background extends StatelessWidget {
   }
 }
 
-Widget containerWhite(Widget child) {
+Widget containerWhiteDash(Widget child) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: Container(

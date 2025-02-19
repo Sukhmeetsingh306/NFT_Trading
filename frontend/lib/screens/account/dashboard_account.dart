@@ -148,7 +148,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       ),
                     ),
                     sizedBoxH10(),
-                    containerWhite(
+                    containerWhiteDash(
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -195,7 +195,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       ),
                     ),
                     sizedBoxH8(),
-                    containerWhite(
+                    containerWhiteDash(
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -249,7 +249,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       ),
                     ),
                     sizedBoxH8(),
-                    containerWhite(
+                    containerWhiteDash(
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
@@ -286,6 +286,12 @@ class _DashboardAccountState extends State<DashboardAccount> {
                                   teamColumnImage(
                                     'assets/icons/details.png',
                                     'Details               ',
+                                    onTap: () {
+                                      materialRouteNavigator(
+                                        context,
+                                        const ReserveAccount(),
+                                      );
+                                    },
                                   ),
                                   teamColumnImage(
                                     'assets/icons/deposits.png',
@@ -309,7 +315,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       ),
                     ),
                     sizedBoxH8(),
-                    containerWhite(
+                    containerWhiteDash(
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
