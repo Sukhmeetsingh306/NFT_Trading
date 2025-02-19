@@ -20,6 +20,7 @@ class DashboardAccount extends StatefulWidget {
 
 class _DashboardAccountState extends State<DashboardAccount> {
   String username = "User";
+  String usdtBalance = '0.00';
 
   bool isHidden = false;
 
@@ -32,7 +33,8 @@ class _DashboardAccountState extends State<DashboardAccount> {
   Future<void> _loadUsername() async {
     final pref = await SharedPreferences.getInstance();
     setState(() {
-      username = pref.getString('username') ?? "User"; // Ensure UI updates
+      username = pref.getString('username') ?? "User";
+      usdtBalance = pref.getString('usdtBalance') ?? '0.00';
     });
     //print("Loaded Username: $username"); // 🔍 Debug SharedPreferences
   }
@@ -52,58 +54,68 @@ class _DashboardAccountState extends State<DashboardAccount> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 18.0, top: 18),
-                  child: Row(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircleAvatar(
                         radius: 40,
                         // backgroundImage: AssetImage('assets/images/t.png'),
                       ),
-                      const SizedBox(width: 20),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          googleText(
-                            isHidden ? "******" : username, // Toggle visibility
+                          const SizedBox(width: 20),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              googleText(
+                                isHidden
+                                    ? "******"
+                                    : username, // Toggle visibility
+                              ),
+                              const SizedBox(height: 5),
+                              googleText(
+                                isHidden ? "UID: ******" : "UID: 123456",
+                                //isHidden ? "UID: ******" : "UID: ${uid}",
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 5),
-                          googleText(
-                            isHidden ? "UID: ******" : "UID: 123456",
-                            //isHidden ? "UID: ******" : "UID: ${uid}",
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
+                          Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).size.height * 0.03),
+                            child: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  isHidden = !isHidden; // Toggle state
+                                });
+                              },
+                              icon: Icon(
+                                isHidden
+                                    ? Icons.visibility_off
+                                    : Icons.visibility, // Eye icon toggle
+                                size: 20,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
+                          // Padding(
+                          //   padding: EdgeInsets.only(
+                          //       bottom:
+                          //           MediaQuery.of(context).size.height * 0.03),
+                          //   child: IconButton(
+                          //     onPressed: () {},
+                          //     icon: const Icon(
+                          //       Icons.calendar_today,
+                          //       size: 20,
+                          //       color: Colors.black,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.03),
-                        child: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isHidden = !isHidden; // Toggle state
-                            });
-                          },
-                          icon: Icon(
-                            isHidden
-                                ? Icons.visibility_off
-                                : Icons.visibility, // Eye icon toggle
-                            size: 20,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).size.height * 0.03),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.calendar_today,
-                            size: 20,
-                            color: Colors.black,
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -116,19 +128,19 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       dashBoardOutlineButton('Level 1  >'),
                       const SizedBox(width: 15),
                       dashBoardOutlineButton('20 Points  >'),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      gestureDetectorRich(
-                        Image.asset('assets/icons/nft_list.png',
-                            width: 24, height: 24),
-                        onTap: () {
-                          materialRouteNavigator(
-                            context,
-                            const ReserveAccount(),
-                          );
-                        },
-                      ),
+                      // SizedBox(
+                      //   width: 15,
+                      // ),
+                      // gestureDetectorRich(
+                      //   Image.asset('assets/icons/nft_list.png',
+                      //       width: 24, height: 24),
+                      //   onTap: () {
+                      //     materialRouteNavigator(
+                      //       context,
+                      //       const ReserveAccount(),
+                      //     );
+                      //   },
+                      // ),
                     ],
                   ),
                 ),
@@ -145,7 +157,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                       ),
                       sizedBoxH8(),
                       income(
-                        '100.00',
+                        usdtBalance,
                         fontWeight: FontWeight.bold,
                       ),
                       Divider(),
