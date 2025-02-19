@@ -120,6 +120,9 @@ class _AssetsScreenState extends State<AssetsScreen> {
                       AppTextButton(buttonText: 'Deposit', onPressed: () {}),
                       sizedBoxH8(),
                       containerWhite(_buildHistorySection()),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * .085,
+                      ),
                     ],
                   ),
                 ),
