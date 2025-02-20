@@ -44,13 +44,16 @@ Widget endDrawer(BuildContext context) {
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
-        DrawerHeader(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: backgroundColor,
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .16,
+          child: DrawerHeader(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: backgroundColor,
+              ),
             ),
+            child: googleText("Menu", color: Colors.black, fontSize: 24),
           ),
-          child: googleText("Menu", color: Colors.black, fontSize: 24),
         ),
         listTile(
           "Home",
