@@ -61,7 +61,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
     //List<Color> gradientColors = generateRandomColors(3);
 
     return Scaffold(
-      appBar: appBarCode("DashBoard"),
+      appBar: appBarCode("Dashboard"),
       endDrawer: endDrawer(context),
       body: Stack(
         children: [

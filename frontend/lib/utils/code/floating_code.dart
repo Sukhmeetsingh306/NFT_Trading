@@ -18,7 +18,7 @@ Widget floatingRowCode(BuildContext context) {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2), // Fixed error
+            color: Colors.black.withValues(alpha: 0.2), // Fixed error
             blurRadius: 5,
             spreadRadius: 2,
           ),
@@ -40,7 +40,7 @@ Widget floatingRowCode(BuildContext context) {
             "Rewards",
             onPressed: () {
               if (!isCurrentRoute(context, ReserveAccount())) {
-                pageRouteNavigator(context, ReserveAccount());
+                materialRouteNavigator(context, ReserveAccount());
               }
             },
           ),

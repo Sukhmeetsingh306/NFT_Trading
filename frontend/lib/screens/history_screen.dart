@@ -284,9 +284,10 @@ Widget _depositAddressItem(
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(
+      googleText(
         title,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
       ),
       const SizedBox(height: 4),
       Container(
@@ -298,9 +299,10 @@ Widget _depositAddressItem(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
+            googleText(
               wallet,
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
+              fontSize: 12,
+              fontWeight: FontWeight.normal,
             ),
             GestureDetector(
               onTap: toggle,

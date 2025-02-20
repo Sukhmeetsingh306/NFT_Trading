@@ -58,9 +58,11 @@ Widget containerWhiteDash(Widget child) {
 // ];
 
 const List<Color> backgroundColor = [
-  Color(0xFFE7F1F3),
-  Color(0xFFE7F1F3),
-  Color(0xFFE7F1F3),
-  Color(0xFFE7F1F3),
-  Color(0xFFE7F1F3),
+  // Color(0xFFE7F1F3),
+  // Color(0xFFE7F1F3),
+  // Color(0xFFE7F1F3),
+  // Color(0xFFE7F1F3),
+  // Color(0xFFE7F1F3),
+  Colors.white,
+  Colors.white,
 ];

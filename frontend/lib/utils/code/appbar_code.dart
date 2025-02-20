@@ -2,27 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/background_core.dart';
 import 'package:frontend/screens/account/reserve_account.dart';
 import 'package:frontend/utils/navigation_utils.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-
 import '../../screens/account/dashboard_account.dart';
 import '../../screens/login_screen.dart';
 import '../text_utils.dart';
 
 PreferredSizeWidget appBarCode(String screenName) {
   return AppBar(
-    backgroundColor: Colors.white60,
+    backgroundColor: Color(0xFFE7F1F3),
+    elevation: 4,
     //e7f1f3
     title: Padding(
       padding: const EdgeInsets.only(left: 4.0),
       child: googleText(screenName, fontSize: 20),
     ),
     actions: [
-      IconButton(
-        icon: const Icon(LucideIcons.bell),
-        onPressed: () {
-          // Add notification action
-        },
-      ),
+      // IconButton(
+      //   icon: const Icon(LucideIcons.bell),
+      //   onPressed: () {
+      //     // Add notification action
+      //   },
+      // ),
       Builder(
         builder: (context) => Padding(
           padding: const EdgeInsets.only(right: 4.0),

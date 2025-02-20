@@ -3,7 +3,7 @@ import 'package:frontend/screens/account/dashboard_account.dart';
 import 'package:frontend/screens/login_screen.dart';
 
 import 'screens/account/reserve_account.dart';
-import 'screens/assets_screen.dart';
+import 'screens/history_screen.dart';
 import 'withdraw.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: Withdraw(),
-      home: LoginScreen(),
+      home: DashboardAccount(),
     );
   }
 }
