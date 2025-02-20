@@ -9,6 +9,7 @@ import '../utils/code/floating_code.dart';
 import '../utils/navigation_utils.dart';
 import '../utils/text_utils.dart';
 import 'account/dashboard_account.dart';
+import 'deposit_screen.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -147,7 +148,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ),
                       ),
                       sizedBoxH10(),
-                      AppTextButton(buttonText: 'Deposit', onPressed: () {}),
+                      AppTextButton(
+                          buttonText: 'Deposit',
+                          onPressed: () {
+                            materialRouteNavigator(
+                              context,
+                              const DepositScreen(),
+                            );
+                          }),
                       sizedBoxH8(),
                       containerWhite(_buildHistorySection()),
                       SizedBox(

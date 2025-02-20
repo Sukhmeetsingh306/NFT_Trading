@@ -324,7 +324,7 @@ class _DashboardAccountState extends State<DashboardAccount> {
                                     'assets/icons/details.png',
                                     'Details               ',
                                     onTap: () {
-                                      materialRouteNavigator(
+                                      materialRouteNavigatorRep(
                                         context,
                                         const HistoryScreen(),
                                       );
