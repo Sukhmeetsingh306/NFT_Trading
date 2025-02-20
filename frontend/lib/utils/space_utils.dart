@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 
+Widget sizedBoxH5() {
+  return SizedBox(
+    height: 5,
+  );
+}
+
 Widget sizedBoxH8() {
   return SizedBox(
     height: 8,

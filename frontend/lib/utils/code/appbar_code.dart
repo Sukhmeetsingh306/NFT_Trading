@@ -2,24 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:frontend/core/background_core.dart';
 import 'package:frontend/screens/account/reserve_account.dart';
 import 'package:frontend/utils/navigation_utils.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-
 import '../../screens/account/dashboard_account.dart';
+import '../../screens/login_screen.dart';
 import '../text_utils.dart';
 
-PreferredSizeWidget appBarCode() {
+PreferredSizeWidget appBarCode(String screenName) {
   return AppBar(
+    backgroundColor: Color(0xFFE7F1F3),
+    elevation: 4,
+    //e7f1f3
     title: Padding(
       padding: const EdgeInsets.only(left: 4.0),
-      child: googleText('DashBoard', fontSize: 20),
+      child: googleText(screenName, fontSize: 20),
     ),
     actions: [
-      IconButton(
-        icon: const Icon(LucideIcons.bell),
-        onPressed: () {
-          // Add notification action
-        },
-      ),
+      // IconButton(
+      //   icon: const Icon(LucideIcons.bell),
+      //   onPressed: () {
+      //     // Add notification action
+      //   },
+      // ),
       Builder(
         builder: (context) => Padding(
           padding: const EdgeInsets.only(right: 4.0),
@@ -41,13 +43,16 @@ Widget endDrawer(BuildContext context) {
     child: ListView(
       padding: EdgeInsets.zero,
       children: [
-        DrawerHeader(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: backgroundColor,
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .16,
+          child: DrawerHeader(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: backgroundColor,
+              ),
             ),
+            child: googleText("Menu", color: Colors.black, fontSize: 24),
           ),
-          child: googleText("Menu", color: Colors.black, fontSize: 24),
         ),
         listTile(
           "Home",
@@ -57,7 +62,7 @@ Widget endDrawer(BuildContext context) {
           "Profile",
           Icon(Icons.account_circle),
           onTap: () {
-            pushAndRemoveUntil(
+            pageRouteNavigatorRep(
               context,
               const DashboardAccount(),
             );
@@ -78,6 +83,12 @@ Widget endDrawer(BuildContext context) {
             );
           },
         ),
+        listTile("Logout", Icon(Icons.logout_rounded), onTap: () {
+          pushAndRemoveUntil(
+            context,
+            const LoginScreen(),
+          );
+        }),
       ],
     ),
   );

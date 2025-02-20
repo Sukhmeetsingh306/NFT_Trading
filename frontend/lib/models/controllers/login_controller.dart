@@ -1,7 +1,7 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter/material.dart';
 
 import '../../globals.dart';
 
@@ -21,13 +21,16 @@ class LoginController {
       );
 
       final responseData = jsonDecode(response.body);
-      // print('Login Response: $responseData'); // 🔍 Debug API response
 
       if (response.statusCode == 200) {
         if (responseData.containsKey('user')) {
           final pref = await SharedPreferences.getInstance();
           await pref.setString(
               'username', responseData['user']['name'] ?? 'User');
+          await pref.setString('usdtBalance',
+              responseData['user']['usdtBalance']['\$numberDecimal'] ?? '0.00');
+          await pref.setString('walletAddress',
+              responseData['user']['walletAddress'] ?? 'Wallet Address');
         }
         return true;
       } else {
@@ -38,7 +41,6 @@ class LoginController {
         return false;
       }
     } catch (error) {
-      // print('Login Error: $error');
       return false;
     }
   }

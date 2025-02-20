@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/account/dashboard_account.dart';
 import 'package:frontend/screens/login_screen.dart';
 
 import 'screens/account/reserve_account.dart';
+import 'screens/history_screen.dart';
+import 'withdraw.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +24,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white30),
         useMaterial3: true,
       ),
-      home: LoginScreen(),
+      //home: Withdraw(),
+      home: DashboardAccount(),
     );
   }
 }
