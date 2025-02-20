@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/deposit_screen.dart';
 import 'package:frontend/utils/buttons/dashboard_buttons.dart';
 import 'package:frontend/utils/code/appbar_code.dart';
 import 'package:frontend/utils/code/balance_code.dart';
@@ -13,7 +12,7 @@ import '../../core/background_core.dart';
 import '../../utils/code/detector_code.dart';
 import '../../utils/code/floating_code.dart';
 import '../../utils/navigation_utils.dart';
-import '../assets_screen.dart';
+import '../history_screen.dart';
 import 'reserve_account.dart';
 
 class DashboardAccount extends StatefulWidget {
@@ -211,13 +210,13 @@ class _DashboardAccountState extends State<DashboardAccount> {
                               children: [
                                 SizedBox(width: width * 0.38),
                                 googleText(
-                                  'Daily Income',
+                                  'Daily Profit',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
                                 SizedBox(width: width * 0.03),
                                 googleText(
-                                  'Total Income',
+                                  'Net Profit',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -227,7 +226,6 @@ class _DashboardAccountState extends State<DashboardAccount> {
                           Divider(),
                           earning(context, 'Comprehensive', '100', '100'),
                           earning(context, 'Reserve', '0', '90000'),
-                          earning(context, 'Team', '50000', '0'),
                           earning(context, 'Activity', '0', '0'),
                           earning(context, 'Stake', '0', '0'),
                         ],
@@ -328,13 +326,19 @@ class _DashboardAccountState extends State<DashboardAccount> {
                                     onTap: () {
                                       materialRouteNavigator(
                                         context,
-                                        const AssetsScreen(),
+                                        const HistoryScreen(),
                                       );
                                     },
                                   ),
                                   teamColumnImage(
                                     'assets/icons/deposits.png',
                                     'Deposit         ',
+                                    onTap: () {
+                                      materialRouteNavigator(
+                                        context,
+                                        const DepositScreen(),
+                                      );
+                                    },
                                   ),
                                   teamColumnImage(
                                     'assets/icons/withdrawal.png',

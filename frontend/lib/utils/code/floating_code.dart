@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/account/dashboard_account.dart';
 import 'package:frontend/screens/account/reserve_account.dart';
-import 'package:frontend/screens/assets_screen.dart';
+import 'package:frontend/screens/history_screen.dart';
 import 'package:frontend/utils/navigation_utils.dart';
 
 import '../text_utils.dart';
@@ -18,7 +18,7 @@ Widget floatingRowCode(BuildContext context) {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.2),
+            color: Colors.black.withOpacity(0.2), // Fixed error
             blurRadius: 5,
             spreadRadius: 2,
           ),
@@ -30,46 +30,47 @@ Widget floatingRowCode(BuildContext context) {
           _customButton(
             "Earn",
             onPressed: () {
-              materialRouteNavigator(
-                context,
-                ReserveAccount(),
-              );
+              if (!isCurrentRoute(context, ReserveAccount())) {
+                pageRouteNavigator(context, ReserveAccount());
+              }
             },
           ),
           _separator(),
           _customButton(
-            "Reserve",
+            "Rewards",
             onPressed: () {
-              materialRouteNavigator(
-                context,
-                ReserveAccount(),
-              );
+              if (!isCurrentRoute(context, ReserveAccount())) {
+                pageRouteNavigator(context, ReserveAccount());
+              }
             },
           ),
           _separator(),
           _customButton(
-            "Assets",
+            "History",
             onPressed: () {
-              materialRouteNavigatorRep(
-                context,
-                AssetsScreen(),
-              );
+              if (!isCurrentRoute(context, HistoryScreen())) {
+                pageRouteNavigatorRep(context, HistoryScreen());
+              }
             },
           ),
           _separator(),
           _customButton(
             "Profile",
             onPressed: () {
-              pushAndRemoveUntil(
-                context,
-                DashboardAccount(),
-              );
+              if (!isCurrentRoute(context, DashboardAccount())) {
+                pageRouteNavigatorRep(context, DashboardAccount());
+              }
             },
           ),
         ],
       ),
     ),
   );
+}
+
+bool isCurrentRoute(BuildContext context, Widget targetPage) {
+  return ModalRoute.of(context)?.settings.name ==
+      targetPage.runtimeType.toString();
 }
 
 Widget _customButton(String text, {GestureTapCallback? onPressed}) {

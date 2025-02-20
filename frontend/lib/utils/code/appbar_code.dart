@@ -63,7 +63,7 @@ Widget endDrawer(BuildContext context) {
           "Profile",
           Icon(Icons.account_circle),
           onTap: () {
-            pushAndRemoveUntil(
+            pageRouteNavigatorRep(
               context,
               const DashboardAccount(),
             );

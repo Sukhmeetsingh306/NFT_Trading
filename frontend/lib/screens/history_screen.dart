@@ -10,14 +10,14 @@ import '../utils/navigation_utils.dart';
 import '../utils/text_utils.dart';
 import 'account/dashboard_account.dart';
 
-class AssetsScreen extends StatefulWidget {
-  const AssetsScreen({super.key});
+class HistoryScreen extends StatefulWidget {
+  const HistoryScreen({super.key});
 
   @override
-  State<AssetsScreen> createState() => _AssetsScreenState();
+  State<HistoryScreen> createState() => _HistoryScreenState();
 }
 
-class _AssetsScreenState extends State<AssetsScreen> {
+class _HistoryScreenState extends State<HistoryScreen> {
   bool bep = false;
   bool trc = false;
   bool isVisible = false;
@@ -46,7 +46,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCode("Assets"),
+      appBar: appBarCode("History"),
       endDrawer: endDrawer(context),
       body: Stack(
         children: [
@@ -64,7 +64,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 5.0),
                               child: googleText(
-                                'Assets (USDT)',
+                                'Earning (USDT)',
                                 fontSize: 14,
                               ),
                             ),
@@ -132,7 +132,7 @@ class _AssetsScreenState extends State<AssetsScreen> {
                                     onTap: () {
                                       materialRouteNavigator(
                                         context,
-                                        const AssetsScreen(),
+                                        const HistoryScreen(),
                                       );
                                     },
                                   ),
