@@ -10,6 +10,9 @@ class ColorThemeData {
   final blackColor = const Color(0xff000000);
   final primaryBackground = const Color(0x00182026);
 
+  // MARK: Text Color
+  final textWHiteColor = const Color(0xffFFFFFF);
+
   const ColorThemeData();
 }
 
