@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/theme/color/color_theme.dart';
+import '../utils/widget/form/textForm_form.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,13 +17,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
   //final LoginController _loginController = LoginController();
 
-  //bool _obscureText = true;
+  bool _obscureText = true;
   bool hasMinLength = false;
 
   @override
@@ -128,96 +132,106 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 15, 20, 0),
-                              child: TextFormField(
-                                controller: _emailController,
-                                focusNode: _emailFocusNode,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: "Email Address",
-                                  labelStyle: GoogleFonts.getFont(
-                                    'Inter',
-                                    color: ColorTheme.color.textWhiteColor,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16,
-                                  ),
-                                  hintText: 'Enter your email',
-                                  hintStyle: GoogleFonts.getFont(
-                                    'Inter',
-                                    color: ColorTheme.color.textWhiteColor,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 16,
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors
-                                          .transparent, // Ensure transparent border
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  filled: true, // Ensure it's filled
-                                  fillColor: Colors
-                                      .black, // Set desired background color
-                                  contentPadding: EdgeInsets.symmetric(
-                                      vertical: 20, horizontal: 16),
-                                  suffixIcon: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      value: selectedDomain,
-                                      alignment: Alignment.centerRight,
-                                      dropdownColor: Colors.black,
-                                      onChanged: (String? newValue) {
-                                        if (newValue != null) {
-                                          setState(() {
-                                            selectedDomain = newValue;
-                                            _updateEmail();
-                                          });
+                                  EdgeInsetsDirectional.fromSTEB(0, 18, 20, 0),
+                              child: Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: [
+                                    textFormField(
+                                      _emailController,
+                                      _emailFocusNode,
+                                      "Email Address",
+                                      'Enter your email...',
+                                      (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your email';
+                                        } else if (!RegExp(
+                                                r"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
+                                            .hasMatch(value)) {
+                                          return 'Please enter a valid email';
                                         }
+                                        return null;
                                       },
-                                      items: emailDomains
-                                          .map<DropdownMenuItem<String>>(
-                                              (String domain) {
-                                        return DropdownMenuItem<String>(
-                                          value: domain,
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(
-                                                "@$domain",
-                                                style: GoogleFonts.getFont(
-                                                  'Inter',
-                                                  color: ColorTheme
-                                                      .color.textWhiteColor,
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16,
-                                                ),
-                                              ), // Smaller dropdown icon
-                                            ],
-                                          ),
-                                        );
-                                      }).toList(),
+                                      suffixIcon: DropdownButtonHideUnderline(
+                                        child: DropdownButton<String>(
+                                          value: selectedDomain,
+                                          alignment: Alignment.centerRight,
+                                          dropdownColor: Colors.black,
+                                          onChanged: (String? newValue) {
+                                            if (newValue != null) {
+                                              setState(() {
+                                                selectedDomain = newValue;
+                                                _updateEmail();
+                                              });
+                                            }
+                                          },
+                                          items: emailDomains
+                                              .map<DropdownMenuItem<String>>(
+                                                  (String domain) {
+                                            return DropdownMenuItem<String>(
+                                              value: domain,
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    "@$domain",
+                                                    style: GoogleFonts.getFont(
+                                                      'Inter',
+                                                      color: ColorTheme
+                                                          .color.textWhiteColor,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      fontSize: 16,
+                                                    ),
+                                                  ), // Smaller dropdown icon
+                                                ],
+                                              ),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
+                                      keyboardType: TextInputType.emailAddress,
+                                      autofillHints: [AutofillHints.email],
+                                      onChanged: (value) {
+                                        _updateEmail();
+                                      },
                                     ),
-                                  ),
+                                    sizedBoxH15(),
+                                    textFormField(
+                                      _passwordController,
+                                      _passwordFocusNode,
+                                      'Password',
+                                      "Enter your password...",
+                                      (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter a password';
+                                        }
+                                        if (value.length < 8) {
+                                          return 'Password must be at least 8 characters long';
+                                        }
+                                        RegExp regex = RegExp(
+                                            r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$');
+                                        if (!regex.hasMatch(value)) {
+                                          return 'Password must contain at least one uppercase letter, one number, and one special character';
+                                        }
+                                        return null;
+                                      },
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          _obscureText
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _obscureText = !_obscureText;
+                                          });
+                                        },
+                                      ),
+                                      obscureText: _obscureText,
+                                    )
+                                  ],
                                 ),
-                                style: GoogleFonts.getFont(
-                                  'Inter',
-                                  color: Colors
-                                      .white, // Ensure text color is visible
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16,
-                                ),
-                                keyboardType: TextInputType.emailAddress,
-                                autofillHints: [AutofillHints.email],
-                                onChanged: (value) {
-                                  _updateEmail();
-                                },
                               ),
                             ),
                           ],
