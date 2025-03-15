@@ -8,10 +8,13 @@ class ColorThemeData {
   final backgroundBlack = const Color.fromRGBO(15, 15, 14, 0.5);
   final deepPuceColor = const Color(0xffAC5F5F);
   final blackColor = const Color(0xff000000);
+
+// MARK: Background color
   final primaryBackground = const Color(0x00182026);
+  final secondaryBackgroundColor = const Color(0x00101518);
 
   // MARK: Text Color
-  final textWHiteColor = const Color(0xffFFFFFF);
+  final textWhiteColor = const Color(0xffFFFFFF);
 
   const ColorThemeData();
 }

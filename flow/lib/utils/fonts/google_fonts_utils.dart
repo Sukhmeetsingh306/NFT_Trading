@@ -12,9 +12,27 @@ Text googleInterText(String text,
     text,
     textAlign: textAlign,
     style: GoogleFonts.getFont(
-      'Lato',
-      color: color ?? ColorTheme.color.textWHiteColor,
-      fontWeight: fontWeight ?? FontWeight.bold,
+      'Inter',
+      color: color ?? ColorTheme.color.textWhiteColor,
+      fontWeight: fontWeight ?? FontWeight.w600,
+      letterSpacing: 0.1,
+      fontSize: fontSize ?? 23,
+    ),
+  );
+}
+
+Text googleReadexProText(String text,
+    {double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+    TextAlign? textAlign}) {
+  return Text(
+    text,
+    textAlign: textAlign,
+    style: GoogleFonts.getFont(
+      'Readex Pro',
+      color: color ?? ColorTheme.color.textWhiteColor,
+      fontWeight: fontWeight ?? FontWeight.w600,
       letterSpacing: 0.1,
       fontSize: fontSize ?? 23,
     ),
