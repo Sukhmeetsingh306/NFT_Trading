@@ -3,20 +3,20 @@ import 'package:flow/utils/widget/space_widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../utils/theme/color/color_theme.dart';
-import '../utils/widget/form/textForm_form.dart';
+import '../../utils/theme/color/color_theme.dart';
+import '../../utils/widget/form/textForm_form.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginAuthScreen extends StatefulWidget {
+  const LoginAuthScreen({super.key});
 
   static String routeName = 'loginPage';
   static String routePath = '/loginPage';
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginAuthScreen> createState() => _LoginAuthScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginAuthScreenState extends State<LoginAuthScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController = TextEditingController();

@@ -1,4 +1,4 @@
-import 'package:flow/screen/login_screen.dart';
+import 'package:flow/screen/authentication/login_auth_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const LoginAuthScreen(),
     );
   }
 }
