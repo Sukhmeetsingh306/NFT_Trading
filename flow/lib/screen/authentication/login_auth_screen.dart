@@ -1,4 +1,6 @@
+import 'package:flow/screen/authentication/forget_password_auth_screen.dart';
 import 'package:flow/utils/fonts/google_fonts_utils.dart';
+import 'package:flow/utils/routes/navigation_routes.dart';
 import 'package:flow/utils/widget/space_widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -262,7 +264,12 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                                   ),
                                                 ),
                                               ),
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                materialRouteNavigator(
+                                                  context,
+                                                  ForgetPasswordAuthScreen(),
+                                                );
+                                              },
                                               child: googleInterText(
                                                 'Forget Password?',
                                                 fontSize: 13,
