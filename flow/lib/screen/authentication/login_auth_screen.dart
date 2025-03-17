@@ -5,6 +5,7 @@ import 'package:flow/utils/widget/space_widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../models/controllers/login_controller.dart';
 import '../../utils/theme/color/color_theme.dart';
 import '../../utils/widget/form/textForm_form.dart';
 
@@ -23,6 +24,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final LoginController _loginController = LoginController();
 
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
@@ -297,7 +299,28 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                                   ),
                                                 ),
                                               ),
-                                              onPressed: () {},
+                                              onPressed: () async {
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  bool isAuthenticated =
+                                                      await _loginController
+                                                          .loginUser(
+                                                    context: context,
+                                                    email:
+                                                        _emailController.text,
+                                                    password:
+                                                        _passwordController
+                                                            .text,
+                                                  );
+
+                                                  if (isAuthenticated) {
+                                                    pushAndRemoveUntil(
+                                                      context,
+                                                      ForgetPasswordAuthScreen(),
+                                                    );
+                                                  }
+                                                }
+                                              },
                                               child: googleInterText(
                                                 'Login',
                                                 fontSize: 16,
