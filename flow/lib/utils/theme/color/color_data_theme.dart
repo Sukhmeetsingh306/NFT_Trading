@@ -15,6 +15,7 @@ class ColorThemeData {
 
   // MARK: Text Color
   final textWhiteColor = const Color(0xffFFFFFF);
+  final buttonBackgroundColor = const Color(0xFF6898AB);
 
   const ColorThemeData();
 }

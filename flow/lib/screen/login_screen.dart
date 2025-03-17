@@ -167,27 +167,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                           },
                                           items: emailDomains
                                               .map<DropdownMenuItem<String>>(
-                                                  (String domain) {
-                                            return DropdownMenuItem<String>(
-                                              value: domain,
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text(
-                                                    "@$domain",
-                                                    style: GoogleFonts.getFont(
-                                                      'Inter',
-                                                      color: ColorTheme
-                                                          .color.textWhiteColor,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      fontSize: 16,
+                                            (String domain) {
+                                              return DropdownMenuItem<String>(
+                                                value: domain,
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: [
+                                                    Text(
+                                                      "@$domain",
+                                                      style:
+                                                          GoogleFonts.getFont(
+                                                        'Inter',
+                                                        color: ColorTheme.color
+                                                            .textWhiteColor,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 16,
+                                                      ),
                                                     ),
-                                                  ), // Smaller dropdown icon
-                                                ],
-                                              ),
-                                            );
-                                          }).toList(),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ).toList(),
                                         ),
                                       ),
                                       keyboardType: TextInputType.emailAddress,
@@ -229,7 +232,124 @@ class _LoginScreenState extends State<LoginScreen> {
                                         },
                                       ),
                                       obscureText: _obscureText,
-                                    )
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                    ),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 24, 0, 24),
+                                            child: TextButton(
+                                              style: ButtonStyle(
+                                                foregroundColor:
+                                                    WidgetStateProperty.all<
+                                                        Color>(
+                                                  ColorTheme
+                                                      .color.textWhiteColor,
+                                                ),
+                                                shape: WidgetStateProperty.all<
+                                                    RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: googleInterText(
+                                                'Forget Password?',
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 116.6,
+                                            height: 36.9,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    WidgetStateProperty.all<
+                                                        Color>(
+                                                  ColorTheme.color
+                                                      .buttonBackgroundColor,
+                                                ),
+                                                shape: WidgetStateProperty.all<
+                                                    RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            25),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child: googleInterText(
+                                                'Login',
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Opacity(
+                                      opacity: 0.8,
+                                      child: InkWell(
+                                        onTap: () async {},
+                                        child: Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.8,
+                                          height: 44,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black
+                                                .withValues(alpha: 0.7),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                          ),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              googleInterText(
+                                                'Don\'t have an account?',
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(24, 0, 4, 0),
+                                                child: InkWell(
+                                                  onTap: () async {},
+                                                  child: googleInterText(
+                                                    'Create',
+                                                    color: ColorTheme.color
+                                                        .buttonBackgroundColor,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                              ),
+                                              Icon(
+                                                Icons.arrow_forward_rounded,
+                                                color: ColorTheme.color
+                                                    .buttonBackgroundColor,
+                                                size: 24,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -238,7 +358,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
