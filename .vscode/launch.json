@@ -5,24 +5,31 @@
      "version": "0.2.0",
      "configurations": [
           {
-               "name": "frontend",
-               "cwd": "frontend",
-               "request": "launch",
-               "type": "dart"
-          },
-          {
-               "name": "frontend (profile mode)",
-               "cwd": "frontend",
+               "name": "flow",
+               "cwd": "flow",
                "request": "launch",
                "type": "dart",
-               "flutterMode": "profile"
+               "program": "${workspaceFolder}/flow/lib/main.dart"
           },
-          {
-               "name": "frontend (release mode)",
-               "cwd": "frontend",
-               "request": "launch",
-               "type": "dart",
-               "flutterMode": "release"
-          }
+          // {
+          //      "name": "frontend",
+          //      "cwd": "frontend",
+          //      "request": "launch",
+          //      "type": "dart"
+          // },
+          // {
+          //      "name": "frontend (profile mode)",
+          //      "cwd": "frontend",
+          //      "request": "launch",
+          //      "type": "dart",
+          //      "flutterMode": "profile"
+          // },
+          // {
+          //      "name": "frontend (release mode)",
+          //      "cwd": "frontend",
+          //      "request": "launch",
+          //      "type": "dart",
+          //      "flutterMode": "release"
+          // }
      ]
 }
