@@ -10,6 +10,10 @@ Future<void> pageRouteNavigator(BuildContext context, Widget classname) {
   );
 }
 
+Future<void> pageNamedRouteNavigator(BuildContext context, String routeName) {
+  return Navigator.pushNamed(context, routeName);
+}
+
 Future<void> pageRouteNavigatorRep(BuildContext context, Widget classname) {
   return Navigator.of(context).pushReplacement(
     PageRouteBuilder(
@@ -20,6 +24,11 @@ Future<void> pageRouteNavigatorRep(BuildContext context, Widget classname) {
   );
 }
 
+Future<void> pageNamedRouteNavigatorRep(
+    BuildContext context, String routeName) {
+  return Navigator.pushReplacementNamed(context, routeName);
+}
+
 Future<void> materialRouteNavigator(BuildContext context, Widget classname) {
   return Navigator.push(
     context,
@@ -27,6 +36,11 @@ Future<void> materialRouteNavigator(BuildContext context, Widget classname) {
       builder: (context) => classname,
     ),
   );
+}
+
+Future<void> materialNamedRouteNavigator(
+    BuildContext context, String routeName) {
+  return Navigator.pushNamed(context, routeName);
 }
 
 Future<void> materialRouteNavigatorRep(BuildContext context, Widget classname) {
@@ -45,6 +59,14 @@ Future<void> pushAndRemoveUntil(BuildContext context, Widget classname) {
       builder: (context) => classname,
     ),
     (Route<dynamic> route) => false, // Remove all previous routes
+  );
+}
+
+Future<void> pushNamedAndRemoveUntil(BuildContext context, String routeName) {
+  return Navigator.pushNamedAndRemoveUntil(
+    context,
+    routeName,
+    (Route<dynamic> route) => false,
   );
 }
 
