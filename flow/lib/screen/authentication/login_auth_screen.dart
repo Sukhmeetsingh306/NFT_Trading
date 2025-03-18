@@ -25,9 +25,6 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final LoginController _loginController = LoginController();
-
-  final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
   //final LoginController _loginController = LoginController();
 
   bool _obscureText = true;
@@ -143,7 +140,6 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                   children: [
                                     textFormField(
                                       _emailController,
-                                      _emailFocusNode,
                                       "Email Address",
                                       'Enter your email...',
                                       (value) {
@@ -206,7 +202,6 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                     sizedBoxH15(),
                                     textFormField(
                                       _passwordController,
-                                      _passwordFocusNode,
                                       'Password',
                                       "Enter your password...",
                                       (value) {
