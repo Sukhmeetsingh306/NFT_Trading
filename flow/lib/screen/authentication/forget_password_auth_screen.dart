@@ -9,6 +9,9 @@ import '../../utils/widget/form/textForm_form.dart';
 class ForgetPasswordAuthScreen extends StatefulWidget {
   const ForgetPasswordAuthScreen({super.key});
 
+  static String routeName = 'forgetPage';
+  static String routePath = '/forgetPage';
+
   @override
   State<ForgetPasswordAuthScreen> createState() =>
       _ForgetPasswordAuthScreenState();

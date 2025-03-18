@@ -1,3 +1,4 @@
+import 'package:flow/screen/authentication/register_detail_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,13 +7,16 @@ import '../../models/controllers/register_controllers.dart';
 import '../../utils/fonts/google_fonts_utils.dart';
 import '../../utils/routes/navigation_routes.dart';
 import '../../utils/theme/color/color_theme.dart';
+import '../../utils/validation/password_validations.dart';
 import '../../utils/widget/button_widget_utils.dart';
 import '../../utils/widget/form/textForm_form.dart';
 import '../../utils/widget/space_widget_utils.dart';
-import 'login_auth_screen.dart';
 
 class RegisterAuthScreen extends StatefulWidget {
   const RegisterAuthScreen({super.key});
+
+  static String routeName = 'registerPage';
+  static String routePath = '/registerPage';
 
   @override
   State<RegisterAuthScreen> createState() => _RegisterAuthScreenState();
@@ -338,7 +342,10 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                           fontSize: 10,
                                         ),
                                       ),
-                                    sizedBoxH15(),
+                                    sizedBoxH8(),
+                                    PasswordValidations(
+                                        hasMinLength: hasMinLength),
+                                    sizedBoxH8(),
                                     Container(
                                       width: double.infinity,
                                       padding:
@@ -346,30 +353,10 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                       child: elevatedButton(
                                         'Create Account',
                                         () async {
-                                          print("BUtton pressed");
-                                          if (_formKey.currentState!
-                                              .validate()) {
-                                            await _registerController
-                                                .registerUser(
-                                              context: context,
-                                              email: _emailController.text,
-                                              password:
-                                                  _passwordController.text,
-                                              name: '',
-                                            );
-                                            print("Button worked");
-                                            setState(() {
-                                              _formKey.currentState!.reset();
-                                            });
-
-                                            reloadWidget();
-
-                                            materialRouteNavigatorRep(
-                                              context,
-                                              LoginAuthScreen(),
-                                            );
-                                          }
-                                          print("Button exited");
+                                          materialRouteNavigator(
+                                            context,
+                                            DetailsScreen(),
+                                          );
                                         },
                                       ),
                                     ),
@@ -403,9 +390,19 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(4, 0, 24, 0),
                                                 child: InkWell(
-                                                  onTap: () async {},
+                                                  onTap: () async {
+                                                    if (Navigator.of(context)
+                                                        .canPop()) {
+                                                      pop(context);
+                                                    } else {
+                                                      pushNamedAndRemoveUntil(
+                                                        context,
+                                                        '/loginScreen',
+                                                      );
+                                                    }
+                                                  },
                                                   child: googleInterText(
-                                                    'Create',
+                                                    'Login',
                                                     color: ColorTheme.color
                                                         .buttonBackgroundColor,
                                                     fontSize: 14,

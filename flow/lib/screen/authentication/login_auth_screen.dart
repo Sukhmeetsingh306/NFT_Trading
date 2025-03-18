@@ -1,4 +1,3 @@
-import 'package:flow/screen/authentication/forget_password_auth_screen.dart';
 import 'package:flow/utils/fonts/google_fonts_utils.dart';
 import 'package:flow/utils/routes/navigation_routes.dart';
 import 'package:flow/utils/widget/space_widget_utils.dart';
@@ -248,10 +247,8 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                             child: textButton(
                                               'Forget Password?',
                                               () {
-                                                materialRouteNavigator(
-                                                  context,
-                                                  ForgetPasswordAuthScreen(),
-                                                );
+                                                materialNamedRouteNavigator(
+                                                    context, '/forgetPage');
                                               },
                                             ),
                                           ),
@@ -261,26 +258,24 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                               child: elevatedButton(
                                                 'Login',
                                                 () async {
-                                                  if (_formKey.currentState!
-                                                      .validate()) {
-                                                    bool isAuthenticated =
-                                                        await _loginController
-                                                            .loginUser(
-                                                      context: context,
-                                                      email:
-                                                          _emailController.text,
-                                                      password:
-                                                          _passwordController
-                                                              .text,
-                                                    );
+                                                  // if (_formKey.currentState!
+                                                  //     .validate()) {
+                                                  //   bool isAuthenticated =
+                                                  //       await _loginController
+                                                  //           .loginUser(
+                                                  //     context: context,
+                                                  //     email:
+                                                  //         _emailController.text,
+                                                  //     password:
+                                                  //         _passwordController
+                                                  //             .text,
+                                                  //   );
 
-                                                    if (isAuthenticated) {
-                                                      pushAndRemoveUntil(
-                                                        context,
-                                                        ForgetPasswordAuthScreen(),
-                                                      );
-                                                    }
-                                                  }
+                                                  //   if (isAuthenticated) {
+                                                  pushNamedAndRemoveUntil(
+                                                      context, '/registerPage');
+                                                  //     }
+                                                  //   }
                                                 },
                                               )),
                                         ],
