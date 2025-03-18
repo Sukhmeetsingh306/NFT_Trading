@@ -28,6 +28,7 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
 
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordNode = FocusNode();
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
@@ -261,6 +262,43 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                         },
                                       ),
                                       obscureText: _obscureText,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                    ),
+                                    sizedBoxH15(),
+                                    textFormField(
+                                      _confirmPasswordController,
+                                      _confirmPasswordNode,
+                                      'Confirm Password',
+                                      "Enter your password...",
+                                      (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter a password';
+                                        }
+                                        if (value.length < 8) {
+                                          return 'Password must be at least 8 characters long';
+                                        }
+                                        RegExp regex = RegExp(
+                                            r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$');
+                                        if (!regex.hasMatch(value)) {
+                                          return 'Password must contain at least one uppercase letter, one number, and one special character';
+                                        }
+                                        return null;
+                                      },
+                                      suffixIcon: IconButton(
+                                        icon: Icon(
+                                          _confirmObscureText
+                                              ? Icons.visibility_off
+                                              : Icons.visibility,
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            _confirmObscureText =
+                                                !_confirmObscureText;
+                                          });
+                                        },
+                                      ),
+                                      obscureText: _confirmObscureText,
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
                                     ),
