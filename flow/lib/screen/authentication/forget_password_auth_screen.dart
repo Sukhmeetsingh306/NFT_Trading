@@ -17,7 +17,6 @@ class _ForgetPasswordAuthScreenState extends State<ForgetPasswordAuthScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final FocusNode _emailFocusNode = FocusNode();
   //final LoginController _loginController = LoginController();
 
   bool hasMinLength = false;
@@ -85,7 +84,6 @@ class _ForgetPasswordAuthScreenState extends State<ForgetPasswordAuthScreen> {
                     padding: EdgeInsetsDirectional.fromSTEB(10, 0, 15, 17),
                     child: textFormField(
                       _emailController,
-                      _emailFocusNode,
                       "Email Address",
                       'Enter your email...',
                       (value) {
