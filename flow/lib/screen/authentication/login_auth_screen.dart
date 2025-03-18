@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/controllers/login_controller.dart';
 import '../../utils/theme/color/color_theme.dart';
+import '../../utils/widget/button_widget_utils.dart';
 import '../../utils/widget/form/textForm_form.dart';
 
 class LoginAuthScreen extends StatefulWidget {
@@ -244,85 +245,44 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     12, 24, 0, 24),
-                                            child: TextButton(
-                                              style: ButtonStyle(
-                                                foregroundColor:
-                                                    WidgetStateProperty.all<
-                                                        Color>(
-                                                  ColorTheme
-                                                      .color.textWhiteColor,
-                                                ),
-                                                shape: WidgetStateProperty.all<
-                                                    RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                  ),
-                                                ),
-                                              ),
-                                              onPressed: () {
+                                            child: textButton(
+                                              'Forget Password?',
+                                              () {
                                                 materialRouteNavigator(
                                                   context,
                                                   ForgetPasswordAuthScreen(),
                                                 );
                                               },
-                                              child: googleInterText(
-                                                'Forget Password?',
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w400,
-                                              ),
                                             ),
                                           ),
                                           SizedBox(
-                                            width: 116.6,
-                                            height: 36.9,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                backgroundColor:
-                                                    WidgetStateProperty.all<
-                                                        Color>(
-                                                  ColorTheme.color
-                                                      .buttonBackgroundColor,
-                                                ),
-                                                shape: WidgetStateProperty.all<
-                                                    RoundedRectangleBorder>(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            25),
-                                                  ),
-                                                ),
-                                              ),
-                                              onPressed: () async {
-                                                if (_formKey.currentState!
-                                                    .validate()) {
-                                                  bool isAuthenticated =
-                                                      await _loginController
-                                                          .loginUser(
-                                                    context: context,
-                                                    email:
-                                                        _emailController.text,
-                                                    password:
-                                                        _passwordController
-                                                            .text,
-                                                  );
-
-                                                  if (isAuthenticated) {
-                                                    pushAndRemoveUntil(
-                                                      context,
-                                                      ForgetPasswordAuthScreen(),
-                                                    );
-                                                  }
-                                                }
-                                              },
-                                              child: googleInterText(
+                                              width: 116.6,
+                                              height: 36.9,
+                                              child: elevatedButton(
                                                 'Login',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ),
+                                                () async {
+                                                  if (_formKey.currentState!
+                                                      .validate()) {
+                                                    bool isAuthenticated =
+                                                        await _loginController
+                                                            .loginUser(
+                                                      context: context,
+                                                      email:
+                                                          _emailController.text,
+                                                      password:
+                                                          _passwordController
+                                                              .text,
+                                                    );
+
+                                                    if (isAuthenticated) {
+                                                      pushAndRemoveUntil(
+                                                        context,
+                                                        ForgetPasswordAuthScreen(),
+                                                      );
+                                                    }
+                                                  }
+                                                },
+                                              )),
                                         ],
                                       ),
                                     ),

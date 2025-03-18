@@ -26,3 +26,27 @@ ElevatedButton elevatedButton(
     ),
   );
 }
+
+TextButton textButton(
+  String buttonText,
+  VoidCallback onPressed,
+) {
+  return TextButton(
+    style: ButtonStyle(
+      foregroundColor: WidgetStateProperty.all<Color>(
+        ColorTheme.color.textWhiteColor,
+      ),
+      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    ),
+    onPressed: onPressed,
+    child: googleInterText(
+      buttonText,
+      fontSize: 13,
+      fontWeight: FontWeight.w400,
+    ),
+  );
+}

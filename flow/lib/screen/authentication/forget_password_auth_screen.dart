@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/theme/color/color_theme.dart';
+import '../../utils/widget/button_widget_utils.dart';
 import '../../utils/widget/form/textForm_form.dart';
 
 class ForgetPasswordAuthScreen extends StatefulWidget {
@@ -141,24 +142,7 @@ class _ForgetPasswordAuthScreenState extends State<ForgetPasswordAuthScreen> {
                   SizedBox(
                     width: 190,
                     height: 50,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all<Color>(
-                          ColorTheme.color.buttonBackgroundColor,
-                        ),
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: googleInterText(
-                        'Send Reset Link',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    child: elevatedButton('Send Reset Link', () {}),
                   ),
                 ],
               ),
