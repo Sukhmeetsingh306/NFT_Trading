@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../models/controllers/login_controller.dart';
 import '../../models/controllers/register_controllers.dart';
 import '../../utils/fonts/google_fonts_utils.dart';
+import '../../utils/routes/navigation_routes.dart';
 import '../../utils/theme/color/color_theme.dart';
+import '../../utils/widget/button_widget_utils.dart';
 import '../../utils/widget/form/textForm_form.dart';
 import '../../utils/widget/space_widget_utils.dart';
+import 'login_auth_screen.dart';
 
 class RegisterAuthScreen extends StatefulWidget {
   const RegisterAuthScreen({super.key});
@@ -25,10 +28,6 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
   final TextEditingController _otpEmailController = TextEditingController();
 
   final RegisterController _registerController = RegisterController();
-
-  final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
-  final FocusNode _confirmPasswordNode = FocusNode();
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
@@ -169,7 +168,6 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                   children: [
                                     textFormField(
                                       _emailController,
-                                      _emailFocusNode,
                                       "Email Address",
                                       'Enter your email...',
                                       (value) {
@@ -232,7 +230,6 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                     sizedBoxH15(),
                                     textFormField(
                                       _passwordController,
-                                      _passwordFocusNode,
                                       'Password',
                                       "Enter your password...",
                                       (value) {
@@ -268,7 +265,6 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                     sizedBoxH15(),
                                     textFormField(
                                       _confirmPasswordController,
-                                      _confirmPasswordNode,
                                       'Confirm Password',
                                       "Enter your password...",
                                       (value) {
@@ -302,37 +298,84 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
                                     ),
-                                    SizedBox(
-                                      width: double.infinity,
-                                      child: SizedBox(
-                                        width: 116.6,
-                                        height: 36.9,
-                                        child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                WidgetStateProperty.all<Color>(
-                                              ColorTheme
-                                                  .color.buttonBackgroundColor,
-                                            ),
-                                            shape: WidgetStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(25),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () async {},
-                                          child: googleInterText(
-                                            'Login',
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
+                                    sizedBoxH15(),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: textFormField(
+                                            _otpEmailController,
+                                            'Email OTP',
+                                            'Enter OTP..',
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter
+                                                  .digitsOnly
+                                            ],
+                                            (value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'Please enter a valid OTP';
+                                              }
+                                              return null;
+                                            },
                                           ),
                                         ),
+                                        SizedBox(width: 10),
+                                        elevatedButton(
+                                          'OTP',
+                                          () {
+                                            _sendEmailOTP();
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    if (otpEmailSent)
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 4.0),
+                                        child: googleInterText(
+                                          'OTP has been sent to your Email',
+                                          fontSize: 10,
+                                        ),
+                                      ),
+                                    sizedBoxH15(),
+                                    Container(
+                                      width: double.infinity,
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 40),
+                                      child: elevatedButton(
+                                        'Create Account',
+                                        () async {
+                                          print("BUtton pressed");
+                                          if (_formKey.currentState!
+                                              .validate()) {
+                                            await _registerController
+                                                .registerUser(
+                                              context: context,
+                                              email: _emailController.text,
+                                              password:
+                                                  _passwordController.text,
+                                              name: '',
+                                            );
+                                            print("Button worked");
+                                            setState(() {
+                                              _formKey.currentState!.reset();
+                                            });
+
+                                            reloadWidget();
+
+                                            materialRouteNavigatorRep(
+                                              context,
+                                              LoginAuthScreen(),
+                                            );
+                                          }
+                                          print("Button exited");
+                                        },
                                       ),
                                     ),
+                                    sizedBoxH10(),
                                     Opacity(
-                                      opacity: 0.8,
+                                      opacity: 0.9,
                                       child: InkWell(
                                         onTap: () async {},
                                         child: Container(
@@ -350,14 +393,15 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              googleInterText(
-                                                'Don\'t have an account?',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
+                                              Icon(
+                                                Icons.arrow_back_rounded,
+                                                color: ColorTheme.color
+                                                    .buttonBackgroundColor,
+                                                size: 24,
                                               ),
                                               Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(24, 0, 4, 0),
+                                                    .fromSTEB(4, 0, 24, 0),
                                                 child: InkWell(
                                                   onTap: () async {},
                                                   child: googleInterText(
@@ -369,11 +413,10 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                                   ),
                                                 ),
                                               ),
-                                              Icon(
-                                                Icons.arrow_forward_rounded,
-                                                color: ColorTheme.color
-                                                    .buttonBackgroundColor,
-                                                size: 24,
+                                              googleInterText(
+                                                'Already have an account?',
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
                                               ),
                                             ],
                                           ),
