@@ -343,83 +343,91 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                         ),
                                       ),
                                     sizedBoxH8(),
-                                    PasswordValidations(
-                                        hasMinLength: hasMinLength),
-                                    sizedBoxH8(),
-                                    Container(
-                                      width: double.infinity,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 40),
-                                      child: elevatedButton(
-                                        'Create Account',
-                                        () async {
-                                          materialNamedRouteNavigator(
-                                              context, '/registerDetailPage');
-                                        },
-                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 5, 20, 0),
+                              child: Column(
+                                children: [
+                                  PasswordValidations(
+                                      hasMinLength: hasMinLength),
+                                  sizedBoxH8(),
+                                  Container(
+                                    width: double.infinity,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 40),
+                                    child: elevatedButton(
+                                      'Create Account',
+                                      () async {
+                                        materialNamedRouteNavigator(
+                                            context, '/registerDetailPage');
+                                      },
                                     ),
-                                    sizedBoxH10(),
-                                    Opacity(
-                                      opacity: 0.9,
-                                      child: InkWell(
-                                        onTap: () async {},
-                                        child: Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  0.8,
-                                          height: 44,
-                                          decoration: BoxDecoration(
-                                            color: Colors.black
-                                                .withValues(alpha: 0.7),
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.arrow_back_rounded,
-                                                color: ColorTheme.color
-                                                    .buttonBackgroundColor,
-                                                size: 24,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(4, 0, 24, 0),
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    if (Navigator.of(context)
-                                                        .canPop()) {
-                                                      pop(context);
-                                                    } else {
-                                                      pushNamedAndRemoveUntil(
-                                                        context,
-                                                        '/loginScreen',
-                                                      );
-                                                    }
-                                                  },
-                                                  child: googleInterText(
-                                                    'Login',
-                                                    color: ColorTheme.color
-                                                        .buttonBackgroundColor,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w400,
-                                                  ),
+                                  ),
+                                  sizedBoxH10(),
+                                  Opacity(
+                                    opacity: 0.9,
+                                    child: InkWell(
+                                      onTap: () async {},
+                                      child: Container(
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.8,
+                                        height: 44,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black
+                                              .withValues(alpha: 0.7),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.arrow_back_rounded,
+                                              color: ColorTheme
+                                                  .color.buttonBackgroundColor,
+                                              size: 24,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(4, 0, 24, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  if (Navigator.of(context)
+                                                      .canPop()) {
+                                                    pop(context);
+                                                  } else {
+                                                    pushNamedAndRemoveUntil(
+                                                      context,
+                                                      '/loginScreen',
+                                                    );
+                                                  }
+                                                },
+                                                child: googleInterText(
+                                                  'Login',
+                                                  color: ColorTheme.color
+                                                      .buttonBackgroundColor,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w400,
                                                 ),
                                               ),
-                                              googleInterText(
-                                                'Already have an account?',
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                            googleInterText(
+                                              'Already have an account?',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
