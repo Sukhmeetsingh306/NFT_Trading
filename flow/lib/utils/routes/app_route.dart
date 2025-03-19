@@ -1,3 +1,4 @@
+import 'package:flow/screen/authentication/register_detail_auth_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../screen/authentication/forget_password_auth_screen.dart';
@@ -10,6 +11,7 @@ class AppRoutes {
       '/loginPage': (context) => const LoginAuthScreen(),
       '/registerPage': (context) => const RegisterAuthScreen(),
       '/forgetPage': (context) => const ForgetPasswordAuthScreen(),
+      '/registerDetailPage': (context) => const RegisterDetailAuthScreen(),
     };
   }
 }

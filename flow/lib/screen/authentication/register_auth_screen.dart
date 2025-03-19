@@ -353,10 +353,8 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                       child: elevatedButton(
                                         'Create Account',
                                         () async {
-                                          materialRouteNavigator(
-                                            context,
-                                            DetailsScreen(),
-                                          );
+                                          materialNamedRouteNavigator(
+                                              context, '/registerDetailPage');
                                         },
                                       ),
                                     ),
