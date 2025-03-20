@@ -1,6 +1,9 @@
 import 'package:flow/utils/fonts/google_fonts_utils.dart';
 import 'package:flow/utils/theme/color/color_theme.dart';
+import 'package:flow/utils/widget/container_widget_utils.dart';
 import 'package:flutter/material.dart';
+
+import '../../utils/widget/space_widget_utils.dart';
 
 class DashboardMainScreen extends StatefulWidget {
   const DashboardMainScreen({super.key});
@@ -17,6 +20,15 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
   // late AnimationController _controller;
   // late Animation<double> _fadeAnimation;
   // late Animation<Offset> _slideAnimation;
+  // late AnimationController _controller1;
+  // late Animation<double> _fadeAnimation1;
+  // late Animation<Offset> _slideAnimation1;
+  // late Animation<double> _scaleAnimation1;
+
+  // late AnimationController _controller2;
+  // late Animation<double> _fadeAnimation2;
+  // late Animation<Offset> _slideAnimation2;
+  // late Animation<double> _scaleAnimation2;
   // late Animation<double> _scaleAnimation;
 
   // @override
@@ -44,11 +56,58 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
   //   );
 
   //   _controller.forward();
+  // _controller1 = AnimationController(
+  //   duration: const Duration(milliseconds: 600),
+  //   vsync: this,
+  // );
+
+  // _fadeAnimation1 = Tween<double>(begin: 0.0, end: 1.0).animate(
+  //   CurvedAnimation(parent: _controller1, curve: Curves.easeInOut),
+  // );
+
+  // _slideAnimation1 = Tween<Offset>(
+  //   begin: const Offset(0.0, 0.49),
+  //   end: Offset.zero,
+  // ).animate(
+  //   CurvedAnimation(parent: _controller1, curve: Curves.easeInOut),
+  // );
+
+  // _scaleAnimation1 = Tween<double>(begin: 1.0, end: 1.0).animate(
+  //   CurvedAnimation(parent: _controller1, curve: Curves.easeInOut),
+  // );
+
+  // _controller1.forward();
+
+  // _controller2 = AnimationController(
+  //   duration: const Duration(milliseconds: 600),
+  //   vsync: this,
+  // );
+
+  // _fadeAnimation2 = Tween<double>(begin: 0.0, end: 1.0).animate(
+  //   CurvedAnimation(parent: _controller2, curve: Curves.easeInOut),
+  // );
+
+  // _slideAnimation2 = Tween<Offset>(
+  //   begin: const Offset(0.0, 0.51),
+  //   end: Offset.zero,
+  // ).animate(
+  //   CurvedAnimation(parent: _controller2, curve: Curves.easeInOut),
+  // );
+
+  // _scaleAnimation2 = Tween<double>(begin: 1.0, end: 1.0).animate(
+  //   CurvedAnimation(parent: _controller2, curve: Curves.easeInOut),
+  // );
+
+  // Future.delayed(const Duration(milliseconds: 50), () {
+  //   _controller2.forward();
+  // });
   // }
 
   // @override
   // void dispose() {
   //   _controller.dispose();
+  // _controller1.dispose();
+  // _controller2.dispose();
   //   super.dispose();
   // }
 
@@ -57,17 +116,20 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
     return Scaffold(
       backgroundColor: ColorTheme.color.primaryBackground,
       body: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(12, 60, 0, 20),
+        padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 20),
         child: Column(
           children: [
-            Row(
-              children: [
-                googleInterText(
-                  'Dashboard',
-                  fontSize: 30,
-                  fontWeight: FontWeight.w500,
-                ),
-              ],
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+              child: Row(
+                children: [
+                  googleInterText(
+                    'Dashboard',
+                    fontSize: 30,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ],
+              ),
             ),
             // FadeTransition(
             //   opacity: _fadeAnimation,
@@ -77,7 +139,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
             //       scale: _scaleAnimation,
             //       child:
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -143,138 +205,153 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 16, 12, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: MediaQuery.sizeOf(context).width * 0.44,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.color.secondaryBackgroundColor,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x3F14181B),
-                          offset: Offset(
-                            0.0,
-                            3,
-                          ),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(12),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          googleInterTextWeight4Font16('Total Income',
-                              fontSize: 12),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
-                            child: googleInterTextWeight4Font16(
-                              '+\$12402',
-                              fontSize: 30,
-                              fontWeight: FontWeight.w500,
-                              color: ColorTheme.color.tertiaryColor,
-                            ),
-                          ),
-                          Container(
-                            width: 80,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              color: Color(0x4D39D2C0),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                googleInterTextWeight4Font16(
-                                  '4.5%',
-                                  fontSize: 14,
-                                  color: ColorTheme.color.tertiaryColor,
-                                ),
-                                Icon(
-                                  Icons.trending_up_rounded,
-                                  color: ColorTheme.color.tertiaryColor,
-                                  size: 24,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  // FadeTransition(
+                  //   opacity: _fadeAnimation1,
+                  //   child: SlideTransition(
+                  //     position: _slideAnimation1,
+                  //     child: ScaleTransition(
+                  //       scale: _scaleAnimation1,
+                  //       child:
+                  containerDash(
+                    context,
+                    'Total Income',
+                    '+\$12402',
+                    ColorTheme.color.tertiaryColor,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width * 0.44,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.color.secondaryBackgroundColor,
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 4,
-                          color: Color(0x3F14181B),
-                          offset: Offset(
-                            0.0,
-                            3,
-                          ),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(12),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          googleInterTextWeight4Font16('Total WIthdrawal',
-                              fontSize: 12),
-                          Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
-                              child: googleInterText(
-                                '\$8,392',
-                                fontSize: 30,
-                                fontWeight: FontWeight.w500,
-                                color: ColorTheme.color.tertiaryColor,
-                              )),
-                          Container(
-                            width: 80,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              color: Color(0x9AF06A6A),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                googleInterTextWeight4Font16(
-                                  '4.5%',
-                                  fontSize: 14,
-                                ),
-                                Icon(
-                                  Icons.trending_up_rounded,
-                                  color: ColorTheme.color.errorColor,
-                                  size: 24,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  // FadeTransition(
+                  //   opacity: _fadeAnimation2,
+                  //   child: SlideTransition(
+                  //     position: _slideAnimation2,
+                  //     child: ScaleTransition(
+                  //       scale: _scaleAnimation2,
+                  //       child:
+                  containerDash(
+                    context,
+                    'Total WIthdrawal',
+                    '\$8,392',
+                    ColorTheme.color.errorColor,
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                 ],
               ),
             ),
+            sizedBoxH15(),
+            Container(
+              width: MediaQuery.sizeOf(context).width,
+              decoration: BoxDecoration(
+                color: ColorTheme.color.secondaryBackgroundColor,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(0),
+                  bottomRight: Radius.circular(0),
+                  topLeft: Radius.circular(16),
+                  topRight: Radius.circular(16),
+                ),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        googleInterTextWeight4Font12('Quick Service'),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.44,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: ColorTheme.color.primaryBackground,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {},
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.swap_horiz_rounded,
+                                  color: ColorTheme.color.whiteColor,
+                                  size: 40,
+                                ),
+                                Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 8, 0, 0),
+                                    child: googleInterTextWeight4Font12(
+                                        'Add Funds')),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.44,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: ColorTheme.color.primaryBackground,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {},
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.nfc,
+                                  color: ColorTheme.color.whiteColor,
+                                  size: 40,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 8, 0, 0),
+                                  child: googleInterTextWeight4Font12('Earn'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        googleInterTextWeight4Font12('Transaction'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
