@@ -21,6 +21,24 @@ Text googleInterText(String text,
   );
 }
 
+Text googleInterTextWeight4Font16(String text,
+    {double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+    TextAlign? textAlign}) {
+  return Text(
+    text,
+    textAlign: textAlign,
+    style: GoogleFonts.getFont(
+      'Inter',
+      color: color ?? ColorTheme.color.textWhiteColor,
+      fontWeight: fontWeight ?? FontWeight.w400,
+      letterSpacing: 0.1,
+      fontSize: fontSize ?? 16,
+    ),
+  );
+}
+
 Text googleReadexProText(String text,
     {double? fontSize,
     FontWeight? fontWeight,
