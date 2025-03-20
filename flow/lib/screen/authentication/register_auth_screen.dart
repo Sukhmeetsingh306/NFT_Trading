@@ -1,9 +1,7 @@
-import 'package:flow/screen/authentication/register_detail_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../models/controllers/register_controllers.dart';
 import '../../utils/fonts/google_fonts_utils.dart';
 import '../../utils/routes/navigation_routes.dart';
 import '../../utils/theme/color/color_theme.dart';
@@ -11,6 +9,7 @@ import '../../utils/validation/password_validations.dart';
 import '../../utils/widget/button_widget_utils.dart';
 import '../../utils/widget/form/textForm_form.dart';
 import '../../utils/widget/space_widget_utils.dart';
+import 'register_detail_auth_screen.dart';
 
 class RegisterAuthScreen extends StatefulWidget {
   const RegisterAuthScreen({super.key});
@@ -30,8 +29,6 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
   final TextEditingController _otpEmailController = TextEditingController();
-
-  final RegisterController _registerController = RegisterController();
 
   bool _obscureText = true;
   bool _confirmObscureText = true;
@@ -362,8 +359,19 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                     child: elevatedButton(
                                       'Create Account',
                                       () async {
-                                        materialNamedRouteNavigator(
-                                            context, '/registerDetailPage');
+                                        if (_formKey.currentState!.validate()) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  RegisterDetailAuthScreen(
+                                                email: _emailController.text,
+                                                password:
+                                                    _passwordController.text,
+                                              ),
+                                            ),
+                                          );
+                                        }
                                       },
                                     ),
                                   ),
@@ -401,12 +409,13 @@ class _RegisterAuthScreenState extends State<RegisterAuthScreen> {
                                                   if (Navigator.of(context)
                                                       .canPop()) {
                                                     pop(context);
-                                                  } else {
-                                                    pushNamedAndRemoveUntil(
-                                                      context,
-                                                      '/loginScreen',
-                                                    );
                                                   }
+                                                  // else {
+                                                  //   pushNamedAndRemoveUntil(
+                                                  //     context,
+                                                  //     '/loginPage',
+                                                  //   );
+                                                  // }
                                                 },
                                                 child: googleInterText(
                                                   'Login',

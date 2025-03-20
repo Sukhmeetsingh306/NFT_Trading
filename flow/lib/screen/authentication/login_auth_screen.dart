@@ -309,7 +309,11 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(24, 0, 4, 0),
                                                 child: InkWell(
-                                                  onTap: () async {},
+                                                  onTap: () async {
+                                                    materialNamedRouteNavigator(
+                                                        context,
+                                                        '/registerPage');
+                                                  },
                                                   child: googleInterText(
                                                     'Create',
                                                     color: ColorTheme.color

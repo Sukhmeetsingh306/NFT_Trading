@@ -38,9 +38,9 @@ Future<void> materialRouteNavigator(BuildContext context, Widget classname) {
   );
 }
 
-Future<void> materialNamedRouteNavigator(
-    BuildContext context, String routeName) {
-  return Navigator.pushNamed(context, routeName);
+Future<void> materialNamedRouteNavigator(BuildContext context, String routeName,
+    {Object? argument}) {
+  return Navigator.pushNamed(context, routeName, arguments: argument);
 }
 
 Future<void> materialRouteNavigatorRep(BuildContext context, Widget classname) {

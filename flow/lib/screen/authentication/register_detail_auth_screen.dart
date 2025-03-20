@@ -10,12 +10,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../models/controllers/register_controllers.dart';
 import '../../utils/fonts/google_fonts_utils.dart';
 import '../../utils/routes/navigation_routes.dart';
 import '../../utils/widget/button_widget_utils.dart';
 
 class RegisterDetailAuthScreen extends StatefulWidget {
-  const RegisterDetailAuthScreen({super.key});
+  final String email;
+  final String password;
+
+  const RegisterDetailAuthScreen(
+      {super.key, required this.email, required this.password});
 
   static String routeName = 'registerDetailPage';
   static String routePath = '/registerDetailPage';
@@ -32,6 +37,7 @@ class _RegisterDetailAuthScreenState extends State<RegisterDetailAuthScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _referenceController = TextEditingController();
+  final RegisterController _registerController = RegisterController();
 
   File? _imageFile;
   final ImagePicker _picker = ImagePicker();
@@ -58,6 +64,19 @@ class _RegisterDetailAuthScreenState extends State<RegisterDetailAuthScreen> {
       setState(() {
         _imageFile = File(pickedFile.path);
       });
+    }
+  }
+
+  Map<String, String>? data;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (data == null) {
+      // Extract arguments from ModalRoute safely here
+      data = ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
+      print(
+          "Email: ${data?['email']}"); // Debug to confirm data is passed correctly
     }
   }
 
@@ -301,8 +320,15 @@ class _RegisterDetailAuthScreenState extends State<RegisterDetailAuthScreen> {
                                     child: elevatedButton(
                                       'Create Account',
                                       () async {
-                                        materialNamedRouteNavigator(
-                                            context, '/registerDetailPage');
+                                        if (_formKey.currentState!.validate()) {
+                                          await _registerController
+                                              .registerUser(
+                                            context: context,
+                                            name: _nameController.text,
+                                            password: widget.password,
+                                            email: widget.email,
+                                          );
+                                        }
                                       },
                                     ),
                                   ),
