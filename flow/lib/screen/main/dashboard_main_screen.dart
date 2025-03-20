@@ -142,6 +142,139 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                 // ),
               ),
             ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(12, 16, 12, 0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: MediaQuery.sizeOf(context).width * 0.44,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.color.secondaryBackgroundColor,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Color(0x3F14181B),
+                          offset: Offset(
+                            0.0,
+                            3,
+                          ),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          googleInterTextWeight4Font16('Total Income',
+                              fontSize: 12),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
+                            child: googleInterTextWeight4Font16(
+                              '+\$12402',
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                              color: ColorTheme.color.tertiaryColor,
+                            ),
+                          ),
+                          Container(
+                            width: 80,
+                            height: 28,
+                            decoration: BoxDecoration(
+                              color: Color(0x4D39D2C0),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                googleInterTextWeight4Font16(
+                                  '4.5%',
+                                  fontSize: 14,
+                                  color: ColorTheme.color.tertiaryColor,
+                                ),
+                                Icon(
+                                  Icons.trending_up_rounded,
+                                  color: ColorTheme.color.tertiaryColor,
+                                  size: 24,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.sizeOf(context).width * 0.44,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.color.secondaryBackgroundColor,
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 4,
+                          color: Color(0x3F14181B),
+                          offset: Offset(
+                            0.0,
+                            3,
+                          ),
+                        )
+                      ],
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(12),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          googleInterTextWeight4Font16('Total WIthdrawal',
+                              fontSize: 12),
+                          Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 12),
+                              child: googleInterText(
+                                '\$8,392',
+                                fontSize: 30,
+                                fontWeight: FontWeight.w500,
+                                color: ColorTheme.color.tertiaryColor,
+                              )),
+                          Container(
+                            width: 80,
+                            height: 28,
+                            decoration: BoxDecoration(
+                              color: Color(0x9AF06A6A),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                googleInterTextWeight4Font16(
+                                  '4.5%',
+                                  fontSize: 14,
+                                ),
+                                Icon(
+                                  Icons.trending_up_rounded,
+                                  color: ColorTheme.color.errorColor,
+                                  size: 24,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
