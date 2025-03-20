@@ -273,7 +273,8 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
 
                                                   //   if (isAuthenticated) {
                                                   pushNamedAndRemoveUntil(
-                                                      context, '/registerPage');
+                                                      context,
+                                                      '/dashboardPage');
                                                   //     }
                                                   //   }
                                                 },
