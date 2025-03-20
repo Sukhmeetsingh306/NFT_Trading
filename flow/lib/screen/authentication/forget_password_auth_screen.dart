@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/theme/color/color_theme.dart';
+import '../../utils/widget/button_widget_utils.dart';
 import '../../utils/widget/form/textForm_form.dart';
 
 class ForgetPasswordAuthScreen extends StatefulWidget {
   const ForgetPasswordAuthScreen({super.key});
+
+  static String routeName = 'forgetPage';
+  static String routePath = '/forgetPage';
 
   @override
   State<ForgetPasswordAuthScreen> createState() =>
@@ -17,7 +21,6 @@ class _ForgetPasswordAuthScreenState extends State<ForgetPasswordAuthScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  final FocusNode _emailFocusNode = FocusNode();
   //final LoginController _loginController = LoginController();
 
   bool hasMinLength = false;
@@ -85,7 +88,6 @@ class _ForgetPasswordAuthScreenState extends State<ForgetPasswordAuthScreen> {
                     padding: EdgeInsetsDirectional.fromSTEB(10, 0, 15, 17),
                     child: textFormField(
                       _emailController,
-                      _emailFocusNode,
                       "Email Address",
                       'Enter your email...',
                       (value) {
@@ -143,24 +145,7 @@ class _ForgetPasswordAuthScreenState extends State<ForgetPasswordAuthScreen> {
                   SizedBox(
                     width: 190,
                     height: 50,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all<Color>(
-                          ColorTheme.color.buttonBackgroundColor,
-                        ),
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: googleInterText(
-                        'Send Reset Link',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    child: elevatedButton('Send Reset Link', () {}),
                   ),
                 ],
               ),
