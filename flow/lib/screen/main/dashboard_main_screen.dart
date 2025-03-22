@@ -2,6 +2,7 @@ import 'package:flow/utils/fonts/google_fonts_utils.dart';
 import 'package:flow/utils/theme/color/color_theme.dart';
 import 'package:flow/utils/widget/container_widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/routes/navigation_routes.dart';
 import '../../utils/widget/space_widget_utils.dart';
@@ -37,10 +38,16 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
   late Animation<double> _fadeAnimation3;
   late Animation<Offset> _moveAnimation3;
 
+  String username = "User";
+  String usdtBalance = '0.00';
+
+  bool isHidden = false;
+
   @override
   void initState() {
     super.initState();
     loadTransactions();
+    _loadUsername();
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 600),
@@ -126,6 +133,15 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
     Future.delayed(const Duration(milliseconds: 50), () {
       _controller3.forward();
     });
+  }
+
+  Future<void> _loadUsername() async {
+    final pref = await SharedPreferences.getInstance();
+    setState(() {
+      username = pref.getString('username') ?? "User";
+      usdtBalance = pref.getString('usdtBalance') ?? '0.00';
+    });
+    //print("Loaded Username: $username"); // 🔍 Debug SharedPreferences
   }
 
   @override
@@ -252,29 +268,61 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                             children: [
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 20, 20, 40),
+                                    20, 20, 20, 20),
                                 child: Row(
-                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    googleInterTextWeight4Font16(
-                                      'UID:123445',
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        googleInterTextWeight4Font16(
+                                          isHidden
+                                              ? "******"
+                                              : username, // Toggle visibility
+                                        ),
+                                        const SizedBox(height: 5),
+                                        googleInterTextWeight4Font16(
+                                          isHidden
+                                              ? "UID: ******"
+                                              : "UID: 123456",
+                                        ),
+                                      ],
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          isHidden = !isHidden; // Toggle state
+                                        });
+                                      },
+                                      icon: Icon(
+                                        isHidden
+                                            ? Icons.visibility_off
+                                            : Icons
+                                                .visibility, // Eye icon toggle
+                                        size: 25,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ],
                                 ),
                               ),
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 0, 0, 20),
-                                child: Column(
+                                    20, 0, 35, 20),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     googleInterTextWeight4Font16(
                                         'Wallet Balance'),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 5, 0, 0),
-                                      child:
-                                          googleInterTextWeight4Font16('1029'),
+                                    googleInterTextWeight4Font16(
+                                      isHidden ? '****' : usdtBalance,
                                     ),
                                   ],
                                 ),
