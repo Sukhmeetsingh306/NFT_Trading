@@ -1,3 +1,4 @@
+import 'package:flow/utils/widget/container_widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +40,7 @@ class _DepositMainScreenState extends State<DepositMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorTheme.color.primaryBackground,
+      backgroundColor: ColorTheme.color.secondaryBackgroundColor,
       body: Padding(
         padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 20),
         child: Column(
@@ -163,6 +164,21 @@ class _DepositMainScreenState extends State<DepositMainScreen> {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+              child: Column(
+                children: [
+                  containerField(
+                    width: MediaQuery.sizeOf(context).width,
+                    height: 60,
+                    googleInterTextWeight4Font16(
+                      "USDT Deposit Address (BEP-20)",
+                      fontSize: 17,
                     ),
                   ),
                 ],
