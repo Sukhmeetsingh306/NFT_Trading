@@ -110,6 +110,55 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
   // _controller2.dispose();
   //   super.dispose();
   // }
+  List<Map<String, dynamic>> transactions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadTransactions();
+  }
+
+  void loadTransactions() {
+    setState(() {
+      transactions = [
+        {
+          "title": "Withdraw USDT (BSC)",
+          "amount": "-100",
+          "date": "2025/02/16 15:36:58",
+          "status": "Pending",
+          "color": Colors.orange
+        },
+        {
+          "title": "Trial fund recovery",
+          "amount": "-150",
+          "date": "2025/02/15 03:15:57",
+          "status": "Success",
+          "color": Colors.green
+        },
+        {
+          "title": "Deposit USDT",
+          "amount": "+100.01",
+          "date": "2025/02/12 20:08:26",
+          "status": "Success",
+          "color": Colors.green
+        },
+        {
+          "title": "Trial fund",
+          "amount": "+150",
+          "date": "2025/02/12 19:24:55",
+          "status": "Success",
+          "color": Colors.green
+        },
+        {
+          "title": "New Transaction",
+          "amount": "+500",
+          "date": "2025/03/22 10:30:00",
+          "status": "Pending",
+          "color": Colors.blue
+        }
+      ];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,114 +295,167 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
               ),
             ),
             sizedBoxH15(),
-            Container(
-              width: MediaQuery.sizeOf(context).width,
-              decoration: BoxDecoration(
-                color: ColorTheme.color.secondaryBackgroundColor,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(0),
-                  bottomRight: Radius.circular(0),
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        googleInterTextWeight4Font12('Quick Service'),
-                      ],
-                    ),
+            Expanded(
+              child: Container(
+                width: MediaQuery.sizeOf(context).width,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: ColorTheme.color.secondaryBackgroundColor,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(0),
+                    bottomRight: Radius.circular(0),
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * 0.44,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: ColorTheme.color.primaryBackground,
-                            borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          googleInterTextWeight4Font12('Quick Service'),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * 0.44,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: ColorTheme.color.primaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {},
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.swap_horiz_rounded,
+                                    color: ColorTheme.color.whiteColor,
+                                    size: 40,
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 8, 0, 0),
+                                      child: googleInterTextWeight4Font12(
+                                          'Add Funds')),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {},
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.swap_horiz_rounded,
-                                  color: ColorTheme.color.whiteColor,
-                                  size: 40,
-                                ),
-                                Padding(
+                          Container(
+                            width: MediaQuery.sizeOf(context).width * 0.44,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: ColorTheme.color.primaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {},
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.nfc,
+                                    color: ColorTheme.color.whiteColor,
+                                    size: 40,
+                                  ),
+                                  Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 8, 0, 0),
-                                    child: googleInterTextWeight4Font12(
-                                        'Add Funds')),
-                              ],
+                                    child: googleInterTextWeight4Font12('Earn'),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * 0.44,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: ColorTheme.color.primaryBackground,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {},
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.nfc,
-                                  color: ColorTheme.color.whiteColor,
-                                  size: 40,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 8, 0, 0),
-                                  child: googleInterTextWeight4Font12('Earn'),
-                                ),
-                              ],
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          googleInterTextWeight4Font12('Transaction'),
+                        ],
+                      ),
+                    ),
+                    transactions.isEmpty
+                        ? Center(
+                            child:
+                                CircularProgressIndicator()) // Show loading while fetching
+                        : Flexible(
+                            child: ListView.builder(
+                              itemCount: transactions.length,
+                              shrinkWrap:
+                                  true, // Allows ListView to take only the required space
+                              physics:
+                                  AlwaysScrollableScrollPhysics(), // Enables scrolling
+                              itemBuilder: (context, index) {
+                                final transaction = transactions[index];
+                                return _transactionItem(
+                                  transaction["title"],
+                                  transaction["amount"],
+                                  transaction["date"],
+                                  transaction["status"],
+                                  transaction["color"],
+                                );
+                              },
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 12),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        googleInterTextWeight4Font12('Transaction'),
-                      ],
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _transactionItem(
+      String title, String amount, String date, String status, Color color) {
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(20, 12, 20, 12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              googleInterText(title, fontWeight: FontWeight.w600, fontSize: 12),
+              googleInterText(date, color: Colors.grey, fontSize: 12),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              googleInterText(amount,
+                  color: color, fontWeight: FontWeight.w600, fontSize: 12),
+              googleInterText(status, color: color, fontSize: 12),
+            ],
+          ),
+        ],
       ),
     );
   }
