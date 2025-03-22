@@ -432,7 +432,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                                     Navigator.of(context).push(
                                       PageRouteBuilder(
                                         transitionDuration:
-                                            Duration(milliseconds: 220),
+                                            Duration(milliseconds: 400),
                                         pageBuilder: (context, animation,
                                                 secondaryAnimation) =>
                                             DepositMainScreen(),
