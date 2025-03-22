@@ -1,3 +1,4 @@
+import 'package:flow/screen/main/deposit_main_screen.dart';
 import 'package:flow/utils/fonts/google_fonts_utils.dart';
 import 'package:flow/utils/theme/color/color_theme.dart';
 import 'package:flow/utils/widget/container_widget_utils.dart';
@@ -426,8 +427,33 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    materialNamedRouteNavigator(
-                                        context, '/depositPage');
+                                    //Navigator.of(context)
+//                                        .pushNamed('/depositPage');//
+                                    Navigator.of(context).push(
+                                      PageRouteBuilder(
+                                        transitionDuration:
+                                            Duration(milliseconds: 220),
+                                        pageBuilder: (context, animation,
+                                                secondaryAnimation) =>
+                                            DepositMainScreen(),
+                                        transitionsBuilder: (context, animation,
+                                            secondaryAnimation, child) {
+                                          const begin = Offset(0.0, 1.0);
+                                          const end = Offset.zero;
+                                          const curve = Curves.easeInOut;
+
+                                          var tween = Tween(
+                                                  begin: begin, end: end)
+                                              .chain(CurveTween(curve: curve));
+                                          var offsetAnimation =
+                                              animation.drive(tween);
+
+                                          return SlideTransition(
+                                              position: offsetAnimation,
+                                              child: child);
+                                        },
+                                      ),
+                                    );
                                   },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
