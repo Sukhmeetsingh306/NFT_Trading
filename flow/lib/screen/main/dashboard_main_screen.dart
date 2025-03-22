@@ -425,7 +425,10 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                                   focusColor: Colors.transparent,
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    materialNamedRouteNavigator(
+                                        context, '/depositPage');
+                                  },
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -436,11 +439,12 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                                         size: 40,
                                       ),
                                       Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 8, 0, 0),
-                                          child: googleInterTextWeight4Font12(
-                                              'Add Funds')),
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 8, 0, 0),
+                                        child: googleInterTextWeight4Font12(
+                                          'Add Funds',
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
