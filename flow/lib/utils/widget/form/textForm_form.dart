@@ -6,7 +6,6 @@ import '../../theme/color/color_theme.dart';
 
 Widget textFormField(
   TextEditingController controller,
-  FocusNode focusNode,
   String labelText,
   String hintText,
   FormFieldValidator<String> validator, {
@@ -20,7 +19,6 @@ Widget textFormField(
 }) {
   return TextFormField(
     controller: controller,
-    focusNode: focusNode,
     decoration: InputDecoration(
       labelText: labelText,
       labelStyle: GoogleFonts.getFont(

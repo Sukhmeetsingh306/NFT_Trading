@@ -10,12 +10,14 @@ class ColorThemeData {
   final blackColor = const Color(0xff000000);
 
 // MARK: Background color
-  final primaryBackground = const Color(0x00182026);
-  final secondaryBackgroundColor = const Color(0x00101518);
+  final primaryBackground = const Color(0xff182026);
+  final secondaryBackgroundColor = const Color(0xff101518);
 
   // MARK: Text Color
   final textWhiteColor = const Color(0xffFFFFFF);
   final buttonBackgroundColor = const Color(0xFF6898AB);
+  final tertiaryColor = const Color(0xFF928163);
+  final errorColor = const Color(0xFFC4454D);
 
   const ColorThemeData();
 }
