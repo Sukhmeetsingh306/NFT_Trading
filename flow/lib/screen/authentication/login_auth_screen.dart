@@ -272,7 +272,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                                                   //   );
 
                                                   //   if (isAuthenticated) {
-                                                  pushNamedAndRemoveUntil(
+                                                  materialNamedRouteNavigator(
                                                       context,
                                                       '/dashboardPage');
                                                   //     }

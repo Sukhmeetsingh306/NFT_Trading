@@ -3,6 +3,7 @@ import 'package:flow/utils/theme/color/color_theme.dart';
 import 'package:flow/utils/widget/container_widget_utils.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/routes/navigation_routes.dart';
 import '../../utils/widget/space_widget_utils.dart';
 
 class DashboardMainScreen extends StatefulWidget {
@@ -133,7 +134,6 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
     _controller1.dispose();
     _controller2.dispose();
     _controller3.dispose();
-    loadTransactions();
     super.dispose();
   }
 
@@ -190,13 +190,25 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   googleInterText(
                     'Dashboard',
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      if (Navigator.of(context).canPop()) {
+                        pop(context);
+                      }
+                    },
+                    icon: Icon(
+                      Icons.login_rounded,
+                      color: ColorTheme.color.whiteColor,
+                    ),
                   ),
                 ],
               ),
