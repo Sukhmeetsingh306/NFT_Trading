@@ -207,7 +207,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
