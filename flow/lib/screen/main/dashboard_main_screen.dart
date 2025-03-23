@@ -1,6 +1,7 @@
 import 'package:flow/screen/main/deposit_main_screen.dart';
 import 'package:flow/utils/fonts/google_fonts_utils.dart';
 import 'package:flow/utils/theme/color/color_theme.dart';
+import 'package:flow/utils/widget/card_widget_utils.dart';
 import 'package:flow/utils/widget/container_widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,9 +22,6 @@ class DashboardMainScreen extends StatefulWidget {
 class _DashboardMainScreenState extends State<DashboardMainScreen>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _fadeAnimation;
-  late Animation<Offset> _slideAnimation;
-  late Animation<double> _scaleAnimation;
 
   late AnimationController _controller1;
   late Animation<double> _fadeAnimation1;
@@ -53,21 +51,6 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
     _controller = AnimationController(
       duration: const Duration(milliseconds: 600),
       vsync: this,
-    );
-
-    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0.0, 0.3),
-      end: Offset.zero,
-    ).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-
-    _scaleAnimation = Tween<double>(begin: 0.4, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
     _controller.forward();
@@ -230,111 +213,63 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                 ],
               ),
             ),
-            FadeTransition(
-              opacity: _fadeAnimation,
-              child: SlideTransition(
-                position: _slideAnimation,
-                child: ScaleTransition(
-                  scale: _scaleAnimation,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 0),
+            CardWidgetUtils(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
                     child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          width: MediaQuery.sizeOf(context).width * 0.92,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 6,
-                                color: Color(0x4B1A1F24),
-                                offset: Offset(
-                                  0.0,
-                                  2,
-                                ),
-                              )
-                            ],
-                            gradient: LinearGradient(
-                              colors: [Color(0xFF00968A), Color(0xFFF2A384)],
-                              stops: [0, 1],
-                              begin: AlignmentDirectional(0.94, -1),
-                              end: AlignmentDirectional(-0.94, 1),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            googleInterTextWeight4Font16(
+                              isHidden
+                                  ? "******"
+                                  : username, // Toggle visibility
                             ),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 20, 20, 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        googleInterTextWeight4Font16(
-                                          isHidden
-                                              ? "******"
-                                              : username, // Toggle visibility
-                                        ),
-                                        const SizedBox(height: 5),
-                                        googleInterTextWeight4Font16(
-                                          isHidden
-                                              ? "UID: ******"
-                                              : "UID: 123456",
-                                        ),
-                                      ],
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          isHidden = !isHidden; // Toggle state
-                                        });
-                                      },
-                                      icon: Icon(
-                                        isHidden
-                                            ? Icons.visibility_off
-                                            : Icons
-                                                .visibility, // Eye icon toggle
-                                        size: 25,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 0, 35, 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    googleInterTextWeight4Font16(
-                                        'Wallet Balance'),
-                                    googleInterTextWeight4Font16(
-                                      isHidden ? '****' : usdtBalance,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                            const SizedBox(height: 5),
+                            googleInterTextWeight4Font16(
+                              isHidden ? "UID: ******" : "UID: 123456",
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isHidden = !isHidden; // Toggle state
+                            });
+                          },
+                          icon: Icon(
+                            isHidden
+                                ? Icons.visibility_off
+                                : Icons.visibility, // Eye icon toggle
+                            size: 25,
+                            color: Colors.white,
                           ),
                         ),
                       ],
                     ),
                   ),
-                ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        googleInterTextWeight4Font16('Wallet Balance'),
+                        googleInterTextWeight4Font16(
+                          isHidden ? '****' : usdtBalance,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
