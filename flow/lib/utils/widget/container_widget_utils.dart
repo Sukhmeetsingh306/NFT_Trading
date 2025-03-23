@@ -67,3 +67,29 @@ Widget containerDash(
     ),
   );
 }
+
+Widget containerField(
+  Widget child, {
+  double? width,
+  double? height,
+}) {
+  return Container(
+    width: width,
+    height: height,
+    margin: const EdgeInsets.only(top: 16),
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      border: Border.all(color: ColorTheme.color.alternativeColor),
+      color: ColorTheme.color.secondaryBackgroundColor,
+      borderRadius: BorderRadius.circular(10),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black38,
+          blurRadius: 8,
+          offset: Offset(0, 2),
+        )
+      ],
+    ),
+    child: child,
+  );
+}

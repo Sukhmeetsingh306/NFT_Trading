@@ -18,6 +18,7 @@ class ColorThemeData {
   final buttonBackgroundColor = const Color(0xFF6898AB);
   final tertiaryColor = const Color(0xFF928163);
   final errorColor = const Color(0xFFC4454D);
+  final alternativeColor = const Color(0xFF1c262e);
 
   const ColorThemeData();
 }
