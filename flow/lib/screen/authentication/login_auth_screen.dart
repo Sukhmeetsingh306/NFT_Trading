@@ -64,7 +64,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
         ),
         decoration: isLargeScreen
             ? BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.7),
+                color: ColorTheme.color.primaryBackground,
                 border: Border.all(color: Colors.grey, width: 2),
                 borderRadius: BorderRadius.circular(20), // Rounded edges
               )
@@ -266,7 +266,9 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                   ),
                 ),
                 child: isLargeScreen
-                    ? Center(child: pageCode(isLargeScreen))
+                    ? Container(
+                        color: Colors.black38,
+                        child: Center(child: pageCode(isLargeScreen)))
                     : Padding(
                         padding: const EdgeInsets.only(
                           top: 60,
