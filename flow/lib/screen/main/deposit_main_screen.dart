@@ -32,6 +32,16 @@ class _DepositMainScreenState extends State<DepositMainScreen>
   late Animation<Offset> _slideAnimation;
   late Animation<double> _scaleAnimation;
 
+  late AnimationController _controller1;
+  late Animation<double> _fadeAnimation1;
+  late Animation<Offset> _slideAnimation1;
+  late Animation<double> _scaleAnimation1;
+
+  late AnimationController _controller2;
+  late Animation<double> _fadeAnimation2;
+  late Animation<Offset> _slideAnimation2;
+  late Animation<double> _scaleAnimation2;
+
   Future<void> _loadUsername() async {
     final pref = await SharedPreferences.getInstance();
     setState(() {
@@ -100,12 +110,60 @@ class _DepositMainScreenState extends State<DepositMainScreen>
     );
 
     _controller.forward();
+
+    _controller1 = AnimationController(
+      duration: const Duration(milliseconds: 700),
+      vsync: this,
+    );
+
+    _fadeAnimation1 = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller1, curve: Curves.easeInOut),
+    );
+
+    _slideAnimation1 = Tween<Offset>(
+      begin: const Offset(0.0, 0.49),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(parent: _controller1, curve: Curves.easeInOut),
+    );
+
+    _scaleAnimation1 = Tween<double>(begin: 1.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller1, curve: Curves.easeInOut),
+    );
+
+    _controller1.forward();
+
+    _controller2 = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+
+    _fadeAnimation2 = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller2, curve: Curves.easeInOut),
+    );
+
+    _slideAnimation2 = Tween<Offset>(
+      begin: const Offset(0.0, 0.51),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(parent: _controller2, curve: Curves.easeInOut),
+    );
+
+    _scaleAnimation2 = Tween<double>(begin: 1.0, end: 1.0).animate(
+      CurvedAnimation(parent: _controller2, curve: Curves.easeInOut),
+    );
+
+    Future.delayed(const Duration(milliseconds: 50), () {
+      _controller2.forward();
+    });
   }
 
   @override
   void dispose() {
     super.dispose();
     _controller.dispose();
+    _controller1.dispose();
+    _controller2.dispose();
   }
 
   @override
@@ -259,191 +317,216 @@ class _DepositMainScreenState extends State<DepositMainScreen>
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
-                child: Column(
-                  children: [
-                    containerField(
-                      width: MediaQuery.sizeOf(context).width,
-                      height: 60,
-                      googleInterTextWeight4Font16(
-                        "USDT Deposit Address (BEP-20)",
-                        fontSize: 17,
+              FadeTransition(
+                opacity: _fadeAnimation1,
+                child: SlideTransition(
+                  position: _slideAnimation1,
+                  child: ScaleTransition(
+                    scale: _scaleAnimation1,
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+                      child: Column(
+                        children: [
+                          containerField(
+                            width: MediaQuery.sizeOf(context).width,
+                            height: 60,
+                            googleInterTextWeight4Font16(
+                              "USDT Deposit Address (BEP-20)",
+                              fontSize: 17,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
-                child: Column(
-                  children: [
-                    containerField(
-                      width: MediaQuery.sizeOf(context).width,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              FadeTransition(
+                opacity: _fadeAnimation2,
+                child: SlideTransition(
+                  position: _slideAnimation2,
+                  child: ScaleTransition(
+                    scale: _scaleAnimation2,
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+                      child: Column(
                         children: [
-                          googleInterTextWeight4Font16(
-                            "Deposit Chain",
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
-                          sizedBoxH5(),
-                          googleInterTextWeight4Font14ColorGrey(
-                            'Minimum Deposit: 50 USDT',
-                          ),
-                          sizedBoxH10(),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: googleInterText(
-                              '*You can only deposit USDT-BEP-20 to this address.\n  Other assets cannot be recovered',
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.redAccent,
-                            ),
-                          ),
-                          sizedBoxH10(),
-                          googleInterTextWeight4Font14ColorGrey(
-                            'This address supports USDT only',
-                          ),
-                          sizedBoxH10(),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 10),
-                            decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.grey, width: 1.5),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Column(
+                          containerField(
+                            width: MediaQuery.sizeOf(context).width,
+                            Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                googleInterTextWeight4Font16(
+                                  "Deposit Chain",
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 20,
+                                ),
+                                sizedBoxH5(),
+                                googleInterTextWeight4Font14ColorGrey(
+                                  'Minimum Deposit: 50 USDT',
+                                ),
+                                sizedBoxH10(),
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 5.0,
-                                    left: 8,
-                                    right: 8,
-                                    bottom: 0,
-                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
                                   child: googleInterText(
-                                    'USDT Deposit Address',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
+                                    '*You can only deposit USDT-BEP-20 to this address.\n  Other assets cannot be recovered',
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.redAccent,
                                   ),
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Flexible(
-                                      fit: FlexFit.loose,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          top: 0,
+                                sizedBoxH10(),
+                                googleInterTextWeight4Font14ColorGrey(
+                                  'This address supports USDT only',
+                                ),
+                                sizedBoxH10(),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 1.5),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 5.0,
                                           left: 8,
-                                          right: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              .09,
+                                          right: 8,
                                           bottom: 0,
                                         ),
                                         child: googleInterText(
-                                          walletAddress,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
+                                          'USDT Deposit Address',
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                    ),
-                                    Column(
-                                      children: [
-                                        AnimatedContainer(
-                                          duration: Duration(milliseconds: 300),
-                                          curve: Curves.easeInOut,
-                                          width: 50,
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                          ),
-                                          child: AnimatedSwitcher(
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            transitionBuilder:
-                                                (widget, animation) {
-                                              return ScaleTransition(
-                                                scale: animation,
-                                                child: widget,
-                                              );
-                                            },
-                                            child: IconButton(
-                                              key: ValueKey<bool>(_isCopied),
-                                              icon: Icon(
-                                                _isCopied
-                                                    ? Icons.check
-                                                    : Icons.copy,
-                                                size: 20,
-                                                color: Colors.grey,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            fit: FlexFit.loose,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 0,
+                                                left: 8,
+                                                right: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    .09,
+                                                bottom: 0,
                                               ),
-                                              onPressed: () =>
-                                                  _copyToClipboard(context),
+                                              child: googleInterText(
+                                                walletAddress,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        sizedBoxH5(),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          sizedBoxH15(),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 1,
-                            height: MediaQuery.of(context).size.height * 0.3,
-                            child: Image.asset('assets/images/png/barcode.jpg'),
-                          ),
-                          sizedBoxH15(),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 10),
-                            decoration: BoxDecoration(
-                              border:
-                                  Border.all(color: Colors.grey, width: 1.5),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 5.0,
-                                    left: 8,
-                                    right: 8,
-                                    bottom: 0,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      googleInterText(
-                                        'Chain',
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                      SizedBox(width: 12),
-                                      googleInterTextWeight4Font16(
-                                        'BSC(BEP-20)',
+                                          Column(
+                                            children: [
+                                              AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 300),
+                                                curve: Curves.easeInOut,
+                                                width: 50,
+                                                height: 50,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.transparent,
+                                                ),
+                                                child: AnimatedSwitcher(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  transitionBuilder:
+                                                      (widget, animation) {
+                                                    return ScaleTransition(
+                                                      scale: animation,
+                                                      child: widget,
+                                                    );
+                                                  },
+                                                  child: IconButton(
+                                                    key: ValueKey<bool>(
+                                                        _isCopied),
+                                                    icon: Icon(
+                                                      _isCopied
+                                                          ? Icons.check
+                                                          : Icons.copy,
+                                                      size: 20,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed: () =>
+                                                        _copyToClipboard(
+                                                            context),
+                                                  ),
+                                                ),
+                                              ),
+                                              sizedBoxH5(),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
                                 ),
+                                sizedBoxH15(),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * 1,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.3,
+                                  child: Image.asset(
+                                      'assets/images/png/barcode.jpg'),
+                                ),
+                                sizedBoxH15(),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.grey, width: 1.5),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                          top: 5.0,
+                                          left: 8,
+                                          right: 8,
+                                          bottom: 0,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            googleInterText(
+                                              'Chain',
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                            SizedBox(width: 12),
+                                            googleInterTextWeight4Font16(
+                                              'BSC(BEP-20)',
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                sizedBoxH20(),
                               ],
                             ),
                           ),
-                          sizedBoxH20(),
                         ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
