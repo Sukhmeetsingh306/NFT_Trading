@@ -78,276 +78,287 @@ class _DepositMainScreenState extends State<DepositMainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorTheme.color.secondaryBackgroundColor,
-      body: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 20),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  googleInterText(
-                    'Deposit',
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  IconButton(
-                    onPressed: () async {
-                      if (Navigator.of(context).canPop()) {
-                        pop(context);
-                      }
-                    },
-                    icon: Icon(
-                      Icons.cancel_outlined,
-                      size: 32,
-                      color: ColorTheme.color.whiteColor,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 20),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    googleInterText(
+                      'Deposit',
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.sizeOf(context).width * 0.92,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 6,
-                          color: Color(0x4B1A1F24),
-                          offset: Offset(
-                            0.0,
-                            2,
-                          ),
-                        )
-                      ],
-                      gradient: LinearGradient(
-                        colors: [Color(0xFF00968A), Color(0xFFF2A384)],
-                        stops: [0, 1],
-                        begin: AlignmentDirectional(0.94, -1),
-                        end: AlignmentDirectional(-0.94, 1),
+                    IconButton(
+                      onPressed: () async {
+                        if (Navigator.of(context).canPop()) {
+                          pop(context);
+                        }
+                      },
+                      icon: Icon(
+                        Icons.cancel_outlined,
+                        size: 32,
+                        color: ColorTheme.color.whiteColor,
                       ),
-                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  googleInterTextWeight4Font16(
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: MediaQuery.sizeOf(context).width * 0.92,
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 6,
+                            color: Color(0x4B1A1F24),
+                            offset: Offset(
+                              0.0,
+                              2,
+                            ),
+                          )
+                        ],
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                          stops: [0, 1],
+                          begin: AlignmentDirectional(0.94, -1),
+                          end: AlignmentDirectional(-0.94, 1),
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    googleInterTextWeight4Font16(
+                                      isHidden
+                                          ? "******"
+                                          : username, // Toggle visibility
+                                    ),
+                                    const SizedBox(height: 5),
+                                    googleInterTextWeight4Font16(
+                                      isHidden ? "UID: ******" : "UID: 123456",
+                                    ),
+                                  ],
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      isHidden = !isHidden; // Toggle state
+                                    });
+                                  },
+                                  icon: Icon(
                                     isHidden
-                                        ? "******"
-                                        : username, // Toggle visibility
+                                        ? Icons.visibility_off
+                                        : Icons.visibility, // Eye icon toggle
+                                    size: 25,
+                                    color: Colors.white,
                                   ),
-                                  const SizedBox(height: 5),
-                                  googleInterTextWeight4Font16(
-                                    isHidden ? "UID: ******" : "UID: 123456",
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                googleInterTextWeight4Font16('Wallet Balance'),
+                                googleInterTextWeight4Font16(
+                                  isHidden ? '****' : usdtBalance,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
+                            child: googleInterTextWeight4Font16(
+                              isHidden
+                                  ? '**** **** **** ****'
+                                  : '1206 1245 6586 7578',
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+                child: Column(
+                  children: [
+                    containerField(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: 60,
+                      googleInterTextWeight4Font16(
+                        "USDT Deposit Address (BEP-20)",
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+                child: Column(
+                  children: [
+                    containerField(
+                      width: MediaQuery.sizeOf(context).width,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          googleInterTextWeight4Font16(
+                            "Deposit Chain",
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                          ),
+                          sizedBoxH5(),
+                          googleInterTextWeight4Font14ColorGrey(
+                            'Minimum Deposit: 50 USDT',
+                          ),
+                          sizedBoxH10(),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: googleInterText(
+                              '*You can only deposit USDT-BEP-20 to this address.\n  Other assets cannot be recovered',
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.redAccent,
+                            ),
+                          ),
+                          sizedBoxH10(),
+                          googleInterTextWeight4Font14ColorGrey(
+                            'This address supports USDT only',
+                          ),
+                          sizedBoxH10(),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10),
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.grey, width: 1.5),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5.0,
+                                    left: 8,
+                                    right: 8,
+                                    bottom: 0,
                                   ),
-                                ],
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    isHidden = !isHidden; // Toggle state
-                                  });
-                                },
-                                icon: Icon(
-                                  isHidden
-                                      ? Icons.visibility_off
-                                      : Icons.visibility, // Eye icon toggle
-                                  size: 25,
-                                  color: Colors.white,
+                                  child: googleInterText(
+                                    'USDT Deposit Address',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              googleInterTextWeight4Font16('Wallet Balance'),
-                              googleInterTextWeight4Font16(
-                                isHidden ? '****' : usdtBalance,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
-                          child: googleInterTextWeight4Font16(
-                            isHidden
-                                ? '**** **** **** ****'
-                                : '1206 1245 6586 7578',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
-              child: Column(
-                children: [
-                  containerField(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: 60,
-                    googleInterTextWeight4Font16(
-                      "USDT Deposit Address (BEP-20)",
-                      fontSize: 17,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
-              child: Column(
-                children: [
-                  containerField(
-                    width: MediaQuery.sizeOf(context).width,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        googleInterTextWeight4Font16(
-                          "Deposit Chain",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                        ),
-                        sizedBoxH5(),
-                        googleInterTextWeight4Font14ColorGrey(
-                          'Minimum Deposit: 50 USDT',
-                        ),
-                        sizedBoxH10(),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: googleInterText(
-                            '*You can only deposit USDT-BEP-20 to this address.\n  Other assets cannot be recovered',
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.redAccent,
-                          ),
-                        ),
-                        sizedBoxH10(),
-                        googleInterTextWeight4Font14ColorGrey(
-                          'This address supports USDT only',
-                        ),
-                        sizedBoxH10(),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1.5),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  top: 5.0,
-                                  left: 8,
-                                  right: 8,
-                                  bottom: 0,
-                                ),
-                                child: googleInterText(
-                                  'USDT Deposit Address',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    fit: FlexFit.loose,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        top: 0,
-                                        left: 8,
-                                        right:
-                                            MediaQuery.of(context).size.width *
-                                                .09,
-                                        bottom: 0,
-                                      ),
-                                      child: googleInterText(
-                                        walletAddress,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Flexible(
+                                      fit: FlexFit.loose,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                          top: 0,
+                                          left: 8,
+                                          right: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              .09,
+                                          bottom: 0,
+                                        ),
+                                        child: googleInterText(
+                                          walletAddress,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      AnimatedContainer(
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.easeInOut,
-                                        width: 50,
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                        ),
-                                        child: AnimatedSwitcher(
+                                    Column(
+                                      children: [
+                                        AnimatedContainer(
                                           duration: Duration(milliseconds: 300),
-                                          transitionBuilder:
-                                              (widget, animation) {
-                                            return ScaleTransition(
-                                              scale: animation,
-                                              child: widget,
-                                            );
-                                          },
-                                          child: IconButton(
-                                            key: ValueKey<bool>(_isCopied),
-                                            icon: Icon(
-                                              _isCopied
-                                                  ? Icons.check
-                                                  : Icons.copy,
-                                              size: 20,
-                                              color: Colors.grey,
+                                          curve: Curves.easeInOut,
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            color: Colors.transparent,
+                                          ),
+                                          child: AnimatedSwitcher(
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            transitionBuilder:
+                                                (widget, animation) {
+                                              return ScaleTransition(
+                                                scale: animation,
+                                                child: widget,
+                                              );
+                                            },
+                                            child: IconButton(
+                                              key: ValueKey<bool>(_isCopied),
+                                              icon: Icon(
+                                                _isCopied
+                                                    ? Icons.check
+                                                    : Icons.copy,
+                                                size: 20,
+                                                color: Colors.grey,
+                                              ),
+                                              onPressed: () =>
+                                                  _copyToClipboard(context),
                                             ),
-                                            onPressed: () =>
-                                                _copyToClipboard(context),
                                           ),
                                         ),
-                                      ),
-                                      sizedBoxH5(),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                                        sizedBoxH5(),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        sizedBoxH10(),
-                      ],
+                          sizedBoxH10(),
+                          SizedBox(
+                              width: 400,
+                              height: 250,
+                              child:
+                                  Image.asset('assets/images/png/barcode.jpg')),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
