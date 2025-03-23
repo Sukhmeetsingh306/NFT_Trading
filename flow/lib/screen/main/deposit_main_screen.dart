@@ -345,12 +345,49 @@ class _DepositMainScreenState extends State<DepositMainScreen> {
                               ],
                             ),
                           ),
-                          sizedBoxH10(),
+                          sizedBoxH15(),
                           SizedBox(
-                              width: 400,
-                              height: 250,
-                              child:
-                                  Image.asset('assets/images/png/barcode.jpg')),
+                            width: MediaQuery.of(context).size.width * 1,
+                            height: MediaQuery.of(context).size.height * 0.3,
+                            child: Image.asset('assets/images/png/barcode.jpg'),
+                          ),
+                          sizedBoxH15(),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 10),
+                            decoration: BoxDecoration(
+                              border:
+                                  Border.all(color: Colors.grey, width: 1.5),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    top: 5.0,
+                                    left: 8,
+                                    right: 8,
+                                    bottom: 0,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      googleInterText(
+                                        'Chain',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                      SizedBox(width: 12),
+                                      googleInterTextWeight4Font16(
+                                        'BSC(BEP-20)',
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          sizedBoxH20(),
                         ],
                       ),
                     ),
