@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../utils/fonts/google_fonts_utils.dart';
 import '../../utils/routes/navigation_routes.dart';
 import '../../utils/theme/color/color_theme.dart';
+import '../../utils/widget/space_widget_utils.dart';
 
 class DepositMainScreen extends StatefulWidget {
   const DepositMainScreen({super.key});
@@ -179,6 +180,44 @@ class _DepositMainScreenState extends State<DepositMainScreen> {
                     googleInterTextWeight4Font16(
                       "USDT Deposit Address (BEP-20)",
                       fontSize: 17,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+              child: Column(
+                children: [
+                  containerField(
+                    width: MediaQuery.sizeOf(context).width,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        googleInterTextWeight4Font16(
+                          "Deposit Chain",
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                        ),
+                        sizedBoxH5(),
+                        googleInterTextWeight4Font14ColorGrey(
+                          'Minimum Deposit: 50 USDT',
+                        ),
+                        sizedBoxH10(),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: googleInterText(
+                            '*You can only deposit USDT-BEP-20 to this address.\n  Other assets cannot be recovered',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.redAccent,
+                          ),
+                        ),
+                        sizedBoxH10(),
+                        googleInterTextWeight4Font14ColorGrey(
+                          'This address supports USDT only',
+                        ),
+                      ],
                     ),
                   ),
                 ],
