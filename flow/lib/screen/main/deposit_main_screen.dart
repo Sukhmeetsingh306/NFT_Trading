@@ -1,5 +1,6 @@
 import 'package:flow/utils/widget/container_widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/fonts/google_fonts_utils.dart';
@@ -20,8 +21,10 @@ class DepositMainScreen extends StatefulWidget {
 class _DepositMainScreenState extends State<DepositMainScreen> {
   String username = "User";
   String usdtBalance = '0.00';
+  String walletAddress = "Fetching...";
 
   bool isHidden = false;
+  bool _isCopied = false;
 
   Future<void> _loadUsername() async {
     final pref = await SharedPreferences.getInstance();
@@ -32,10 +35,43 @@ class _DepositMainScreenState extends State<DepositMainScreen> {
     //print("Loaded Username: $username"); // 🔍 Debug SharedPreferences
   }
 
+  Future<void> _loadWalletAddress() async {
+    final pref = await SharedPreferences.getInstance();
+    String? savedAddress = pref.getString('walletAddress');
+
+    print("Retrieved Wallet Address: $savedAddress"); // Debugging
+
+    if (mounted) {
+      setState(() {
+        walletAddress =
+            savedAddress ?? "0x3E79B2d4FDa2a93f145B7Bc2D46fc435B396d46e";
+      });
+    }
+  }
+
+  void _copyToClipboard(BuildContext context) {
+    if (_isCopied) return;
+
+    Clipboard.setData(ClipboardData(text: walletAddress));
+
+    setState(() {
+      _isCopied = true;
+    });
+
+    Future.delayed(Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() {
+          _isCopied = false;
+        });
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _loadUsername();
+    _loadWalletAddress();
   }
 
   @override
@@ -217,6 +253,94 @@ class _DepositMainScreenState extends State<DepositMainScreen> {
                         googleInterTextWeight4Font14ColorGrey(
                           'This address supports USDT only',
                         ),
+                        sizedBoxH10(),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 10),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey, width: 1.5),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 5.0,
+                                  left: 8,
+                                  right: 8,
+                                  bottom: 0,
+                                ),
+                                child: googleInterText(
+                                  'USDT Deposit Address',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    fit: FlexFit.loose,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        top: 0,
+                                        left: 8,
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                .09,
+                                        bottom: 0,
+                                      ),
+                                      child: googleInterText(
+                                        walletAddress,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                  Column(
+                                    children: [
+                                      AnimatedContainer(
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.easeInOut,
+                                        width: 50,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                        ),
+                                        child: AnimatedSwitcher(
+                                          duration: Duration(milliseconds: 300),
+                                          transitionBuilder:
+                                              (widget, animation) {
+                                            return ScaleTransition(
+                                              scale: animation,
+                                              child: widget,
+                                            );
+                                          },
+                                          child: IconButton(
+                                            key: ValueKey<bool>(_isCopied),
+                                            icon: Icon(
+                                              _isCopied
+                                                  ? Icons.check
+                                                  : Icons.copy,
+                                              size: 20,
+                                              color: Colors.grey,
+                                            ),
+                                            onPressed: () =>
+                                                _copyToClipboard(context),
+                                          ),
+                                        ),
+                                      ),
+                                      sizedBoxH5(),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        sizedBoxH10(),
                       ],
                     ),
                   ),
