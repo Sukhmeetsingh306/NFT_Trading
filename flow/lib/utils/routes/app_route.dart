@@ -1,3 +1,4 @@
+import 'package:flow/screen/main/deposit_main_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../screen/authentication/forget_password_auth_screen.dart';
@@ -12,6 +13,7 @@ class AppRoutes {
       '/registerPage': (context) => const RegisterAuthScreen(),
       '/forgetPage': (context) => const ForgetPasswordAuthScreen(),
       '/dashboardPage': (context) => const DashboardMainScreen(),
+      '/depositPage': (context) => const DepositMainScreen(),
       // '/registerDetailPage': (context) => RegisterDetailAuthScreen(),
     };
   }
