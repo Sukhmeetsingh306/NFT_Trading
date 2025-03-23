@@ -23,6 +23,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
+  late Animation<double> _scaleAnimation;
 
   late AnimationController _controller1;
   late Animation<double> _fadeAnimation1;
@@ -33,7 +34,6 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
   late Animation<double> _fadeAnimation2;
   late Animation<Offset> _slideAnimation2;
   late Animation<double> _scaleAnimation2;
-  late Animation<double> _scaleAnimation;
 
   late AnimationController _controller3;
   late Animation<double> _fadeAnimation3;
