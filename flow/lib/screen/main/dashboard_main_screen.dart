@@ -181,311 +181,390 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
     });
   }
 
+  Widget cardWidget() {
+    return CardWidgetUtils(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    googleInterTextWeight4Font16(
+                      isHidden ? "******" : username, // Toggle visibility
+                    ),
+                    const SizedBox(height: 5),
+                    googleInterTextWeight4Font16(
+                      isHidden ? "UID: ******" : "UID: 123456",
+                    ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isHidden = !isHidden; // Toggle state
+                    });
+                  },
+                  icon: Icon(
+                    isHidden
+                        ? Icons.visibility_off
+                        : Icons.visibility, // Eye icon toggle
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                googleInterTextWeight4Font16('Wallet Balance'),
+                googleInterTextWeight4Font16(
+                  isHidden ? '****' : usdtBalance,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorTheme.color.primaryBackground,
-      body: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 20),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  googleInterText(
-                    'Dashboard',
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  IconButton(
-                    onPressed: () async {
-                      if (Navigator.of(context).canPop()) {
-                        pop(context);
-                      }
-                    },
-                    icon: Icon(
-                      Icons.login_rounded,
-                      color: ColorTheme.color.whiteColor,
+      body: LayoutBuilder(builder: (context, constraints) {
+        bool isLargeScreen = constraints.maxWidth > 900;
+        return Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0, 60, 0, 20),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    googleInterText(
+                      'Dashboard',
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ),
-                ],
+                    IconButton(
+                      onPressed: () async {
+                        if (Navigator.of(context).canPop()) {
+                          pop(context);
+                        }
+                      },
+                      icon: Icon(
+                        Icons.login_rounded,
+                        color: ColorTheme.color.whiteColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            CardWidgetUtils(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            googleInterTextWeight4Font16(
-                              isHidden
-                                  ? "******"
-                                  : username, // Toggle visibility
-                            ),
-                            const SizedBox(height: 5),
-                            googleInterTextWeight4Font16(
-                              isHidden ? "UID: ******" : "UID: 123456",
-                            ),
-                          ],
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isHidden = !isHidden; // Toggle state
-                            });
-                          },
-                          icon: Icon(
-                            isHidden
-                                ? Icons.visibility_off
-                                : Icons.visibility, // Eye icon toggle
-                            size: 25,
-                            color: Colors.white,
+              isLargeScreen
+                  ? SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * .5,
+                            child: cardWidget(),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        googleInterTextWeight4Font16('Wallet Balance'),
-                        googleInterTextWeight4Font16(
-                          isHidden ? '****' : usdtBalance,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FadeTransition(
-                    opacity: _fadeAnimation1,
-                    child: SlideTransition(
-                      position: _slideAnimation1,
-                      child: ScaleTransition(
-                        scale: _scaleAnimation1,
-                        child: containerDash(
-                          context,
-                          'Total Income',
-                          '+\$12402',
-                          ColorTheme.color.tertiaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                  FadeTransition(
-                    opacity: _fadeAnimation2,
-                    child: SlideTransition(
-                      position: _slideAnimation2,
-                      child: ScaleTransition(
-                        scale: _scaleAnimation2,
-                        child: containerDash(
-                          context,
-                          'Total WIthdrawal',
-                          '\$8,392',
-                          ColorTheme.color.errorColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            sizedBoxH15(),
-            Expanded(
-              child: FadeTransition(
-                opacity: _fadeAnimation3,
-                child: SlideTransition(
-                  position: _moveAnimation3,
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.color.secondaryBackgroundColor,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16),
-                      ),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              googleInterTextWeight4Font12('Quick Service'),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                width: MediaQuery.sizeOf(context).width * 0.44,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  color: ColorTheme.color.primaryBackground,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    //Navigator.of(context)
-//                                        .pushNamed('/depositPage');//
-                                    Navigator.of(context).push(
-                                      PageRouteBuilder(
-                                        transitionDuration:
-                                            Duration(milliseconds: 800),
-                                        pageBuilder: (context, animation,
-                                                secondaryAnimation) =>
-                                            DepositMainScreen(),
-                                        transitionsBuilder: (context, animation,
-                                            secondaryAnimation, child) {
-                                          const begin = Offset(0.0, 1.0);
-                                          const end = Offset.zero;
-                                          const curve = Curves.easeInOut;
-
-                                          var tween = Tween(
-                                                  begin: begin, end: end)
-                                              .chain(CurveTween(curve: curve));
-                                          var offsetAnimation =
-                                              animation.drive(tween);
-
-                                          return SlideTransition(
-                                              position: offsetAnimation,
-                                              child: child);
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.swap_horiz_rounded,
-                                        color: ColorTheme.color.whiteColor,
-                                        size: 40,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 8, 0, 0),
-                                        child: googleInterTextWeight4Font12(
-                                          'Add Funds',
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * .2,
+                                  child: FadeTransition(
+                                    opacity: _fadeAnimation1,
+                                    child: SlideTransition(
+                                      position: _slideAnimation1,
+                                      child: ScaleTransition(
+                                        scale: _scaleAnimation1,
+                                        child: containerDash(
+                                          context,
+                                          'Total Income',
+                                          '+\$12402',
+                                          ColorTheme.color.tertiaryColor,
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Container(
-                                width: MediaQuery.sizeOf(context).width * 0.44,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  color: ColorTheme.color.primaryBackground,
-                                  borderRadius: BorderRadius.circular(8),
+                                SizedBox(
+                                  width: 15,
                                 ),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {},
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.nfc,
-                                        color: ColorTheme.color.whiteColor,
-                                        size: 40,
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * .2,
+                                  child: FadeTransition(
+                                    opacity: _fadeAnimation2,
+                                    child: SlideTransition(
+                                      position: _slideAnimation2,
+                                      child: ScaleTransition(
+                                        scale: _scaleAnimation2,
+                                        child: containerDash(
+                                          context,
+                                          'Total WIthdrawal',
+                                          '\$8,392',
+                                          ColorTheme.color.errorColor,
+                                        ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 8, 0, 0),
-                                        child: googleInterTextWeight4Font12(
-                                            'Earn'),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              googleInterTextWeight4Font12('Transaction'),
-                            ],
-                          ),
-                        ),
-                        transactions.isEmpty
-                            ? Center(
-                                child:
-                                    CircularProgressIndicator()) // Show loading while fetching
-                            : Flexible(
-                                child: ListView.builder(
-                                  itemCount: transactions.length,
-                                  shrinkWrap: true,
-                                  physics: AlwaysScrollableScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    final transaction = transactions[index];
-                                    return _transactionItem(
-                                      transaction["title"],
-                                      transaction["amount"],
-                                      transaction["date"],
-                                      transaction["status"],
-                                      transaction["color"],
-                                    );
-                                  },
+                        ],
+                      ),
+                    )
+                  : cardWidget(),
+              isLargeScreen
+                  ? Padding(padding: const EdgeInsets.all(0))
+                  : Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          FadeTransition(
+                            opacity: _fadeAnimation1,
+                            child: SlideTransition(
+                              position: _slideAnimation1,
+                              child: ScaleTransition(
+                                scale: _scaleAnimation1,
+                                child: containerDash(
+                                  context,
+                                  'Total Income',
+                                  '+\$12402',
+                                  ColorTheme.color.tertiaryColor,
                                 ),
                               ),
-                      ],
+                            ),
+                          ),
+                          FadeTransition(
+                            opacity: _fadeAnimation2,
+                            child: SlideTransition(
+                              position: _slideAnimation2,
+                              child: ScaleTransition(
+                                scale: _scaleAnimation2,
+                                child: containerDash(
+                                  context,
+                                  'Total WIthdrawal',
+                                  '\$8,392',
+                                  ColorTheme.color.errorColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+              sizedBoxH15(),
+              Expanded(
+                child: FadeTransition(
+                  opacity: _fadeAnimation3,
+                  child: SlideTransition(
+                    position: _moveAnimation3,
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      height: double.infinity,
+                      decoration: BoxDecoration(
+                        color: ColorTheme.color.secondaryBackgroundColor,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(0),
+                          bottomRight: Radius.circular(0),
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 16, 20, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                googleInterTextWeight4Font12('Quick Service'),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 16, 16, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width: isLargeScreen
+                                      ? MediaQuery.sizeOf(context).width * 0.48
+                                      : MediaQuery.sizeOf(context).width * 0.44,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    color: ColorTheme.color.primaryBackground,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      //Navigator.of(context)
+                                      //                                        .pushNamed('/depositPage');//
+                                      Navigator.of(context).push(
+                                        PageRouteBuilder(
+                                          transitionDuration:
+                                              Duration(milliseconds: 800),
+                                          pageBuilder: (context, animation,
+                                                  secondaryAnimation) =>
+                                              DepositMainScreen(),
+                                          transitionsBuilder: (context,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
+                                            const begin = Offset(0.0, 1.0);
+                                            const end = Offset.zero;
+                                            const curve = Curves.easeInOut;
+
+                                            var tween = Tween(
+                                                    begin: begin, end: end)
+                                                .chain(
+                                                    CurveTween(curve: curve));
+                                            var offsetAnimation =
+                                                animation.drive(tween);
+
+                                            return SlideTransition(
+                                                position: offsetAnimation,
+                                                child: child);
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.swap_horiz_rounded,
+                                          color: ColorTheme.color.whiteColor,
+                                          size: 40,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 8, 0, 0),
+                                          child: googleInterTextWeight4Font12(
+                                            'Add Funds',
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  width: isLargeScreen
+                                      ? MediaQuery.sizeOf(context).width * 0.48
+                                      : MediaQuery.sizeOf(context).width * 0.44,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    color: ColorTheme.color.primaryBackground,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {},
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.nfc,
+                                          color: ColorTheme.color.whiteColor,
+                                          size: 40,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 8, 0, 0),
+                                          child: googleInterTextWeight4Font12(
+                                              'Earn'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                googleInterTextWeight4Font12('Transaction'),
+                              ],
+                            ),
+                          ),
+                          transactions.isEmpty
+                              ? Center(
+                                  child:
+                                      CircularProgressIndicator()) // Show loading while fetching
+                              : Flexible(
+                                  child: ListView.builder(
+                                    itemCount: transactions.length,
+                                    shrinkWrap: true,
+                                    physics: AlwaysScrollableScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      final transaction = transactions[index];
+                                      return _transactionItem(
+                                        transaction["title"],
+                                        transaction["amount"],
+                                        transaction["date"],
+                                        transaction["status"],
+                                        transaction["color"],
+                                      );
+                                    },
+                                  ),
+                                ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      }),
     );
   }
 

@@ -62,28 +62,30 @@ class _CardWidgetUtilsState extends State<CardWidgetUtils>
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: MediaQuery.sizeOf(context).width * 0.92,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 6,
-                        color: Color(0x4B1A1F24),
-                        offset: Offset(
-                          0.0,
-                          2,
-                        ),
-                      )
-                    ],
-                    gradient: LinearGradient(
-                      colors: [Color(0xFF00968A), Color(0xFFF2A384)],
-                      stops: [0, 1],
-                      begin: AlignmentDirectional(0.94, -1),
-                      end: AlignmentDirectional(-0.94, 1),
+                Flexible(
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width * 0.92,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 6,
+                          color: Color(0x4B1A1F24),
+                          offset: Offset(
+                            0.0,
+                            2,
+                          ),
+                        )
+                      ],
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                        stops: [0, 1],
+                        begin: AlignmentDirectional(0.94, -1),
+                        end: AlignmentDirectional(-0.94, 1),
+                      ),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    borderRadius: BorderRadius.circular(8),
+                    child: widget.child,
                   ),
-                  child: widget.child,
                 ),
               ],
             ),
