@@ -181,6 +181,66 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
     });
   }
 
+  Widget cardWidget() {
+    return CardWidgetUtils(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    googleInterTextWeight4Font16(
+                      isHidden ? "******" : username, // Toggle visibility
+                    ),
+                    const SizedBox(height: 5),
+                    googleInterTextWeight4Font16(
+                      isHidden ? "UID: ******" : "UID: 123456",
+                    ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      isHidden = !isHidden; // Toggle state
+                    });
+                  },
+                  icon: Icon(
+                    isHidden
+                        ? Icons.visibility_off
+                        : Icons.visibility, // Eye icon toggle
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                googleInterTextWeight4Font16('Wallet Balance'),
+                googleInterTextWeight4Font16(
+                  isHidden ? '****' : usdtBalance,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,76 +283,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                         children: [
                           SizedBox(
                             width: MediaQuery.of(context).size.width * .5,
-                            child: CardWidgetUtils(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 20, 20, 20),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            googleInterTextWeight4Font16(
-                                              isHidden
-                                                  ? "******"
-                                                  : username, // Toggle visibility
-                                            ),
-                                            const SizedBox(height: 5),
-                                            googleInterTextWeight4Font16(
-                                              isHidden
-                                                  ? "UID: ******"
-                                                  : "UID: 123456",
-                                            ),
-                                          ],
-                                        ),
-                                        IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              isHidden =
-                                                  !isHidden; // Toggle state
-                                            });
-                                          },
-                                          icon: Icon(
-                                            isHidden
-                                                ? Icons.visibility_off
-                                                : Icons
-                                                    .visibility, // Eye icon toggle
-                                            size: 25,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 35, 20),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        googleInterTextWeight4Font16(
-                                            'Wallet Balance'),
-                                        googleInterTextWeight4Font16(
-                                          isHidden ? '****' : usdtBalance,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            child: cardWidget(),
                           ),
                           Padding(
                             padding:
@@ -345,67 +336,7 @@ class _DashboardMainScreenState extends State<DashboardMainScreen>
                         ],
                       ),
                     )
-                  : CardWidgetUtils(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    googleInterTextWeight4Font16(
-                                      isHidden
-                                          ? "******"
-                                          : username, // Toggle visibility
-                                    ),
-                                    const SizedBox(height: 5),
-                                    googleInterTextWeight4Font16(
-                                      isHidden ? "UID: ******" : "UID: 123456",
-                                    ),
-                                  ],
-                                ),
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      isHidden = !isHidden; // Toggle state
-                                    });
-                                  },
-                                  icon: Icon(
-                                    isHidden
-                                        ? Icons.visibility_off
-                                        : Icons.visibility, // Eye icon toggle
-                                    size: 25,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(20, 0, 35, 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                googleInterTextWeight4Font16('Wallet Balance'),
-                                googleInterTextWeight4Font16(
-                                  isHidden ? '****' : usdtBalance,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  : cardWidget(),
               isLargeScreen
                   ? Padding(padding: const EdgeInsets.all(0))
                   : Padding(
