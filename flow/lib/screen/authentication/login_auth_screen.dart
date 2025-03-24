@@ -205,7 +205,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                         width: isLargeScreen ? 400 : double.infinity,
                         height: 44,
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.7),
+                          color: Colors.black.withAlpha(7),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
