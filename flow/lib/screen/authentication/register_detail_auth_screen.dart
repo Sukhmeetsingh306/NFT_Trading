@@ -1,4 +1,6 @@
-import 'dart:io';
+import 'dart:io' show File, Platform;
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flow/utils/theme/color/color_theme.dart';
 import 'package:flow/utils/widget/form/textForm_form.dart';
@@ -41,30 +43,37 @@ class _RegisterDetailAuthScreenState extends State<RegisterDetailAuthScreen>
   final RegisterController _registerController = RegisterController();
 
   File? _imageFile;
-  final ImagePicker _picker = ImagePicker();
+  Uint8List? _webImage;
 
   Future<void> _pickImage() async {
-    if (Platform.isAndroid) {
-      var status = await Permission.photos.request(); // For Android 13+
-      if (status.isDenied || status.isPermanentlyDenied) {
-        print('Permission denied');
-        openAppSettings(); // Open app settings if denied
-        return;
-      }
-    } else if (Platform.isIOS) {
-      var status = await Permission.photos.request();
-      if (status.isDenied) {
-        print('Permission denied');
-        openAppSettings(); // Open app settings if denied
-        return;
+    final ImagePicker picker = ImagePicker();
+
+    if (!kIsWeb) {
+      if (Platform.isAndroid || Platform.isIOS) {
+        var status = await Permission.photos.request(); // Request permission
+
+        if (status.isDenied || status.isPermanentlyDenied) {
+          print('Permission denied');
+          openAppSettings(); // Open app settings if denied
+          return;
+        }
       }
     }
 
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      setState(() {
-        _imageFile = File(pickedFile.path);
-      });
+      if (kIsWeb) {
+        // Convert to Uint8List for web
+        final bytes = await pickedFile.readAsBytes();
+        setState(() {
+          _webImage = bytes;
+        });
+      } else {
+        setState(() {
+          _imageFile = File(pickedFile.path);
+        });
+      }
     }
   }
 
@@ -201,12 +210,15 @@ class _RegisterDetailAuthScreenState extends State<RegisterDetailAuthScreen>
                             child: CircleAvatar(
                               backgroundColor: ColorTheme.color.backgroundBlack,
                               radius: 45,
-                              backgroundImage: _imageFile != null
-                                  ? FileImage(_imageFile!)
-                                  : null,
+                              backgroundImage: kIsWeb
+                                  ? (_webImage != null
+                                      ? MemoryImage(_webImage!)
+                                      : null)
+                                  : (_imageFile != null
+                                      ? FileImage(_imageFile!)
+                                      : null),
                               child: GestureDetector(
-                                onTap:
-                                    _pickImage, // Allow user to pick image even after it's set
+                                onTap: _pickImage,
                                 child: Container(
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
@@ -219,13 +231,14 @@ class _RegisterDetailAuthScreenState extends State<RegisterDetailAuthScreen>
                                       ),
                                     ],
                                   ),
-                                  child: _imageFile == null
-                                      ? const Icon(
-                                          Icons.person_add_alt_1_outlined,
-                                          size: 50,
-                                          color: Colors.grey,
-                                        )
-                                      : null,
+                                  child:
+                                      (_imageFile == null && _webImage == null)
+                                          ? const Icon(
+                                              Icons.person_add_alt_1_outlined,
+                                              size: 50,
+                                              color: Colors.grey,
+                                            )
+                                          : null,
                                 ),
                               ),
                             ),
