@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
-
 extension LKColors on Colors {
   static const lkBlue = Color(0xFF5A8BFF);
   static const lkDarkBlue = Color(0xFF00153C);
@@ -26,7 +25,6 @@ class LiveKitTheme {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-          
             padding: MaterialStateProperty.all<EdgeInsets>(
                 const EdgeInsets.symmetric(vertical: 20, horizontal: 25)),
             shape: MaterialStateProperty.all<OutlinedBorder>(
@@ -54,13 +52,13 @@ class LiveKitTheme {
         //     return accentColor;
         //   }),
         // ),
-        dialogTheme: DialogTheme(
-          backgroundColor: cardColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        
+        // dialogTheme: DialogTheme(
+        //   backgroundColor: cardColor,
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(8),
+        //   ),
+        // ),
+
         hintColor: Colors.red,
         inputDecorationTheme: InputDecorationTheme(
           labelStyle: const TextStyle(
